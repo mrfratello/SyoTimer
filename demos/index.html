@@ -19,7 +19,7 @@
                 minute: 30,
             });
 
-            /* Timer with Head and Foot and countdown is over 
+            /* Timer with Head and Foot. Countdown is over 
             --------------------------------------------------------- */
             $('#countdowned_timer').syotimer({
                 year: 1990,
@@ -27,7 +27,7 @@
                 footTitle: '<i style="color: brown;">Footer of timer.</i>',
             });
 
-            /* Countdown Event of Timer */
+            /* Callback after the end of the countdown timer */
             $('#countdowned_timer_event').syotimer({
                 year: 2000,
                 month: 12,
@@ -39,7 +39,7 @@
                 footTitle: '<i style="color: brown;">Footer of timer.</i>',
                 afterDeadline: function(syotimer){
                     syotimer.bodyBlock.html('<p>The countdown is finished 00:00 2000.12.31</p>');
-                    syotimer.headBlock.html('<h3>Countdown Event of Timer</h3>');
+                    syotimer.headBlock.html('<h3>Callback after the end of the countdown timer</h3>');
                     syotimer.footBlock.html('<i style="color: brown;">Footer of timer after countdown is finished</i>');
                 }
             });
@@ -92,7 +92,7 @@
                 hour: 20,
                 minute: 0,
 
-                headTitle: '<h3>For Russian speakers.<br/>Поддерживается парвильное склонение существительных рядом с числительными</h3>',
+                headTitle: '<h3>For Russian speakers.<br/>Поддерживается правильное склонение существительных рядом с числительными</h3>',
                 lang: 'rus',
 
                 periodic: true,

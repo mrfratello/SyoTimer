@@ -19,9 +19,21 @@ jQuery SyoTimer Plugin has been tested with jQuery 1.7+ on all major browsers:
 * Custom formatting and styling timer
 
 ### Options
-|Option      |   Description                        | Type of Value | Default Value | Available Values |
-| ---------- | -------------------------------------| ------------- | ------------- | ---------------- | 
-|year        | year to date, which should count down timer | integer | 2014 | |
+|Option          |   Description                         | Type of Value | Default Value | Available Values |
+| -------------- | ------------------------------------- | ------------- | ------------- | ---------------- |
+|**year**        | year of date, which should count down timer | integer | 2014 | >1979 |
+|**month**       | month of date, which should count down timer | integer | 7 | 1-12|
+|**day**         | day of date, which should count down timer | integer | 31 | 1-31 |
+|**hour**        | hour of date, which should count down timer | integer | 0 | 0-23 |
+|**minute**      | minute of date, which should count down timer | integer | 0 | 0-59 |
+|**second**      | second of date, which should count down timer | integer | 0 | 0-59 |
+|**dayVisible**  | *true* - show the number of days. *false* - the number of days is not shown in the timer and the number of hours may exceed 23 | boolean | true |  |
+|**dubleNumbers**| *true* - show hours, minutes and seconds with leading zeros (2 hours 5 minutes 4 seconds = 02:05:04) | boolean | true |  |
+|**effectType**  | The effect of changing the value of seconds | string  | 'none' | 'none', 'opacity' |
+|**lang**        | localization signatures timer (days, hours, minutes, seconds) | string  | 'eng'  | 'eng', 'rus' |
+
+
+
 
 ### HTML Structure of SyoTimer
 ```html
