@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Examples of usage jQuery SyoTimer Plugin</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="../source/jquery.1.7.2.js"></script>
+    <script type="text/javascript" src="../source/jquery.syotimer.js"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            /* Simple Timer. The countdown to 20:30 2100.05.09
+            --------------------------------------------------------- */
+            $('#simple_timer').syotimer({
+                year: 2020,
+                month: 5,
+                day: 9,
+                hour: 20,
+                minute: 30,
+            });
+
+            /* Timer with Head and Foot and countdown is over 
+            --------------------------------------------------------- */
+            $('#countdowned_timer').syotimer({
+                year: 1990,
+                headTitle: '<h3>Timer with header and footer. Countdown is over</h3>',
+                footTitle: '<i style="color: brown;">Footer of timer.</i>',
+            });
+
+            /* Countdown Event of Timer */
+            $('#countdowned_timer_event').syotimer({
+                year: 2000,
+                month: 12,
+                day: 31,
+                hour: 0,
+                minute: 0,
+
+                headTitle: '<h3>Timer with header and footer. Countdown is over</h3>',
+                footTitle: '<i style="color: brown;">Footer of timer.</i>',
+                afterDeadline: function(syotimer){
+                    syotimer.bodyBlock.html('<p>The countdown is finished 00:00 2000.12.31</p>');
+                    syotimer.headBlock.html('<h3>Countdown Event of Timer</h3>');
+                    syotimer.footBlock.html('<i style="color: brown;">Footer of timer after countdown is finished</i>');
+                }
+            });
+
+
+            /* Periodic Timer. Period is equal 3 minutes. Effect of fading in 
+            --------------------------------------------------------- */
+            $('#periodic_timer_minutes').syotimer({
+                year: 2015,
+                month: 1,
+                day: 1,
+                hour: 0,
+                minute: 0,
+
+                headTitle: '<h3>Periodic Timer. The countdown begins first through each 3 minutes. Effect of fading in</h3>',
+
+                dayVisible: false,
+                dubleNumbers: false,
+                effectType: 'opacity',
+
+                periodUnit: 'm',
+                periodic: true,
+                periodInterval: 3,
+            });
+
+            /* Periodic Timer. Period is equal 10 days 
+            --------------------------------------------------------- */
+            $('#periodic_timer_days').syotimer({
+                year: 2015,
+                month: 1,
+                day: 1,
+                hour: 20,
+                minute: 0,
+
+                headTitle: '<h3>Periodic Timer. The countdown begins first through each 10 days</h3>\
+                            <p style="font-size: .8em; color: #666;">The date equal 20:00 2015.01.01</p>',
+                dayVisible: false,
+
+                periodic: true,
+                periodInterval: 10,
+                periodUnit: 'd',
+            });
+
+            /* Periodic Timer. Russian localization 
+            --------------------------------------------------------- */
+            $('#russian_localization').syotimer({
+                year: 2015,
+                month: 1,
+                day: 1,
+                hour: 20,
+                minute: 0,
+
+                headTitle: '<h3>For Russian speakers.<br/>Поддерживается парвильное склонение существительных рядом с числительными</h3>',
+                lang: 'rus',
+
+                periodic: true,
+                periodInterval: 10,
+                periodUnit: 'd',
+            });
+        });
+    </script>
+    
+
+    <style type="text/css">
+        body{
+            font-family: Tahoma;
+            font-size: 14px;
+            padding: 0 0 100px;
+        }
+
+        /* Customization Style of SyoTimer */
+        .timer{
+            text-align: center;
+
+            margin: 30px auto 0;
+            padding: 0 0 10px;
+
+            border-bottom: 2px solid #80a3ca;
+        }
+        .timer .table-cell{
+            display: inline-block;
+            margin: 0 5px;
+
+            width: 79px;
+            background: url(./images/timer.png) no-repeat 0 0;
+        }
+        .timer .table-cell .tab-val{
+            font-size: 35px;
+            color: #80a3ca;
+
+            height: 81px;
+            line-height: 81px;
+
+            margin: 0 0 5px;
+        }
+        .timer .table-cell .tab-metr{
+            font-family: Arial;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        #simple_timer.timer .table-cell.day, 
+        #periodic_timer_days.timer .table-cell.hour{
+            width: 120px;
+            background-image: url(./images/timer_long.png);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Examples of usage jQuery SyoTimer Plugin</h1>
+
+    <h3 style="text-align: center;">Simple Timer</h3>
+    <div id="simple_timer"></div>
+
+    <div id="countdowned_timer"></div>
+
+    <div id="countdowned_timer_event"></div>
+
+    <div id="periodic_timer_minutes"></div>
+
+    <div id="periodic_timer_days"></div>
+
+    <div id="russian_localization"></div>
+
+    <br/>
+    <br/>
+    <br/>
+    <a href="https://github.com/mrfratello/SyoTimer">SyoTimer on GitHub</a>
+</body>
+</html>
