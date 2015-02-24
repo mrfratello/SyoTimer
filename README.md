@@ -27,13 +27,19 @@ jQuery SyoTimer Plugin has been tested with jQuery 1.7+ on all major browsers:
 |**hour**        | hour of date, which should count down timer | integer | 0 | 0-23 |
 |**minute**      | minute of date, which should count down timer | integer | 0 | 0-59 |
 |**second**      | second of date, which should count down timer | integer | 0 | 0-59 |
-|**dayVisible**  | *true* - show the number of days.  *false* - the number of days is not shown in the timer and the number of hours may exceed 23 | boolean | true |  |
+|**dayVisible**  | *true* - show the number of days.   
+*false* - the number of days is not shown in the timer and the number of hours may exceed 23 | boolean | true |  |
 |**dubleNumbers**| *true* - show hours, minutes and seconds with leading zeros (2 hours 5 minutes 4 seconds = 02:05:04) | boolean | true |  |
-|**effectType**  | The effect of changing the value of seconds | string  | 'none' | 'none',  'opacity' |
-|**lang**        | localization signatures timer (days, hours, minutes, seconds) | string  | 'eng'  | 'eng',  'rus' |
+|**effectType**  | The effect of changing the value of seconds | string  | 'none' | 'none',   
+'opacity' |
+|**lang**        | localization signatures timer (days, hours, minutes, seconds) | string  | 'eng'  | 'eng',   
+'rus' |
 |**periodic**    | *true* - the timer is periodic. If the date until which counts the timer is reached, the next value date which will count down the timer is incremented by the value **periodInterval** | boolean | false |  |
 |**periodInterval**| the period of the timer in **periodUnit** (if **periodic** is set to *true*) | integer | 7 | >0 |
-|**periodUnit**  | the unit of measurement period timer | string | 'd' | 'd',  'h',  'm',  's' |
+|**periodUnit**  | the unit of measurement period timer | string | 'd' | 'd',  
+'h',  
+'m',  
+'s' |
 
 
 
