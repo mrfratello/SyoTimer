@@ -4,6 +4,7 @@ jQuery SyoTimer Plugin
 jQuery plugin of countdown on html-page
 
 ### Requirements
+
 jQuery SyoTimer Plugin has been tested with jQuery 1.7+ on all major browsers:
 * Firefox 2+ (Win, Mac, Linux);
 * IE8+ (Win);
@@ -12,6 +13,7 @@ jQuery SyoTimer Plugin has been tested with jQuery 1.7+ on all major browsers:
 * Opera 8+ (Win, Mac, Linux, Android, iPhone).
 
 ### Features
+
 * Callback after the end of the countdown timer with the possibility of changing the structure of the timer
 * Periodic counting with the specified period
 * The effect of fading in the countdown
@@ -19,6 +21,7 @@ jQuery SyoTimer Plugin has been tested with jQuery 1.7+ on all major browsers:
 * Custom formatting and styling timer
 
 ### Options
+
 |Option          |   Description                         | Type of Value | Default Value | Available Values |
 | -------------- | ------------------------------------- | ------------- | ------------- | ---------------- |
 |**year**        | year of date, which should count down timer | integer | 2014 | >1979 |
@@ -40,6 +43,7 @@ jQuery SyoTimer Plugin has been tested with jQuery 1.7+ on all major browsers:
 
 
 ### HTML Structure of SyoTimer
+
 ```html
 <div class="timer">
     <div class="timer-head-block"></div>
@@ -64,7 +68,9 @@ jQuery SyoTimer Plugin has been tested with jQuery 1.7+ on all major browsers:
     <div class="timer-foot-block"></div>
 </div>
 ```
+### Demo
 
+[Examples of usage jQuery SyoTimer Plugin](http://syomochkin.xyz/folio/syotimer/demo.html)
 
 ### Version History
 
@@ -76,4 +82,5 @@ jQuery SyoTimer Plugin has been tested with jQuery 1.7+ on all major browsers:
     - first use timer on real web-site
 
 ### TODO
+
 * feature: countdown to date equal now plus necessary interval
