@@ -4,9 +4,9 @@
     <title>Examples of usage jQuery SyoTimer Plugin</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script type="text/javascript" src="../source/jquery.1.7.2.js"></script>
-    <script type="text/javascript" src="../source/jquery.syotimer.js"></script>
-    
+    <script type="text/javascript" src="../libs/jquery.1.7.2.js"></script>
+    <script type="text/javascript" src="../build/jquery.syotimer.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function(){
             /* Simple Timer. The countdown to 20:30 2100.05.09
@@ -19,7 +19,7 @@
                 minute: 30,
             });
 
-            /* Timer with Head and Foot. Countdown is over 
+            /* Timer with Head and Foot. Countdown is over
             --------------------------------------------------------- */
             $('#countdowned_timer').syotimer({
                 year: 1990,
@@ -45,7 +45,7 @@
             });
 
 
-            /* Periodic Timer. Period is equal 3 minutes. Effect of fading in 
+            /* Periodic Timer. Period is equal 3 minutes. Effect of fading in
             --------------------------------------------------------- */
             $('#periodic_timer_minutes').syotimer({
                 year: 2015,
@@ -65,7 +65,7 @@
                 periodInterval: 3,
             });
 
-            /* Periodic Timer. Period is equal 10 days 
+            /* Periodic Timer. Period is equal 10 days
             --------------------------------------------------------- */
             $('#periodic_timer_days').syotimer({
                 year: 2015,
@@ -83,7 +83,7 @@
                 periodUnit: 'd',
             });
 
-            /* Periodic Timer. Russian localization 
+            /* Periodic Timer. Russian localization
             --------------------------------------------------------- */
             $('#russian_localization').syotimer({
                 year: 2015,
@@ -101,11 +101,11 @@
             });
         });
     </script>
-    
+
 
     <style type="text/css">
         body{
-            font-family: Tahoma;
+            font-family: Tahoma, serif;
             font-size: 14px;
             padding: 0 0 100px;
         }
@@ -124,7 +124,7 @@
             margin: 0 5px;
 
             width: 79px;
-            background: url(./images/timer.png) no-repeat 0 0;
+            background: url(../demos/images/timer.png) no-repeat 0 0;
         }
         .timer .table-cell .tab-val{
             font-size: 35px;
@@ -136,15 +136,15 @@
             margin: 0 0 5px;
         }
         .timer .table-cell .tab-metr{
-            font-family: Arial;
+            font-family: Arial, serif;
             font-size: 12px;
             text-transform: uppercase;
         }
 
-        #simple_timer.timer .table-cell.day, 
+        #simple_timer.timer .table-cell.day,
         #periodic_timer_days.timer .table-cell.hour{
             width: 120px;
-            background-image: url(./images/timer_long.png);
+            background-image: url(../demos/images/timer_long.png);
         }
     </style>
 </head>
