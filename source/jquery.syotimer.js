@@ -46,12 +46,12 @@
                 second: ['second', 'seconds'],
                 minute: ['minute', 'minutes'],
                 hour: ['hour', 'hours'],
-                day: ['day', 'days'],
-            },
+                day: ['day', 'days']
+            }
         };
     $.fn.syotimer = function(options){
         // установки по умолчанию
-        defaultTimer = {
+        var defaultTimer = {
             year: 2014,
             month: 7,
             day: 31,
@@ -83,7 +83,7 @@
         return el.each(function(){
             // инициализация плагина
             var obj = $(this);
-            init(obj,settings);
+            obj = init( obj, settings );
 
             (function timeout(){
                 $('.second .tab-val',obj).css('opacity',1);
@@ -135,91 +135,96 @@
 
                     if ( settings.dayVisible ){
                         $('.day .tab-val',obj).html(dd);
-                        $('.day .tab-metr',obj).html(declOfNum(dd, lang[settings.lang].day, settings.lang));
+                        $('.day .tab-metr',obj).html(definitionOfNumerals(dd, lang[settings.lang].day, settings.lang));
 
                         $('.hour .tab-val',obj).html(format2(dh, settings.dubleNumbers));
-                        $('.hour .tab-metr',obj).html(declOfNum(dh, lang[settings.lang].hour, settings.lang));
+                        $('.hour .tab-metr',obj).html(definitionOfNumerals(dh, lang[settings.lang].hour, settings.lang));
                     } else {
                         dh+=dd*24;
                         $('.hour .tab-val',obj).html(format2(dh, settings.dubleNumbers));
-                        $('.hour .tab-metr',obj).html(declOfNum(dh, lang[settings.lang].hour, settings.lang));
+                        $('.hour .tab-metr',obj).html(definitionOfNumerals(dh, lang[settings.lang].hour, settings.lang));
                     }
 
                     $('.minute .tab-val',obj).html(format2(dm, settings.dubleNumbers));
-                    $('.minute .tab-metr',obj).html(declOfNum(dm, lang[settings.lang].minute, settings.lang));
+                    $('.minute .tab-metr',obj).html(definitionOfNumerals(dm, lang[settings.lang].minute, settings.lang));
 
                     $('.second .tab-val',obj).html(format2(ds, settings.dubleNumbers));
-                    $('.second .tab-metr',obj).html(declOfNum(ds, lang[settings.lang].second, settings.lang));
+                    $('.second .tab-metr',obj).html(definitionOfNumerals(ds, lang[settings.lang].second, settings.lang));
 
                     switch ( settings.effectType ){
-                        case 'none':   
-                                        setTimeout( function(){
-                                            timeout();
-                                        },1000);
-                                        break;
+                        case 'none':
+                            setTimeout( function(){
+                                timeout();
+                            },1000);
+                            break;
                         case 'opacity': 
-                                        $('.second .tab-val',obj).animate({opacity: 0.1 }, 1000, 'linear', timeout);
-                                        break;
+                            $('.second .tab-val',obj).animate({opacity: 0.1 }, 1000, 'linear', timeout);
+                            break;
                     }
-                    
                 } else {
                     settings.afterDeadline(obj);
                 }
-
             })();
         });
     };
 
-    function init(elem,options){ // установка html разметки в блоке с таймером
-        timer_html='<div class="timer-head-block">'+options.headTitle+'</div>';
-        timer_html+='<div class="timer-body-block">';
+    function init( elem, options ) { // установка html разметки в блоке с таймером
+        var timerDom,
+            dayCellDom,
+            hourCellDom,
+            minuteCellDom,
+            secondCellDom;
+        timerDom = '<div class="timer-head-block">' + options.headTitle + '</div>';
+        timerDom += '<div class="timer-body-block">';
         if ( options.dayVisible ){
-            timer_html+='\
-            <div class="table-cell day">\
-                <div class="tab-val">0</div>\
-                <div class="tab-metr"></div>\
-            </div>';
+            dayCellDom = '<div class="table-cell day">' +
+                '<div class="tab-val">0</div>' +
+                '<div class="tab-metr"></div>' +
+            '</div>';
         }
-        timer_html+='\
-            <div class="table-cell hour">\
-                <div class="tab-val">00</div>\
-                <div class="tab-metr"></div>\
-            </div>\
-            <div class="table-cell minute">\
-                <div class="tab-val">00</div>\
-                <div class="tab-metr"></div>\
-            </div>\
-            <div class="table-cell second">\
-                <div class="tab-val">00</div>\
-                <div class="tab-metr"></div>\
-            </div>';
-        
-        timer_html+='</div>';
-        timer_html+='<div class="timer-foot-block">'+options.footTitle+'</div>';
+        hourCellDom = '<div class="table-cell hour">' +
+            '<div class="tab-val">00</div>' +
+            '<div class="tab-metr"></div>' +
+        '</div>';
+        minuteCellDom = '<div class="table-cell minute">' +
+            '<div class="tab-val">00</div>' +
+            '<div class="tab-metr"></div>' +
+        '</div>';
+        secondCellDom = '<div class="table-cell second">' +
+            '<div class="tab-val">00</div>' +
+            '<div class="tab-metr"></div>' +
+        '</div>';
 
-        elem.addClass('timer').html(timer_html);
+        timerDom += dayCellDom;
+        timerDom += hourCellDom;
+        timerDom += minuteCellDom;
+        timerDom += secondCellDom;
         
-        headBlock=$('.timer-head-block',elem);
-        bodyBlock=$('.timer-body-block',elem);
-        footBlock=$('.timer-foot-block',elem);
-        timerBlocks={
-            headBlock:headBlock,
-            bodyBlock:bodyBlock,
-            footBlock:footBlock,
-        };
-        elem=$.extend(elem, timerBlocks);
+        timerDom += '</div>';
+        timerDom += '<div class="timer-foot-block">'+options.footTitle+'</div>';
+
+        elem.addClass('timer').html( timerDom );
+        var headBlock = $('.timer-head-block', elem),
+            bodyBlock = $('.timer-body-block', elem),
+            footBlock = $('.timer-foot-block', elem),
+            timerBlocks = {
+                headBlock: headBlock,
+                bodyBlock: bodyBlock,
+                footBlock: footBlock
+            };
+        return $.extend(elem, timerBlocks);
     }
     function format2(ANumber, isUse){ // формирования чисел с ведущими нулями
         isUse = (isUse=='') ? isUse : true;
-        return ( (ANumber<=9) && isUse)? ("0"+ANumber) : (""+ANumber);
+        return ( ( ANumber <= 9 ) && isUse ) ? ( "0" + ANumber ) : ( "" + ANumber );
     }
-    function declOfNum(number, titles, lang){ // установка правильного склонения после числительных
+    function definitionOfNumerals(number, titles, lang){ // установка правильного склонения после числительных
         switch (lang){
             case 'rus': 
-                        cases = [2, 0, 1, 1, 1, 2];
-                        return titles[ (number%100>4 && number%100<20) ? 2 : cases[(number%10<5) ? number%10 : 5] ];
+                var cases = [2, 0, 1, 1, 1, 2];
+                return titles[ (number%100>4 && number%100<20) ? 2 : cases[(number%10<5) ? number%10 : 5] ];
             case 'eng': 
-                        return titles[ ( number == 1 ) ? 0 : 1 ];
+                return titles[ ( number == 1 ) ? 0 : 1 ];
         }
     }
 })(jQuery);
