@@ -2,25 +2,25 @@
  * jquery.syotimer.js
  * @version: v1.0.1
  * @author: John Syomochkin
- * @url: https://github.com/mrfratello/SyoTimer 
+ * @url: https://github.com/mrfratello/SyoTimer
  *
  * Created by John Syomochkin on 2014-12-10.
  *
  *
  * The MIT License (MIT)
- * 
+ *
  * Copyright (c) 2014 John Syomochkin
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -60,8 +60,8 @@
             second: 0,
 
             periodic: false, // true - таймер периодичный
-            periodInterval: 7, // (если periodic установлен как true) период таймера. Единица измерения указывается в periodType 
-            periodUnit: 'd', // единица измерения периода таймера 
+            periodInterval: 7, // (если periodic установлен как true) период таймера. Единица измерения указывается в periodType
+            periodUnit: 'd', // единица измерения периода таймера
 
             dayVisible: true, // показывать ли количество дней, если нет, то количество часов может превышать 23
             dubleNumbers: true, // показывать часы, минуты и секунды с ведущими нолями ( 2часа 5минут 4секунды = 02:05:04)
@@ -101,7 +101,7 @@
                         case 's': unit_ms = 1; break;
                     }
 
-                    differentUnits = Math.abs( Math.ceil( (DeadDate.getTime()-Now.getTime())/(unit_ms*1000) ) ); // кол-во полных единиц времени между текущей датой и дедлайном 
+                    differentUnits = Math.abs( Math.ceil( (DeadDate.getTime()-Now.getTime())/(unit_ms*1000) ) ); // кол-во полных единиц времени между текущей датой и дедлайном
 
                     if ( different>=0 ){
                         dUnits = differentUnits%settings.periodInterval;
@@ -157,7 +157,7 @@
                                 timeout();
                             },1000);
                             break;
-                        case 'opacity': 
+                        case 'opacity':
                             $('.second .tab-val',obj).animate({opacity: 0.1 }, 1000, 'linear', timeout);
                             break;
                     }
@@ -170,39 +170,16 @@
 
     function init( elem, options ) { // установка html разметки в блоке с таймером
         var timerDom,
-            dayCellDom,
-            hourCellDom,
-            minuteCellDom,
-            secondCellDom;
-        timerDom = '<div class="timer-head-block">' + options.headTitle + '</div>';
-        timerDom += '<div class="timer-body-block">';
-        if ( options.dayVisible ){
-            dayCellDom = '<div class="table-cell day">' +
-                '<div class="tab-val">0</div>' +
-                '<div class="tab-metr"></div>' +
-            '</div>';
-        }
-        hourCellDom = '<div class="table-cell hour">' +
-            '<div class="tab-val">00</div>' +
-            '<div class="tab-metr"></div>' +
-        '</div>';
-        minuteCellDom = '<div class="table-cell minute">' +
-            '<div class="tab-val">00</div>' +
-            '<div class="tab-metr"></div>' +
-        '</div>';
-        secondCellDom = '<div class="table-cell second">' +
-            '<div class="tab-val">00</div>' +
-            '<div class="tab-metr"></div>' +
-        '</div>';
-
-        timerDom += dayCellDom;
-        timerDom += hourCellDom;
-        timerDom += minuteCellDom;
-        timerDom += secondCellDom;
-        
-        timerDom += '</div>';
-        timerDom += '<div class="timer-foot-block">'+options.footTitle+'</div>';
-
+            dayCellDom = ( options.dayVisible) ? getCellDom('day', '0') : '';
+        timerDom = '' +
+            '<div class="timer-head-block">' + options.headTitle + '</div>' +
+                '<div class="timer-body-block">' +
+                    dayCellDom +
+                    getCellDom('hour') +
+                    getCellDom('minute') +
+                    getCellDom('second') +
+                '</div>' +
+            '<div class="timer-foot-block">' + options.footTitle + '</div>';
         elem.addClass('timer').html( timerDom );
         var headBlock = $('.timer-head-block', elem),
             bodyBlock = $('.timer-body-block', elem),
@@ -214,16 +191,25 @@
             };
         return $.extend(elem, timerBlocks);
     }
+    function getCellDom(cls, start_count_format) {
+        cls = cls || '';
+        start_count_format = start_count_format || '00';
+        return '' +
+            '<div class="table-cell ' + cls + '">' +
+                '<div class="tab-val">' + start_count_format + '</div>' +
+                '<div class="tab-metr"></div>' +
+            '</div>';
+    }
     function format2(ANumber, isUse){ // формирования чисел с ведущими нулями
-        isUse = (isUse=='') ? isUse : true;
+        isUse = (isUse !== false) ? true : false;
         return ( ( ANumber <= 9 ) && isUse ) ? ( "0" + ANumber ) : ( "" + ANumber );
     }
     function definitionOfNumerals(number, titles, lang){ // установка правильного склонения после числительных
         switch (lang){
-            case 'rus': 
+            case 'rus':
                 var cases = [2, 0, 1, 1, 1, 2];
                 return titles[ (number%100>4 && number%100<20) ? 2 : cases[(number%10<5) ? number%10 : 5] ];
-            case 'eng': 
+            case 'eng':
                 return titles[ ( number == 1 ) ? 0 : 1 ];
         }
     }
