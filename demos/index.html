@@ -16,7 +16,7 @@
                 month: 5,
                 day: 9,
                 hour: 20,
-                minute: 30,
+                minute: 30
             });
 
             /* Timer with Head and Foot. Countdown is over
@@ -62,7 +62,7 @@
 
                 periodUnit: 'm',
                 periodic: true,
-                periodInterval: 3,
+                periodInterval: 3
             });
 
             /* Periodic Timer. Period is equal 10 days
@@ -74,13 +74,13 @@
                 hour: 20,
                 minute: 0,
 
-                headTitle: '<h3>Periodic Timer. The countdown begins first through each 10 days</h3>\
-                            <p style="font-size: .8em; color: #666;">The date equal 20:00 2015.01.01</p>',
+                headTitle: '<h3>Periodic Timer. The countdown begins first through each 10 days</h3>' +
+                    '<p style="font-size: .8em; color: #666;">The date equal 20:00 2015.01.01</p>',
                 dayVisible: false,
 
                 periodic: true,
                 periodInterval: 10,
-                periodUnit: 'd',
+                periodUnit: 'd'
             });
 
             /* Periodic Timer. Russian localization
@@ -97,8 +97,61 @@
 
                 periodic: true,
                 periodInterval: 10,
-                periodUnit: 'd',
+                periodUnit: 'd'
             });
+
+            /* Periodic Timer. Countdown timer with given time zone
+            --------------------------------------------------------- */
+            $('#timer_with_given_timezone').syotimer({
+                year: 2000,
+                month: 7,
+                day: 1,
+                hour: 18,
+                minute: 0,
+                timeZone: 2,
+                ignoreTransferTime: true,
+
+                headTitle: '<h3>Countdown timer with given timezone</h3>' +
+                    '<p>The deadline is 18:00:00 by the time Rome, Italy (UTC+2)</p>',
+                dayVisible: false,
+
+                periodic: true,
+                periodInterval: 1,
+                periodUnit: 'd'
+            });
+
+            /* Periodic Timer. Change options: effect type
+             --------------------------------------------------------- */
+            $('#change_options').syotimer({
+                periodic: true,
+                periodInterval: 10,
+                periodUnit: 'd'
+            });
+
+            $('#change_options__effect-type').click(function() {
+                var button = $(this),
+                    effectTypes = ['opacity', 'none'],
+                    effectIndex = parseInt( button.data('index') ),
+                    nextEffectIndex = ( effectIndex === (effectTypes.length - 1) ) ? 0 : (effectIndex + 1);
+                button.data('index', nextEffectIndex);
+                $('#change_options').syotimer('setOption', 'effectType', effectTypes[nextEffectIndex]);
+            });
+            $('#change_options__double-numbers').click(function() {
+                var button = $(this),
+                    index = parseInt( button.data('index') ),
+                    nextIndex = Math.abs(index - 1);
+                button.data('index', nextIndex);
+                $('#change_options').syotimer('setOption', 'doubleNumbers', nextIndex == 1);
+            });
+            $('#change_options__lang').click(function() {
+                var button = $(this),
+                    languages = ['eng', 'rus'],
+                    langIndex = parseInt( button.data('index') ),
+                    nextLangIndex = ( langIndex === (languages.length - 1) ) ? 0 : (langIndex + 1);
+                button.data('index', nextLangIndex);
+                $('#change_options').syotimer('setOption', 'lang', languages[nextLangIndex]);
+            });
+
         });
     </script>
 
@@ -135,7 +188,7 @@
 
             margin: 0 0 5px;
         }
-        .timer .table-cell .tab-metr{
+        .timer .table-cell .tab-unit{
             font-family: Arial, serif;
             font-size: 12px;
             text-transform: uppercase;
@@ -165,6 +218,19 @@
     <div id="periodic_timer_days"></div>
 
     <div id="russian_localization"></div>
+
+    <div id="timer_with_given_timezone"></div>
+
+    <div style="text-align: center;">
+        <h3>Change options of countdown</h3>
+        <div class="">
+            <button id="change_options__effect-type" data-index="1">Toggle Effect Type</button>
+            <button id="change_options__double-numbers" data-index="1">Toggle Format Numbers</button>
+            <button id="change_options__lang" data-index="0">Toggle Language</button>
+        </div>
+    </div>
+    <div id="change_options"></div>
+
 
     <br/>
     <br/>

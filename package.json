@@ -7,6 +7,10 @@
     "type": "git",
     "url": "git+https://github.com/mrfratello/SyoTimer.git"
   },
+  "scripts": {
+    "gulp": "./node_modules/.bin/gulp",
+    "dev": "npm run gulp dev"
+  },
   "keywords": [
     "countdown",
     "jquery",
