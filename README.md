@@ -4,6 +4,11 @@ jQuery SyoTimer Plugin
 jQuery plugin of countdown on html-page
 
 
+## Demo
+
+[Examples of usage jQuery SyoTimer Plugin](http://syomochkin.xyz/folio/syotimer/demo.html)
+
+
 ## Requirements
 
 jQuery SyoTimer Plugin has been tested with jQuery 1.7+ on all major browsers:
@@ -33,7 +38,7 @@ Include the js-files which you can find in the `build` folder and call the metho
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="jquery.syotimer.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
+    jQuery(function($) {
         $('.your_selector_to_countdown').syotimer();
     });
 </script>
@@ -41,28 +46,30 @@ Include the js-files which you can find in the `build` folder and call the metho
 
 ## HTML Structure of SyoTimer
 
+Classes is named by [BEM methodology](https://en.bem.info/methodology/naming-convention/)
+
 ```html
 <div class="timer">
-    <div class="timer-head-block"></div>
-    <div class="timer-body-block">
-        <div class="table-cell day">
-            <div class="tab-val">1</div>
+    <div class="timer__head timer-head-block"></div>
+    <div class="timer__body timer-body-block">
+        <div class="timer__item timer-cell timer-cell_day table-cell day">
+            <div class="timer-cell__value tab-val">1</div>
             <div class="tab-unit">day</div>
         </div>
-        <div class="table-cell hour">
-            <div class="tab-val">1</div>
-            <div class="tab-unit">hour</div>
+        <div class="timer__item timer-cell timer-cell_hour table-cell hour">
+            <div class="timer-cell__value tab-val">1</div>
+            <div class="timer-cell__unit tab-unit">hour</div>
         </div>
-        <div class="table-cell minute">
-            <div class="tab-val">1</div>
-            <div class="tab-unit">minute</div>
+        <div class="timer__item timer-cell timer-cell_minute table-cell minute">
+            <div class="timer-cell__value tab-val">1</div>
+            <div class="timer-cell__unit tab-unit">minute</div>
         </div>
-        <div class="table-cell second">
-            <div class="tab-val">1</div>
-            <div class="tab-unit">second</div>
+        <div class="timer__item timer-cell timer-cell_second table-cell second">
+            <div class="timer-cell__value tab-val">1</div>
+            <div class="timer-cell__unit tab-unit">second</div>
         </div>
     </div>
-    <div class="timer-foot-block"></div>
+    <div class="timer__footer timer-foot-block"></div>
 </div>
 ```
 
@@ -122,11 +129,6 @@ For example, used a timer with a period of one day, for which the deadline set o
 
 To exclude these cases set `ignoreTransferTime` to `false`.
 
-
-
-## Demo
-
-[Examples of usage jQuery SyoTimer Plugin](http://syomochkin.xyz/folio/syotimer/demo.html)
 
 ## Version History
 
