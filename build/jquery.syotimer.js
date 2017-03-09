@@ -7,9 +7,15 @@
  * @license: under MIT license
  */
 (function($){
-    const DAY_IN_SEC = 24 * 60 * 60;
-    const HOUR_IN_SEC = 60 * 60;
-    const MINUTE_IN_SEC = 60;
+    var DAY_IN_SEC = 24 * 60 * 60;
+    var HOUR_IN_SEC = 60 * 60;
+    var MINUTE_IN_SEC = 60;
+    var LAYOUT_TYPES = {
+        d: "day",
+        h: "hour",
+        m: "minute",
+        s: "second"
+    };
 
     var lang = {
         rus: {
@@ -26,7 +32,7 @@
         }
     };
 
-    const DEFAULTS = {
+    var DEFAULTS = {
         year: 2014,
         month: 7,
         day: 31,
@@ -35,6 +41,7 @@
         second: 0,
         timeZone: 'local',
         ignoreTransferTime: false,
+        layout: 'dhms',
 
         periodic: false, // true - таймер периодичный
         periodInterval: 7, // (если periodic установлен как true) период таймера. Единица измерения указывается в periodType
@@ -60,6 +67,7 @@
          */
         init: function(settings) {
             var options = $.extend({}, DEFAULTS, settings || {});
+            options.itemTypes = staticMethod.getItemTypesByLayout(options.layout);
             return this.each(function() {
                 var elementBox = $(this);
                 elementBox.data('syotimer-options', options);
@@ -73,8 +81,7 @@
          * @private
          */
         _render: function() {
-            var cells = ["day", "hour", "minute", "second"],
-                elementBox = $(this),
+            var elementBox = $(this),
                 options = elementBox.data('syotimer-options');
 
             var timerItem = staticMethod.getTimerItem(),
@@ -87,9 +94,9 @@
                     .append(options.headTitle);
             bodyBlock = $('<div/>').addClass('syotimer__body');
 
-            for (var i = 0; i < cells.length; i++) {
+            for (var i = 0; i < options.itemTypes.length; i++) {
                 var item = timerItem.clone();
-                item.addClass('syotimer-cell_' + cells[i]);
+                item.addClass('syotimer-cell_' + options.itemTypes[i]);
                 bodyBlock.append(item);
             }
             elementBox.addClass('syotimer')
@@ -204,6 +211,14 @@
             timerCell.append(timerCellValue)
                 .append(timerCellUnit);
             return timerCell;
+        },
+
+        getItemTypesByLayout: function(layout) {
+            var itemTypes = [];
+            for (var i = 0; i < layout.length; i++) {
+                itemTypes.push(LAYOUT_TYPES[layout[i]]);
+            }
+            return itemTypes;
         },
 
         /**

@@ -53,6 +53,7 @@
                 day: 1,
                 hour: 0,
                 minute: 0,
+                layout: 'hms',
 
                 headTitle: '<h3>Periodic Timer. The countdown begins first through each 3 minutes. Effect of fading in</h3>',
 
@@ -73,6 +74,7 @@
                 day: 1,
                 hour: 20,
                 minute: 0,
+                layout: 'hms',
 
                 headTitle: '<h3>Periodic Timer. The countdown begins first through each 10 days</h3>' +
                     '<p style="font-size: .8em; color: #666;">The date equal 20:00 2015.01.01</p>',
@@ -81,6 +83,21 @@
                 periodic: true,
                 periodInterval: 10,
                 periodUnit: 'd'
+            });
+
+            /* Periodic Timer. Period is equal 2 hour. Show only seconds
+             --------------------------------------------------------- */
+            $('#periodic_timer__only_seconds').syotimer({
+                hour: 0,
+                minute: 0,
+                second: 0,
+                layout: 's',
+
+                headTitle: '<h3>Periodic Timer. Period is equal 2 hour. Show only seconds</h3>',
+
+                periodic: true,
+                periodInterval: 2,
+                periodUnit: 'h'
             });
 
             /* Periodic Timer. Russian localization
@@ -110,6 +127,7 @@
                 minute: 0,
                 timeZone: 2,
                 ignoreTransferTime: true,
+                layout: 'hms',
 
                 headTitle: '<h3>Countdown timer with given timezone</h3>' +
                     '<p>The deadline is 18:00:00 by the time Rome, Italy (UTC+2)</p>',
@@ -195,7 +213,8 @@
         }
 
         #simple_timer .syotimer-cell_day,
-        #periodic_timer_days .syotimer-cell_hour{
+        #periodic_timer_days .syotimer-cell_hour,
+        #periodic_timer__only_seconds .syotimer-cell_second{
             width: 120px;
             background-image: url(../demos/images/timer_long.png);
         }
@@ -216,6 +235,8 @@
     <div id="periodic_timer_minutes"></div>
 
     <div id="periodic_timer_days"></div>
+
+    <div id="periodic_timer__only_seconds"></div>
 
     <div id="russian_localization"></div>
 
