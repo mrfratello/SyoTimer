@@ -59,6 +59,13 @@
         }
     };
 
+    var ITEMS_HAS_OPTIONS = {
+        second: false,
+        minute: false,
+        hour: false,
+        day: false
+    };
+
     var SyoTimer = {
         /**
          * Init syotimer on DOM
@@ -68,6 +75,10 @@
         init: function(settings) {
             var options = $.extend({}, DEFAULTS, settings || {});
             options.itemTypes = staticMethod.getItemTypesByLayout(options.layout);
+            options._itemsHas = $.extend({}, ITEMS_HAS_OPTIONS, settings || {});
+            for (var i = 0; i < options.itemTypes.length; i++) {
+                options._itemsHas[options.itemTypes[i]] = true;
+            }
             return this.each(function() {
                 var elementBox = $(this);
                 elementBox.data('syotimer-options', options);
@@ -87,7 +98,8 @@
             var timerItem = staticMethod.getTimerItem(),
                 headBlock,
                 bodyBlock,
-                footBlock;
+                footBlock,
+                itemBlocks = {};
             headBlock = $('<div/>').addClass('syotimer__head')
                     .append(options.headTitle);
             footBlock = $('<div/>').addClass('syotimer__footer')
@@ -98,17 +110,19 @@
                 var item = timerItem.clone();
                 item.addClass('syotimer-cell_' + options.itemTypes[i]);
                 bodyBlock.append(item);
+                itemBlocks[options.itemTypes[i]] = item;
             }
-            elementBox.addClass('syotimer')
-                .append(headBlock)
-                .append(bodyBlock)
-                .append(footBlock);
             var timerBlocks = {
                     headBlock: headBlock,
                     bodyBlock: bodyBlock,
                     footBlock: footBlock
                 };
-            elementBox.data('syotimer-blocks', timerBlocks);
+            elementBox.data('syotimer-blocks', timerBlocks)
+                .data('syotimer-items', itemBlocks)
+                .addClass('syotimer')
+                .append(headBlock)
+                .append(bodyBlock)
+                .append(footBlock);
         },
 
         /**
@@ -147,22 +161,27 @@
         _refreshUnitsDom: function(secondsToDeadLine) {
             var elementBox = $(this),
                 options = elementBox.data('syotimer-options'),
-                unitList = ['day', 'hour', 'minute', 'second'],
+                itemBlocks = elementBox.data('syotimer-items'),
+                unitList = options.itemTypes,
                 unitsToDeadLine = staticMethod.getUnitsToDeadLine( secondsToDeadLine ),
                 language = lang[options.lang];
 
-            if ( !options.dayVisible ) {
+            if ( !options._itemsHas.day ) {
                 unitsToDeadLine.hour += unitsToDeadLine.day * 24;
-                unitList.splice(0, 1);
+            }
+            if ( !options._itemsHas.hour ) {
+                unitsToDeadLine.minute += unitsToDeadLine.hour * 60;
+            }
+            if ( !options._itemsHas.minute ) {
+                unitsToDeadLine.second += unitsToDeadLine.minute * 60;
             }
             for(var i = 0; i < unitList.length; i++) {
-                var unit = unitList[i],
-                    cls = '.syotimer-cell_' + unit;
-                $(cls + ' > .syotimer-cell__value', elementBox).html(staticMethod.format2(
+                var unit = unitList[i];
+                $('.syotimer-cell__value', itemBlocks[unit]).html(staticMethod.format2(
                     unitsToDeadLine[unit],
                     (unit != 'day') ? options.doubleNumbers : false
                 ));
-                $(cls + ' > .syotimer-cell__unit', elementBox).html(staticMethod.definitionOfNumerals(
+                $('.syotimer-cell__unit', itemBlocks[unit]).html(staticMethod.definitionOfNumerals(
                     unitsToDeadLine[unit],
                     language[unit],
                     options.lang
