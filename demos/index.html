@@ -8,7 +8,7 @@
     <script type="text/javascript" src="../build/jquery.syotimer.min.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function(){
+        jQuery(function($){
             /* Simple Timer. The countdown to 20:30 2100.05.09
             --------------------------------------------------------- */
             $('#simple_timer').syotimer({
@@ -164,7 +164,7 @@
         }
 
         /* Customization Style of SyoTimer */
-        .timer{
+        .syotimer{
             text-align: center;
 
             margin: 30px auto 0;
@@ -172,14 +172,14 @@
 
             border-bottom: 2px solid #80a3ca;
         }
-        .timer .table-cell{
+        .syotimer-cell{
             display: inline-block;
             margin: 0 5px;
 
             width: 79px;
             background: url(../demos/images/timer.png) no-repeat 0 0;
         }
-        .timer .table-cell .tab-val{
+        .syotimer-cell__value{
             font-size: 35px;
             color: #80a3ca;
 
@@ -188,14 +188,14 @@
 
             margin: 0 0 5px;
         }
-        .timer .table-cell .tab-unit{
+        .syotimer-cell__unit{
             font-family: Arial, serif;
             font-size: 12px;
             text-transform: uppercase;
         }
 
-        #simple_timer.timer .table-cell.day,
-        #periodic_timer_days.timer .table-cell.hour{
+        #simple_timer .syotimer-cell_day,
+        #periodic_timer_days .syotimer-cell_hour{
             width: 120px;
             background-image: url(../demos/images/timer_long.png);
         }

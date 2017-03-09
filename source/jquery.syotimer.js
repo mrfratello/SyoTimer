@@ -33,7 +33,6 @@
         periodUnit: 'd', // единица измерения периода таймера
 
         dayVisible: true, // показывать ли количество дней, если нет, то количество часов может превышать 23
-        dubleNumbers: true, // показывать часы, минуты и секунды с ведущими нолями ( 2часа 5минут 4секунды = 02:05:04)
         doubleNumbers: true, // показывать часы, минуты и секунды с ведущими нолями ( 2часа 5минут 4секунды = 02:05:04)
         effectType: 'none', // эффект отсчета таймера: 'none' - нет эффекта, 'opacity' - выцветание
         lang: 'eng',
@@ -53,9 +52,6 @@
          */
         init: function(settings) {
             var options = $.extend({}, DEFAULTS, settings || {});
-            if ( settings.hasOwnProperty("dubleNumbers") ) { // handler of deprecated options
-                options.doubleNumbers = settings.dubleNumbers;
-            }
             return this.each(function() {
                 var elementBox = $(this);
                 elementBox.data('syotimer-options', options);
@@ -69,26 +65,30 @@
          * @private
          */
         _render: function() {
-            var elementBox = $(this),
-                options = elementBox.data('syotimer-options'),
-                timerDom,
-                dayCellDom = ( options.dayVisible) ? staticMethod.getCellDom('day', '0') : '';
-            timerDom = '' +
-                '<div class="timer-head-block">' + options.headTitle + '</div>' +
-                '<div class="timer-body-block">' +
-                    dayCellDom +
-                    staticMethod.getCellDom('hour') +
-                    staticMethod.getCellDom('minute') +
-                    staticMethod.getCellDom('second') +
-                '</div>' +
-                '<div class="timer-foot-block">' + options.footTitle + '</div>';
+            var cells = ["day", "hour", "minute", "second"],
+                elementBox = $(this),
+                options = elementBox.data('syotimer-options');
+
+            var timerItem = staticMethod.getTimerItem(),
+                headBlock,
+                bodyBlock,
+                footBlock;
+            headBlock = $('<div/>').addClass('syotimer__head')
+                    .append(options.headTitle);
+            footBlock = $('<div/>').addClass('syotimer__footer')
+                    .append(options.headTitle);
+            bodyBlock = $('<div/>').addClass('syotimer__body');
+
+            for (var i = 0; i < cells.length; i++) {
+                var item = timerItem.clone();
+                item.addClass('syotimer-cell_' + cells[i]);
+                bodyBlock.append(item);
+            }
             elementBox.addClass('syotimer')
-                .addClass('timer')
-                .html( timerDom );
-            var headBlock = $('.timer-head-block', elementBox),
-                bodyBlock = $('.timer-body-block', elementBox),
-                footBlock = $('.timer-foot-block', elementBox),
-                timerBlocks = {
+                .append(headBlock)
+                .append(bodyBlock)
+                .append(footBlock);
+            var timerBlocks = {
                     headBlock: headBlock,
                     bodyBlock: bodyBlock,
                     footBlock: footBlock
@@ -103,7 +103,7 @@
         _perSecondHandler: function() {
             var elementBox = $(this),
                 options = elementBox.data('syotimer-options');
-            $('.second .tab-val', elementBox).css( 'opacity', 1 );
+            $('.syotimer-cell_second > .syotimer-cell__value', elementBox).css( 'opacity', 1 );
             var currentDate = new Date(),
                 deadLineDate = new Date(
                     options.year,
@@ -142,12 +142,12 @@
             }
             for(var i = 0; i < unitList.length; i++) {
                 var unit = unitList[i],
-                    cls = '.' + unit;
-                $(cls + ' .tab-val', elementBox).html(staticMethod.format2(
+                    cls = '.syotimer-cell_' + unit;
+                $(cls + ' > .syotimer-cell__value', elementBox).html(staticMethod.format2(
                     unitsToDeadLine[unit],
                     (unit != 'day') ? options.doubleNumbers : false
                 ));
-                $(cls + ' .tab-unit', elementBox).html(staticMethod.definitionOfNumerals(
+                $(cls + ' > .syotimer-cell__unit', elementBox).html(staticMethod.definitionOfNumerals(
                     unitsToDeadLine[unit],
                     language[unit],
                     options.lang
@@ -170,7 +170,7 @@
                     }, 1000);
                     break;
                 case 'opacity':
-                    $('.second .tab-val', elementBox).animate(
+                    $('.syotimer-cell_second > .syotimer-cell__value', elementBox).animate(
                         {opacity: 0.1 },
                         1000,
                         'linear',
@@ -186,18 +186,16 @@
     var staticMethod = {
         /**
          * Return once cell DOM of countdown: day, hour, minute, second
-         * @param cls               class of cell
-         * @param startCountFormat
-         * @returns {string}
+         * @returns {object}
          */
-        getCellDom: function(cls, startCountFormat) {
-            cls = cls || '';
-            startCountFormat = startCountFormat || '00';
-            return '' +
-                '<div class="table-cell ' + cls + '">' +
-                    '<div class="tab-val">' + startCountFormat + '</div>' +
-                    '<div class="tab-metr tab-unit"></div>' +
-                '</div>';
+        getTimerItem: function() {
+            var timerCellValue = $('<div/>').addClass('syotimer-cell__value')
+                    .html('0'),
+                timerCellUnit = $('<div/>').addClass('syotimer-cell__unit'),
+                timerCell = $('<div/>').addClass('syotimer-cell');
+            timerCell.append(timerCellValue)
+                .append(timerCellUnit);
+            return timerCell;
         },
 
         /**

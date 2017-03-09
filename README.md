@@ -49,27 +49,27 @@ Include the js-files which you can find in the `build` folder and call the metho
 Classes is named by [BEM methodology](https://en.bem.info/methodology/naming-convention/)
 
 ```html
-<div class="timer">
-    <div class="timer__head timer-head-block"></div>
-    <div class="timer__body timer-body-block">
-        <div class="timer__item timer-cell timer-cell_day table-cell day">
-            <div class="timer-cell__value tab-val">1</div>
-            <div class="tab-unit">day</div>
+<div class="syotimer">
+    <div class="syotimer__head"></div>
+    <div class="syotimer__body">
+        <div class="syotimer__item syotimer-cell syotimer-cell_day">
+            <div class="syotimer-cell__value">1</div>
+            <div class="syotimer-cell__unit">day</div>
         </div>
-        <div class="timer__item timer-cell timer-cell_hour table-cell hour">
-            <div class="timer-cell__value tab-val">1</div>
-            <div class="timer-cell__unit tab-unit">hour</div>
+        <div class="syotimer__item syotimer-cell syotimer-cell_hour">
+            <div class="syotimer-cell__value">1</div>
+            <div class="syotimer-cell__unit">hour</div>
         </div>
-        <div class="timer__item timer-cell timer-cell_minute table-cell minute">
-            <div class="timer-cell__value tab-val">1</div>
-            <div class="timer-cell__unit tab-unit">minute</div>
+        <div class="syotimer__item syotimer-cell syotimer-cell_minute">
+            <div class="syotimer-cell__value">1</div>
+            <div class="syotimer-cell__unit">minute</div>
         </div>
-        <div class="timer__item timer-cell timer-cell_second table-cell second">
-            <div class="timer-cell__value tab-val">1</div>
-            <div class="timer-cell__unit tab-unit">second</div>
+        <div class="syotimer__item syotimer-cell syotimer-cell_second">
+            <div class="syotimer-cell__value">1</div>
+            <div class="syotimer-cell__unit">second</div>
         </div>
     </div>
-    <div class="timer__footer timer-foot-block"></div>
+    <div class="timer__footer"></div>
 </div>
 ```
 
