@@ -88,19 +88,16 @@
                 options = elementBox.data('syotimer-options');
 
             var timerItem = staticMethod.getTimerItem(),
-                headBlock,
-                bodyBlock,
-                footBlock,
+                headBlock = $('<div/>', {"class": 'syotimer__head'})
+                    .html(options.headTitle),
+                bodyBlock = $('<div/>', {"class": 'syotimer__body'}),
+                footBlock = $('<div/>', {"class": 'syotimer__footer'})
+                    .html(options.footTitle),
                 itemBlocks = {};
-            headBlock = $('<div/>').addClass('syotimer__head')
-                    .append(options.headTitle);
-            footBlock = $('<div/>').addClass('syotimer__footer')
-                    .append(options.headTitle);
-            bodyBlock = $('<div/>').addClass('syotimer__body');
 
             for (var i = 0; i < options.itemTypes.length; i++) {
                 var item = timerItem.clone();
-                item.addClass('syotimer-cell_' + options.itemTypes[i]);
+                item.addClass('syotimer-cell_type_' + options.itemTypes[i]);
                 bodyBlock.append(item);
                 itemBlocks[options.itemTypes[i]] = item;
             }
@@ -124,7 +121,7 @@
         _perSecondHandler: function() {
             var elementBox = $(this),
                 options = elementBox.data('syotimer-options');
-            $('.syotimer-cell_second > .syotimer-cell__value', elementBox).css( 'opacity', 1 );
+            $('.syotimer-cell_type_second > .syotimer-cell__value', elementBox).css( 'opacity', 1 );
             var currentDate = new Date(),
                 deadLineDate = new Date(
                     options.year,
@@ -196,7 +193,7 @@
                     }, 1000);
                     break;
                 case 'opacity':
-                    $('.syotimer-cell_second > .syotimer-cell__value', elementBox).animate(
+                    $('.syotimer-cell_type_second > .syotimer-cell__value', elementBox).animate(
                         {opacity: 0.1 },
                         1000,
                         'linear',
@@ -215,10 +212,12 @@
          * @returns {object}
          */
         getTimerItem: function() {
-            var timerCellValue = $('<div/>').addClass('syotimer-cell__value')
-                    .html('0'),
-                timerCellUnit = $('<div/>').addClass('syotimer-cell__unit'),
-                timerCell = $('<div/>').addClass('syotimer-cell');
+            var timerCellValue = $('<div/>', {
+                    "class": 'syotimer-cell__value',
+                    "text": '0'
+                }),
+                timerCellUnit = $('<div/>', {"class": 'syotimer-cell__unit'}),
+                timerCell = $('<div/>', {"class": 'syotimer-cell'});
             timerCell.append(timerCellValue)
                 .append(timerCellUnit);
             return timerCell;

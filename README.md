@@ -9,17 +9,6 @@ jQuery plugin of countdown on html-page
 [Examples of usage jQuery SyoTimer Plugin](http://syomochkin.xyz/folio/syotimer/demo.html)
 
 
-## Requirements
-
-jQuery SyoTimer Plugin has been tested with jQuery 1.7+ on all major browsers:
-
-* Firefox 2+ (Win, Mac, Linux);
-* IE8+ (Win);
-* Chrome 6+ (Win, Mac, Linux, Android, iPhone);
-* Safari 3.2+ (Win, Mac, iPhone);
-* Opera 8+ (Win, Mac, Linux, Android, iPhone).
-
-
 ## Features
 
 * Callback after the end of the countdown timer with the possibility of changing the structure of the timer
@@ -52,19 +41,19 @@ Classes is named by [BEM methodology](https://en.bem.info/methodology/naming-con
 <div class="syotimer">
     <div class="syotimer__head"></div>
     <div class="syotimer__body">
-        <div class="syotimer__item syotimer-cell syotimer-cell_day">
+        <div class="syotimer__item syotimer-cell syotimer-cell_type_day">
             <div class="syotimer-cell__value">1</div>
             <div class="syotimer-cell__unit">day</div>
         </div>
-        <div class="syotimer__item syotimer-cell syotimer-cell_hour">
+        <div class="syotimer__item syotimer-cell syotimer-cell_type_hour">
             <div class="syotimer-cell__value">1</div>
             <div class="syotimer-cell__unit">hour</div>
         </div>
-        <div class="syotimer__item syotimer-cell syotimer-cell_minute">
+        <div class="syotimer__item syotimer-cell syotimer-cell_type_minute">
             <div class="syotimer-cell__value">1</div>
             <div class="syotimer-cell__unit">minute</div>
         </div>
-        <div class="syotimer__item syotimer-cell syotimer-cell_second">
+        <div class="syotimer__item syotimer-cell syotimer-cell_type_second">
             <div class="syotimer-cell__value">1</div>
             <div class="syotimer-cell__unit">second</div>
         </div>
@@ -130,17 +119,30 @@ For example, used a timer with a period of one day, for which the deadline set o
 To exclude these cases set `ignoreTransferTime` to `false`.
 
 
+## Requirements
+
+jQuery SyoTimer Plugin has been tested with jQuery 1.7+ on all major browsers:
+
++ Firefox 2+ (Win, Mac, Linux);
++ IE8+ (Win);
++ Chrome 6+ (Win, Mac, Linux, Android, iPhone);
++ Safari 3.2+ (Win, Mac, iPhone);
++ Opera 8+ (Win, Mac, Linux, Android, iPhone).
+
+
 ## Version History
 
-* **1.1.0** *2016-07-30*
++ **2.0.0** _2017-03-20_
+    - ???
++ **1.1.0** _2016-07-30_
     - added time zone support
     - added support of the time transfer on summer/winter time
     - added methods support
     - added method of set value to option
     - added minified version of plugin
-* **1.0.1** *2015-02-24*
++ **1.0.1** _2015-02-24_
     - added option for change effect of counting
     - added documentation
     - added examples
-* **1.0.0** *2014-12-10*
++ **1.0.0** _2014-12-10_
     - first use timer on real web-site

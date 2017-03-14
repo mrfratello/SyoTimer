@@ -11,7 +11,7 @@
         jQuery(function($){
             /* Simple Timer. The countdown to 20:30 2100.05.09
             --------------------------------------------------------- */
-            $('#simple_timer').syotimer({
+            $('#simple-timer').syotimer({
                 year: 2020,
                 month: 5,
                 day: 9,
@@ -19,13 +19,15 @@
                 minute: 30
             });
 
+
             /* Timer with Head and Foot. Countdown is over
             --------------------------------------------------------- */
             $('#countdowned_timer').syotimer({
                 year: 1990,
                 headTitle: '<h3>Timer with header and footer. Countdown is over</h3>',
-                footTitle: '<i style="color: brown;">Footer of timer.</i>',
+                footTitle: '<i style="color: brown;">Footer of timer.</i>'
             });
+
 
             /* Callback after the end of the countdown timer */
             $('#countdowned_timer_event').syotimer({
@@ -40,14 +42,14 @@
                 afterDeadline: function(syotimer){
                     syotimer.bodyBlock.html('<p>The countdown is finished 00:00 2000.12.31</p>');
                     syotimer.headBlock.html('<h3>Callback after the end of the countdown timer</h3>');
-                    syotimer.footBlock.html('<i style="color: brown;">Footer of timer after countdown is finished</i>');
+                    syotimer.footBlock.html('<em style="color:brown;">Footer of timer after countdown is finished</em>');
                 }
             });
 
 
             /* Periodic Timer. Period is equal 3 minutes. Effect of fading in
             --------------------------------------------------------- */
-            $('#periodic_timer_minutes').syotimer({
+            $('#periodic-timer_period_minutes').syotimer({
                 year: 2015,
                 month: 1,
                 day: 1,
@@ -66,9 +68,10 @@
                 periodInterval: 3
             });
 
+
             /* Periodic Timer. Period is equal 10 days
             --------------------------------------------------------- */
-            $('#periodic_timer_days').syotimer({
+            $('#periodic-timer_period_days').syotimer({
                 year: 2015,
                 month: 1,
                 day: 1,
@@ -85,37 +88,59 @@
                 periodUnit: 'd'
             });
 
-            /* Periodic Timer. Period is equal 2 hour. Show only seconds
-             --------------------------------------------------------- */
-            $('#periodic_timer__only_seconds').syotimer({
+
+            /*
+             * Demonstrate layout. Period is equal 2 hours. Display only seconds
+             */
+            $('#layout__only-seconds').syotimer({
                 hour: 0,
                 minute: 0,
                 second: 0,
                 layout: 's',
 
-                headTitle: '<h3>Periodic Timer. Period is equal 2 hour. Show only seconds</h3>',
+                headTitle: '<h3>Display only seconds</h3>' +
+                    '<p>Demonstrate layout. Period is equal 2 hours.</p>',
 
                 periodic: true,
                 periodInterval: 2,
                 periodUnit: 'h'
             });
 
-            /* Periodic Timer. Russian localization
-            --------------------------------------------------------- */
-            $('#russian_localization').syotimer({
-                year: 2015,
-                month: 1,
-                day: 1,
-                hour: 20,
-                minute: 0,
 
-                headTitle: '<h3>For Russian speakers.<br/>Поддерживается правильное склонение существительных рядом с числительными</h3>',
-                lang: 'rus',
+            /*
+             * Demonstrate layout. Period is equal 2 days and 5 hours. Units of countdown in reverse order.
+             */
+            $('#layout__reversed-units').syotimer({
+                hour: 0,
+                minute: 0,
+                second: 0,
+                layout: 'smhd',
+
+                headTitle: '<h3>Units of countdown in reverse order</h3>' +
+                    '<p>Demonstrate layout. Period is equal 2 days and 5 hours.</p>',
 
                 periodic: true,
-                periodInterval: 10,
-                periodUnit: 'd'
+                periodInterval: 53,
+                periodUnit: 'h'
             });
+
+
+            /* Demonstrate layout. Period is equal 2 days and 5 hours. Display only days and minutes in reverse order
+             --------------------------------------------------------- */
+            $('#layout__mixed-units').syotimer({
+                hour: 0,
+                minute: 0,
+                second: 0,
+                layout: 'md',
+
+                headTitle: '<h3>Display only days and minutes in reverse order</h3>' +
+                    '<p>Demonstrate layout. Period is equal 1 days, 5 hours and 37 minutes.</p>',
+
+                periodic: true,
+                periodInterval: 1777,
+                periodUnit: 'm'
+            });
+
 
             /* Periodic Timer. Countdown timer with given time zone
             --------------------------------------------------------- */
@@ -137,6 +162,7 @@
                 periodInterval: 1,
                 periodUnit: 'd'
             });
+
 
             /* Periodic Timer. Change options: effect type
              --------------------------------------------------------- */
@@ -212,9 +238,10 @@
             text-transform: uppercase;
         }
 
-        #simple_timer .syotimer-cell_day,
-        #periodic_timer_days .syotimer-cell_hour,
-        #periodic_timer__only_seconds .syotimer-cell_second{
+        #simple-timer .syotimer-cell_day,
+        #periodic-timer_period_days .syotimer-cell_type_hour,
+        #layout__only-seconds .syotimer-cell_type_second,
+        #layout__mixed-units .syotimer-cell_type_minute{
             width: 120px;
             background-image: url(../demos/images/timer_long.png);
         }
@@ -226,19 +253,21 @@
     <h1>Examples of usage jQuery SyoTimer Plugin</h1>
 
     <h3 style="text-align: center;">Simple Timer</h3>
-    <div id="simple_timer"></div>
+    <div id="simple-timer"></div>
 
     <div id="countdowned_timer"></div>
 
     <div id="countdowned_timer_event"></div>
 
-    <div id="periodic_timer_minutes"></div>
+    <div id="periodic-timer_period_minutes"></div>
 
-    <div id="periodic_timer_days"></div>
+    <div id="periodic-timer_period_days"></div>
 
-    <div id="periodic_timer__only_seconds"></div>
+    <div id="layout__only-seconds"></div>
 
-    <div id="russian_localization"></div>
+    <div id="layout__reversed-units"></div>
+
+    <div id="layout__mixed-units"></div>
 
     <div id="timer_with_given_timezone"></div>
 
