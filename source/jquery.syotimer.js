@@ -15,6 +15,12 @@
             minute: ['minute', 'minutes'],
             hour: ['hour', 'hours'],
             day: ['day', 'days']
+        },
+        por: {
+            second: ['segundo', 'segundos'],
+            minute: ['minuto', 'minutos'],
+            hour: ['hora', 'horas'],
+            day: ['dia', 'dias'],
         }
     };
 
@@ -327,6 +333,8 @@
                     return titles[index];
                 case 'eng':
                     return titles[ ( number == 1 ) ? 0 : 1 ];
+                case 'por':
+                        return titles[ ( number == 1 ) ? 0 : 1 ];
             }
         }
 
