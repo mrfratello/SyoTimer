@@ -214,8 +214,6 @@
 
             margin: 30px auto 0;
             padding: 0 0 10px;
-
-            border-bottom: 2px solid #80a3ca;
         }
         .syotimer-cell{
             display: inline-block;
@@ -246,6 +244,30 @@
             width: 120px;
             background-image: url(../demos/images/timer_long.png);
         }
+
+
+        /* For layout demo page */
+        .row{
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #80a3ca;
+        }
+        .left_column{
+            flex-basis: 30%;
+        }
+        .right_column{
+            flex-grow: 1;
+        }
+        pre{
+            font-family: monospace;
+            background: #e1e1e1;
+            color: #666;
+            padding: 5px;
+            border: 2px solid #999;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+        }
     </style>
 </head>
 
@@ -253,12 +275,58 @@
 
     <h1>Examples of usage jQuery SyoTimer Plugin</h1>
 
-    <h3 style="text-align: center;">Simple Timer</h3>
-    <div id="simple-timer"></div>
+    <div class="row">
+        <pre class="left_column"><code>$('#simple-timer').syotimer({
+    year: 2020,
+    month: 5,
+    day: 9,
+    hour: 20,
+    minute: 30
+});</code></pre>
+        <div class="right_column">
+            <h3 style="text-align: center;">Simple Timer</h3>
+            <div id="simple-timer"></div>
+        </div>
+    </div>
 
-    <div id="countdowned_timer"></div>
+    <div class="row">
+        <pre class="left_column"><code>$('#countdowned_timer').syotimer({
+    year: 1990,
+    headTitle: '&lt;h3&gt;Timer with header and footer. Countdown is over&lt;/h3&gt;',
+    footTitle: '&lt;i style="color: brown;"&gt;Footer of timer.&0lt;/i&gt;'
+});</code></pre>
+        <div id="countdowned_timer" class="right_column">
 
-    <div id="countdowned_timer_event"></div>
+        </div>
+    </div>
+
+    .row>pre.left_column>code^#countdowned_timer_event.right_column
+    <div class="row">
+        <pre class="left_column"><code>$('#countdowned_timer_event').syotimer({
+    year: 2000,
+    month: 12,
+    day: 31,
+    hour: 0,
+    minute: 0,
+
+    headTitle: '&lt;h3&gt;Timer with header and footer. Countdown is over&lt;/h3&gt;',
+    footTitle: '&lt;i style="color: brown;"&gt;Footer of timer.&lt;/i&gt;',
+    afterDeadline: function(syotimer){
+        syotimer.bodyBlock.html(
+            '&lt;p&gt;The countdown is finished 00:00 2000.12.31&lt;/p&gt;'
+        );
+        syotimer.headBlock.html(
+            '&lt;h3&gt;Callback after the end of the countdown timer&lt;/h3&gt;'
+        );
+        syotimer.footBlock.html(
+            '&lt;em style="color:brown;"&gt;'
+            + 'Footer of timer after countdown is finished'
+            + '&lt;/em&gt;
+        ');
+    }
+});</code></pre>
+        <div id="countdowned_timer_event" class="right_column"></div>
+    </div>
 
     <div id="periodic-timer_period_minutes"></div>
 
