@@ -3,19 +3,34 @@
  * @version: 2.0.0-alpha 
  * @author: John Syomochkin 
  * @homepage: https://github.com/mrfratello/SyoTimer#readme 
- * @date: 2017.3.14
+ * @date: 2017.5.31
  * @license: under MIT license
  */
 (function($){
+    var DAY = "day",
+        HOUR = "hour",
+        MINUTE = "minute",
+        SECOND = "second";
     var DAY_IN_SEC = 24 * 60 * 60;
     var HOUR_IN_SEC = 60 * 60;
     var MINUTE_IN_SEC = 60;
     var LAYOUT_TYPES = {
-        d: "day",
-        h: "hour",
-        m: "minute",
-        s: "second"
-    };
+            d: DAY,
+            h: HOUR,
+            m: MINUTE,
+            s: SECOND
+        };
+    var UNIT_LINKED_LIST = {
+            list: [SECOND, MINUTE, HOUR, DAY],
+            next: function(current) {
+                var currentIndex = this.list.indexOf(current);
+                return (currentIndex < this.list.length ) ? this.list[currentIndex + 1] : false;
+            },
+            prev: function(current) {
+                var currentIndex = this.list.indexOf(current);
+                return (currentIndex > 0 ) ? this.list[currentIndex - 1] : false;
+            }
+        };
 
     var lang = {
         rus: {
@@ -75,7 +90,7 @@
         init: function(settings) {
             var options = $.extend({}, DEFAULTS, settings || {});
             options.itemTypes = staticMethod.getItemTypesByLayout(options.layout);
-            options._itemsHas = $.extend({}, ITEMS_HAS_OPTIONS, settings || {});
+            options._itemsHas = $.extend({}, ITEMS_HAS_OPTIONS);
             for (var i = 0; i < options.itemTypes.length; i++) {
                 options._itemsHas[options.itemTypes[i]] = true;
             }
@@ -129,7 +144,7 @@
         _perSecondHandler: function() {
             var elementBox = $(this),
                 options = elementBox.data('syotimer-options');
-            $('.syotimer-cell_type_second > .syotimer-cell__value', elementBox).css( 'opacity', 1 );
+            $('.syotimer-cell > .syotimer-cell__value', elementBox).css( 'opacity', 1 );
             var currentDate = new Date(),
                 deadLineDate = new Date(
                     options.year,
@@ -173,13 +188,16 @@
                 unitsToDeadLine.second += unitsToDeadLine.minute * 60;
             }
             for(var i = 0; i < unitList.length; i++) {
-                var unit = unitList[i];
-                $('.syotimer-cell__value', itemBlocks[unit]).html(staticMethod.format2(
-                    unitsToDeadLine[unit],
-                    (unit != 'day') ? options.doubleNumbers : false
+                var unit = unitList[i],
+                    unitValue = unitsToDeadLine[unit],
+                    itemBlock = itemBlocks[unit];
+                itemBlock.data('syotimer-unit-value', unitValue);
+                $('.syotimer-cell__value', itemBlock).html(staticMethod.format2(
+                    unitValue,
+                    (unit != DAY) ? options.doubleNumbers : false
                 ));
-                $('.syotimer-cell__unit', itemBlocks[unit]).html(staticMethod.definitionOfNumerals(
-                    unitsToDeadLine[unit],
+                $('.syotimer-cell__unit', itemBlock).html(staticMethod.definitionOfNumerals(
+                    unitValue,
                     language[unit],
                     options.lang
                 ));
@@ -189,27 +207,35 @@
         /**
          * Applying effect of changing numbers
          * @param effectType
+         * @param unit
          * @private
          */
-        _applyEffectSwitch: function(effectType) {
+        _applyEffectSwitch: function(effectType, unit) {
+            unit = unit || SECOND;
             var element = this,
                 elementBox = $(element);
-            switch ( effectType ){
-                case 'none':
-                    setTimeout( function(){
-                        SyoTimer._perSecondHandler.apply(element, []);
-                    }, 1000);
-                    break;
-                case 'opacity':
-                    $('.syotimer-cell_type_second > .syotimer-cell__value', elementBox).animate(
-                        {opacity: 0.1 },
+            if ( effectType === 'none' ) {
+                setTimeout(function () {
+                    SyoTimer._perSecondHandler.apply(element, []);
+                }, 1000);
+            } else if ( effectType === 'opacity' ) {
+                var itemBlocks = elementBox.data('syotimer-items'),
+                    unitItemBlock = itemBlocks[unit];
+                if (unitItemBlock) {
+                    var nextUnit = UNIT_LINKED_LIST.next(unit),
+                        unitValue = unitItemBlock.data('syotimer-unit-value');
+                    $('.syotimer-cell__value', unitItemBlock).animate(
+                        {opacity: 0.1},
                         1000,
                         'linear',
-                        function() {
+                        function () {
                             SyoTimer._perSecondHandler.apply(element, []);
                         }
                     );
-                    break;
+                    if (nextUnit && unitValue == 0) {
+                        SyoTimer._applyEffectSwitch.apply(element, [effectType, nextUnit]);
+                    }
+                }
             }
         }
     };
@@ -283,14 +309,13 @@
          * @returns {{}}
          */
         getUnitsToDeadLine: function(secondsToDeadLine) {
-            var unitList = ['day', 'hour', 'minute', 'second'],
+            var unit = DAY,
                 unitsToDeadLine = {};
-            for (var i = 0; i < unitList.length; i++) {
-                var unit = unitList[i],
-                    unitInMilliSec = staticMethod.getPeriodUnit(unit);
+            do {
+                var unitInMilliSec = staticMethod.getPeriodUnit(unit);
                 unitsToDeadLine[unit] = Math.floor(secondsToDeadLine / unitInMilliSec);
                 secondsToDeadLine = secondsToDeadLine % unitInMilliSec;
-            }
+            } while (unit = UNIT_LINKED_LIST.prev(unit));
             return unitsToDeadLine;
         },
 
@@ -302,16 +327,16 @@
         getPeriodUnit: function(given_period_unit) {
             switch (given_period_unit) {
                 case 'd':
-                case 'day':
+                case DAY:
                     return DAY_IN_SEC;
                 case 'h':
-                case 'hour':
+                case HOUR:
                     return HOUR_IN_SEC;
                 case 'm':
-                case 'minute':
+                case MINUTE:
                     return MINUTE_IN_SEC;
                 case 's':
-                case 'second':
+                case SECOND:
                     return 1;
             }
         },
@@ -322,13 +347,13 @@
                 amendmentOnTransferTime = 0,
                 amendment;
             if ( options.timeZone !== 'local' ) {
-                var timezoneOffset = parseFloat(options.timeZone) * staticMethod.getPeriodUnit('hour'),
-                    localTimezoneOffset = - currentDate.getTimezoneOffset() * staticMethod.getPeriodUnit('minute');
+                var timezoneOffset = parseFloat(options.timeZone) * staticMethod.getPeriodUnit(HOUR),
+                    localTimezoneOffset = - currentDate.getTimezoneOffset() * staticMethod.getPeriodUnit(MINUTE);
                 amendmentOnTimezone = (timezoneOffset - localTimezoneOffset) * 1000;
             }
             if ( options.ignoreTransferTime ) {
-                var currentTimezoneOffset = -currentDate.getTimezoneOffset() * staticMethod.getPeriodUnit('minute'),
-                    deadLineTimezoneOffset = -deadLineDate.getTimezoneOffset() * staticMethod.getPeriodUnit('minute');
+                var currentTimezoneOffset = -currentDate.getTimezoneOffset() * staticMethod.getPeriodUnit(MINUTE),
+                    deadLineTimezoneOffset = -deadLineDate.getTimezoneOffset() * staticMethod.getPeriodUnit(MINUTE);
                 amendmentOnTransferTime = (currentTimezoneOffset - deadLineTimezoneOffset) * 1000;
             }
             amendment = amendmentOnTimezone + amendmentOnTransferTime;
