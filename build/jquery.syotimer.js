@@ -3,7 +3,7 @@
  * @version: 2.0.0-alpha 
  * @author: John Syomochkin 
  * @homepage: https://github.com/mrfratello/SyoTimer#readme 
- * @date: 2017.5.31
+ * @date: 2017.6.1
  * @license: under MIT license
  */
 (function($){
@@ -62,7 +62,6 @@
         periodInterval: 7, // (если periodic установлен как true) период таймера. Единица измерения указывается в periodType
         periodUnit: 'd', // единица измерения периода таймера
 
-        dayVisible: true, // показывать ли количество дней, если нет, то количество часов может превышать 23
         doubleNumbers: true, // показывать часы, минуты и секунды с ведущими нолями ( 2часа 5минут 4секунды = 02:05:04)
         effectType: 'none', // эффект отсчета таймера: 'none' - нет эффекта, 'opacity' - выцветание
         lang: 'eng',

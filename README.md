@@ -33,7 +33,7 @@ Include the js-files which you can find in the `build` folder and call the metho
 </script>
 ```
 
-## HTML Structure of SyoTimer
+## Markup
 
 Classes is named by [BEM methodology](https://en.bem.info/methodology/naming-convention/)
 
@@ -65,24 +65,23 @@ Classes is named by [BEM methodology](https://en.bem.info/methodology/naming-con
 
 ## Options
 
-|Option          |   Description                         | Type of Value | Default Value | Available Values |
-| -------------- | ------------------------------------- | ------------- | ------------- | ---------------- |
-|**year**        | year of date, which should count down timer | integer | 2014 | >1979 |
-|**month**       | month of date, which should count down timer | integer | 7 | 1-12|
-|**day**         | day of date, which should count down timer | integer | 31 | 1-31 |
-|**hour**        | hour of date, which should count down timer | integer | 0 | 0-23 |
-|**minute**      | minute of date, which should count down timer | integer | 0 | 0-59 |
-|**second**      | second of date, which should count down timer | integer | 0 | 0-59 |
-|**timeZone**    | setting the time zone of deadline. If `local` then the time zone is ignored and the deadline is determined by local time of the user. Otherwise, specifies the offset from the UTC | float/string | 'local' | 'local', >-12 && <12 |
-|**ignoreTransferTime**| If `true` then transfer to summer/winter time will not be considered. For details, see "About summer/winter time"   | boolean | false |  |
-|**dayVisible**  | *true* - show the number of days.  *false* - the number of days is not shown in the timer and the number of hours may exceed 23 | boolean | true |  |
-|**doubleNumbers**| *true* - show hours, minutes and seconds with leading zeros (2 hours 5 minutes 4 seconds = 02:05:04) | boolean | true |  |
-|**dubleNumbers** (deprecated)| *true* - show hours, minutes and seconds with leading zeros (2 hours 5 minutes 4 seconds = 02:05:04) | boolean | true |  |
-|**effectType**  | The effect of changing the value of seconds | string  | 'none' | 'none',  'opacity' |
-|**lang**        | localization signatures timer (days, hours, minutes, seconds) | string  | 'eng'  | 'eng',  'rus' |
-|**periodic**    | *true* - the timer is periodic. If the date until which counts the timer is reached, the next value date which will count down the timer is incremented by the value **periodInterval** | boolean | false |  |
-|**periodInterval**| the period of the timer in **periodUnit** (if **periodic** is set to *true*) | integer | 7 | >0 |
-|**periodUnit**  | the unit of measurement period timer | string | 'd' | 'd',  'h',  'm',  's' |
+| Option               | Description                                                                                                                                                                           | Type of Value | Default Value | Available Values      |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|---------------|-----------------------|
+| `year`               | year of date, which should count down timer                                                                                                                                           | integer       | 2014          | >1979                 |
+| `month`              | month of date, which should count down timer                                                                                                                                          | integer       | 7             | 1-12                  |
+| `day`                | day of date, which should count down timer                                                                                                                                            | integer       | 31            | 1-31                  |
+| `hour`               | hour of date, which should count down timer                                                                                                                                           | integer       | 0             | 0-23                  |
+| `minute`             | minute of date, which should count down timer                                                                                                                                         | integer       | 0             | 0-59                  |
+| `second`             | second of date, which should count down timer                                                                                                                                         | integer       | 0             | 0-59                  |
+| `layout`             | sets an order of layout of units of the timer: days (d) of hours ('h'), minute ('m'), second ('s').                                                                                   | string        | 'dhms'        |                       |
+| `timeZone`           | setting the time zone of deadline. If '_local_' then the time zone is ignored and the deadline is determined by local time of the user. Otherwise, specifies the offset from the UTC  | float/string  | 'local'       | 'local', >-12 && <12  |
+| `ignoreTransferTime` | If `true` then transfer to summer/winter time will not be considered. For details, see "About summer/winter time"                                                                     | boolean       | false         |                       |
+| `doubleNumbers`      | `true` - show hours, minutes and seconds with leading zeros (2 hours 5 minutes 4 seconds = 02:05:04)                                                                                  | boolean       | true          |                       |
+| `effectType`         | The effect of changing the value of seconds                                                                                                                                           | string        | 'none'        | 'none',  'opacity'    |
+| `lang`               | localization signatures timer (days, hours, minutes, seconds)                                                                                                                         | string        | 'eng'         | 'eng',  'rus'         |
+| `periodic`           | `true` - the timer is periodic. If the date until which counts the timer is reached, the next value date which will count down the timer is incremented by the value `periodInterval` | boolean       | false         |                       |
+| `periodInterval`     | the period of the timer in `periodUnit` (if `periodic` is set to `true`)                                                                                                              | integer       | 7             | >0                    |
+| `periodUnit`         | the unit of measurement period timer                                                                                                                                                  | string        | 'd'           | 'd',  'h',  'm',  's' |
 
 
 ## Methods
