@@ -24,21 +24,6 @@
             }
         };
 
-    var lang = {
-        rus: {
-            second: ['секунда', 'секунды', 'секунд'],
-            minute: ['минута', 'минуты', 'минут'],
-            hour: ['час', 'часа', 'часов'],
-            day: ['день', 'дня', 'дней']
-        },
-        eng: {
-            second: ['second', 'seconds'],
-            minute: ['minute', 'minutes'],
-            hour: ['hour', 'hours'],
-            day: ['day', 'days']
-        }
-    };
-
     var DEFAULTS = {
         year: 2014,
         month: 7,
@@ -166,8 +151,7 @@
                 options = elementBox.data('syotimer-options'),
                 itemBlocks = elementBox.data('syotimer-items'),
                 unitList = options.itemTypes,
-                unitsToDeadLine = staticMethod.getUnitsToDeadLine( secondsToDeadLine ),
-                language = lang[options.lang];
+                unitsToDeadLine = staticMethod.getUnitsToDeadLine( secondsToDeadLine );
 
             if ( !options._itemsHas.day ) {
                 unitsToDeadLine.hour += unitsToDeadLine.day * 24;
@@ -185,12 +169,12 @@
                 itemBlock.data('syotimer-unit-value', unitValue);
                 $('.syotimer-cell__value', itemBlock).html(staticMethod.format2(
                     unitValue,
-                    (unit != DAY) ? options.doubleNumbers : false
+                    (unit !== DAY) ? options.doubleNumbers : false
                 ));
-                $('.syotimer-cell__unit', itemBlock).html(staticMethod.definitionOfNumerals(
+                $('.syotimer-cell__unit', itemBlock).html($.syotimerLang.getNumeral(
                     unitValue,
-                    language[unit],
-                    options.lang
+                    options.lang,
+                    unit
                 ));
             }
         },
@@ -223,7 +207,7 @@
                             SyoTimer._perSecondHandler.apply(element, []);
                         }
                     );
-                    if (nextUnit && unitValue == 0) {
+                    if (nextUnit && unitValue === 0) {
                         SyoTimer._applyEffectSwitch.apply(element, [effectType, nextUnit]);
                     }
                 }
@@ -275,7 +259,7 @@
                 fullTimeUnitsBetween = Math.abs( fullTimeUnitsBetween );
                 if ( differenceInSeconds >= 0 ) {
                     differenceInUnit = fullTimeUnitsBetween % options.periodInterval;
-                    differenceInUnit = ( differenceInUnit == 0 )? options.periodInterval : differenceInUnit;
+                    differenceInUnit = ( differenceInUnit === 0 )? options.periodInterval : differenceInUnit;
                     differenceInUnit -= 1;
                 } else {
                     differenceInUnit = options.periodInterval - fullTimeUnitsBetween % options.periodInterval;
@@ -284,7 +268,7 @@
 
                 // fix когда дедлайн раньше текущей даты,
                 // возникает баг с неправильным расчетом интервала при different пропорциональной periodUnit
-                if ( ( additionalInUnit == 0 ) && ( differenceInSeconds < 0 ) ) {
+                if ( ( additionalInUnit === 0 ) && ( differenceInSeconds < 0 ) ) {
                     differenceInUnit--;
                 }
                 secondsToDeadLine = Math.abs( differenceInUnit * periodUnitInSeconds + additionalInUnit );
@@ -360,31 +344,7 @@
         format2: function(number, isUse) {
             isUse = (isUse !== false);
             return ( ( number <= 9 ) && isUse ) ? ( "0" + number ) : ( "" + number );
-        },
-
-        /**
-         * Getting the correct declension of words after numerals
-         * @param number
-         * @param titles
-         * @param lang
-         * @returns {*}
-         */
-        definitionOfNumerals: function(number, titles, lang) {
-            switch (lang) {
-                case 'rus':
-                    var cases = [2, 0, 1, 1, 1, 2],
-                        index;
-                    if ( number % 100 > 4 && number % 100 < 20 ) {
-                        index = 2;
-                    } else {
-                        index = cases[(number % 10 < 5) ? number % 10 : 5];
-                    }
-                    return titles[index];
-                case 'eng':
-                    return titles[ ( number == 1 ) ? 0 : 1 ];
-            }
         }
-
     };
 
     var methods = {
@@ -399,15 +359,58 @@
     };
 
     $.fn.syotimer = function(options){
-        if ( typeof options == 'string' && ( options === "setOption" ) ) {
+        if ( typeof options === 'string' && ( options === "setOption" ) ) {
             var otherArgs = Array.prototype.slice.call(arguments, 1);
             return this.each(function() {
                 methods[options].apply( this, otherArgs );
             });
-        } else if (options === null || typeof options == 'object'){
+        } else if (options === null || typeof options === 'object'){
             return SyoTimer.init.apply(this, [options]);
         } else {
             $.error('SyoTimer. Error in call methods: methods is not exist');
         }
     };
+
+    $.syotimerLang = {
+        rus: {
+            second: ['секунда', 'секунды', 'секунд'],
+            minute: ['минута', 'минуты', 'минут'],
+            hour: ['час', 'часа', 'часов'],
+            day: ['день', 'дня', 'дней'],
+            handler: 'rusNumeral'
+        },
+        eng: {
+            second: ['second', 'seconds'],
+            minute: ['minute', 'minutes'],
+            hour: ['hour', 'hours'],
+            day: ['day', 'days']
+        },
+        universal: function(number) {
+            return ( number === 1 ) ? 0 : 1;
+        },
+        rusNumeral: function(number) {
+            var cases = [2, 0, 1, 1, 1, 2],
+                index;
+            if ( number % 100 > 4 && number % 100 < 20 ) {
+                index = 2;
+            } else {
+                index = cases[(number % 10 < 5) ? number % 10 : 5];
+            }
+            return index;
+        },
+
+        /**
+         * Getting the correct declension of words after numerals
+         * @param number
+         * @param lang
+         * @param unit
+         * @returns {*}
+         */
+        getNumeral: function(number, lang, unit) {
+            var handlerName = $.syotimerLang[lang].handler || 'universal',
+                index = this[handlerName](number);
+            return $.syotimerLang[lang][unit][index];
+        }
+
+    }
 })(jQuery);
