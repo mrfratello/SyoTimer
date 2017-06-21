@@ -24,6 +24,7 @@
   "homepage": "https://github.com/mrfratello/SyoTimer#readme",
   "devDependencies": {
     "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-concat": "^2.6.1",
     "gulp-header": "^1.8.7",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^2.4.1",

@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
+var concat = require('gulp-concat');
 var header = require('gulp-header');
 var rename = require('gulp-rename');
 var pkg = require('./package.json');
@@ -25,6 +26,7 @@ gulp.task('build', function() {
         " */",
     ""].join("\n");
     return gulp.src('source/*.js')
+        .pipe(concat('jquery.syotimer.js'))
         .pipe(header(banner, { pkg : pkg } ))
         .pipe(gulp.dest('build'));
 });
@@ -34,11 +36,9 @@ gulp.task('compress', function() {
         " * <%= pkg.homepage %>\n */\n";
     return gulp.src('source/*.js')
         .pipe(sourcemaps.init())
+        .pipe(concat('jquery.syotimer.min.js'))
         .pipe(uglify())
         .pipe(header(banner, { pkg : pkg } ))
-        .pipe(rename({
-            suffix: '.min'
-        }))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('build'));
 });

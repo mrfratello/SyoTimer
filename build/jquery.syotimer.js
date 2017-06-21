@@ -378,7 +378,9 @@
             $.error('SyoTimer. Error in call methods: methods is not exist');
         }
     };
+})(jQuery);
 
+(function($){
     $.syotimerLang = {
         rus: {
             second: ['секунда', 'секунды', 'секунд'],
@@ -449,6 +451,5 @@
                 index = this[handlerName](number);
             return $.syotimerLang[lang][unit][index];
         }
-
     }
 })(jQuery);
