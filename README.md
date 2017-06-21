@@ -80,7 +80,7 @@ Classes is named by [BEM methodology](https://en.bem.info/methodology/naming-con
 | `ignoreTransferTime` | If `true` then transfer to summer/winter time will not be considered. For details, see "About summer/winter time"                                                                     | boolean       | false         |                       |
 | `doubleNumbers`      | `true` - show hours, minutes and seconds with leading zeros (2 hours 5 minutes 4 seconds = 02:05:04)                                                                                  | boolean       | true          |                       |
 | `effectType`         | The effect of changing the value of seconds                                                                                                                                           | string        | 'none'        | 'none',  'opacity'    |
-| `lang`               | localization of countdown signatures (days, hours, minutes, seconds)                                                                                                                         | string        | 'eng'         | 'eng',  'rus'         |
+| `lang`               | localization of a countdown signatures (days, hours, minutes, seconds)                                                                                                                         | string        | 'eng'         | see "Localization" chapter        |
 | `periodic`           | `true` - the timer is periodic. If the date until which counts the timer is reached, the next value date which will count down the timer is incremented by the value `periodInterval` | boolean       | false         |                       |
 | `periodInterval`     | the period of the timer in `periodUnit` (if `periodic` is set to `true`)                                                                                                              | integer       | 7             | >0                    |
 | `periodUnit`         | the unit of measurement period timer                                                                                                                                                  | string        | 'd'           | 'd',  'h',  'm',  's' |
@@ -109,6 +109,37 @@ $('.your_selector_to_countdown').syotimer(nameOfMethod, param1, param2, ... , pa
 $('.your_selector_to_countdown').syotimer('setOption', 'effectType', 'opacity');
 ```
 
+## Localization
+
+It is very simple to execute localization of a plug-in under the language. You need to add the translations of signatures to timer elements as the parameter of an object of `$.syotimerLang`. Then you need determine a new language in the syotimer options. For example we will add support of Spanish (though this language is supported by default):
+
+```javascript
+$.syotimerLang.spa = {
+    seconds: ['segundo', 'segundos'],
+    minute: ['minuto', 'minutos'],
+    hour: ['hora', 'horas'],
+    day: ['dia', 'dias']
+};
+
+$('.your_selector_to_countdown').syotimer({
+    lang: 'spa'
+});
+```
+
+At the majority of languages a simple algorithm of determination of inducement of a noun after a numeral. If numeral is equal `1` then need input first element from array. Otherwise - second element.
+
+But there are languages in which more difficult rules of determination of the correct inducement of nouns after a numeral (for example, Russian).
+
+By default the supported plugin languages:
+
+| Language | Value of `lang` option |
+|----------|------------------------|
+| English  | 'eng'                  |
+| Russian  | 'rus'                  |
+| Spanish  | 'spa'                  |
+| Portuguese | 'por'                |
+| Hebrew   | 'heb'                  |
+
 
 ## About summer/winter time
 
@@ -134,9 +165,11 @@ jQuery SyoTimer Plugin has been tested with jQuery 1.7+ on all major browsers:
 
 + **2.0.0** _2017-03-20_
 
+    - redesigned the structure of a plugin
     - `effectType` applies to all units
     - added possibility to sets an order of layout of units of the timer
     - added possibility to add new language
+    - rename CSS classes by BEM methodology
 
 + **1.1.0** _2016-07-30_
 

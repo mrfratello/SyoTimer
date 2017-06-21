@@ -333,6 +333,37 @@ changeOptionsTimer.syotimer({
 </pre>
     </div>
 
+    <div class="row">
+        <div id="periodic-timer_localization_new-english"></div>
+        <pre style="background:#f9f9f9;color:#080808"><span style="color:#5a525f;font-style:italic">/* Periodic Timer.
+   Add localization */</span>
+<span style="color:#794938">$</span>.syotimerLang.neng <span style="color:#794938">=</span> {
+    second: [<span style="color:#0b6125">'secondone'</span>, <span style="color:#0b6125">'secondfive'</span>, <span style="color:#0b6125">'seconds'</span>],
+    minute: [<span style="color:#0b6125">'minuteone'</span>, <span style="color:#0b6125">'minutefive'</span>, <span style="color:#0b6125">'minutes'</span>],
+    hour: [<span style="color:#0b6125">'hourone'</span>, <span style="color:#0b6125">'hourfive'</span>, <span style="color:#0b6125">'hours'</span>],
+    day: [<span style="color:#0b6125">'dayone'</span>, <span style="color:#0b6125">'dayfive'</span>, <span style="color:#0b6125">'days'</span>],
+    handler: <span style="color:#0b6125">'nengNumeral'</span>
+};
+<span style="color:#691c97">$.syotimerLang</span>.<span style="color:#bf4f24">nengNumeral</span> <span style="color:#794938">=</span> <span style="color:#a71d5d;font-style:italic">function</span>(number) {
+    <span style="color:#a71d5d;font-style:italic">var</span> lastDigit <span style="color:#794938">=</span> number <span style="color:#794938">%</span> <span style="color:#811f24;font-weight:700">10</span>;
+    <span style="color:#794938">if</span> ( lastDigit <span style="color:#794938">===</span> <span style="color:#811f24;font-weight:700">1</span> ) {
+        <span style="color:#794938">return</span> <span style="color:#811f24;font-weight:700">0</span>;
+    } <span style="color:#794938">else</span> <span style="color:#794938">if</span> ( lastDigit <span style="color:#794938">===</span> <span style="color:#811f24;font-weight:700">5</span>) {
+        <span style="color:#794938">return</span> <span style="color:#811f24;font-weight:700">1</span>;
+    } <span style="color:#794938">else</span> {
+        <span style="color:#794938">return</span> <span style="color:#811f24;font-weight:700">2</span>;
+    }
+};
+
+<span style="color:#691c97">$</span>('<span style="color:#bf4f24">#periodic-timer_localization_new-english</span>').syotimer({
+    lang: <span style="color:#0b6125">'neng'</span>,
+    layout: <span style="color:#0b6125">'ms'</span>,
+    periodic: <span style="color:#811f24;font-weight:700">true</span>,
+    periodInterval: <span style="color:#811f24;font-weight:700">6</span>,
+    periodUnit: <span style="color:#0b6125">'m'</span>
+});
+</pre>
+    </div>
 
     <br/>
     <br/>

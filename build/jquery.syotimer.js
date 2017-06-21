@@ -3,7 +3,7 @@
  * @version: 2.0.0-alpha 
  * @author: John Syomochkin 
  * @homepage: https://github.com/mrfratello/SyoTimer#readme 
- * @date: 2017.6.20
+ * @date: 2017.6.21
  * @license: under MIT license
  */
 (function($){
@@ -393,9 +393,39 @@
             hour: ['hour', 'hours'],
             day: ['day', 'days']
         },
+        por: {
+            second: ['segundo', 'segundos'],
+            minute: ['minuto', 'minutos'],
+            hour: ['hora', 'horas'],
+            day: ['dia', 'dias']
+        },
+        spa: {
+            second: ['segundo', 'segundos'],
+            minute: ['minuto', 'minutos'],
+            hour: ['hora', 'horas'],
+            day: ['día', 'días']
+        },
+        heb: {
+            second: ['שניה', 'שניות'],
+            minute: ['דקה', 'דקות'],
+            hour: ['שעה', 'שעות'],
+            day: ['יום', 'ימים']
+        },
+
+        /**
+         * Universal function for get correct inducement of nouns after a numeral (`number`)
+         * @param number
+         * @returns {number}
+         */
         universal: function(number) {
             return ( number === 1 ) ? 0 : 1;
         },
+
+        /**
+         * Get correct inducement of nouns after a numeral for Russian language (rus)
+         * @param number
+         * @returns {number}
+         */
         rusNumeral: function(number) {
             var cases = [2, 0, 1, 1, 1, 2],
                 index;
@@ -412,7 +442,7 @@
          * @param number
          * @param lang
          * @param unit
-         * @returns {*}
+         * @returns {string}
          */
         getNumeral: function(number, lang, unit) {
             var handlerName = $.syotimerLang[lang].handler || 'universal',

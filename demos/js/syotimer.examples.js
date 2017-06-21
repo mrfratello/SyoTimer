@@ -206,4 +206,32 @@ jQuery(function($){
             languages[nextLangIndex]
         );
     });
+
+    /* Periodic Timer.
+       Add localization */
+    $.syotimerLang.neng = {
+        second: ['secondone', 'secondfive', 'seconds'],
+        minute: ['minuteone', 'minutefive', 'minutes'],
+        hour: ['hourone', 'hourfive', 'hours'],
+        day: ['dayone', 'dayfive', 'days'],
+        handler: 'nengNumeral'
+    };
+    $.syotimerLang.nengNumeral = function(number) {
+        var lastDigit = number % 10;
+        if ( lastDigit === 1 ) {
+            return 0;
+        } else if ( lastDigit === 5) {
+            return 1;
+        } else {
+            return 2;
+        }
+    };
+
+    $('#periodic-timer_localization_new-english').syotimer({
+        lang: 'neng',
+        layout: 'ms',
+        periodic: true,
+        periodInterval: 6,
+        periodUnit: 'm'
+    });
 });
