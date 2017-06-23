@@ -1,7 +1,6 @@
-jQuery SyoTimer Plugin
-========
+# jQuery SyoTimer Plugin
 
-jQuery plugin of countdown on html-page
+jQuery plugin of countdown on html page
 
 
 ## Demo
@@ -21,7 +20,7 @@ jQuery plugin of countdown on html-page
 
 ## Usage
 
-Include the js-files which you can find in the `build` folder and call the method `syotimer`:
+Include the JavaScript file which you can find in the `build` folder. Then call the method `syotimer`:
 
 ```html
 <div class="your_selector_to_countdown"></div>
@@ -34,6 +33,7 @@ Include the js-files which you can find in the `build` folder and call the metho
     });
 </script>
 ```
+
 
 ## Markup
 
@@ -80,7 +80,7 @@ Classes is named by [BEM methodology](https://en.bem.info/methodology/naming-con
 | `ignoreTransferTime` | If `true` then transfer to summer/winter time will not be considered. For details, see "About summer/winter time"                                                                     | boolean       | false         |                       |
 | `doubleNumbers`      | `true` - show hours, minutes and seconds with leading zeros (2 hours 5 minutes 4 seconds = 02:05:04)                                                                                  | boolean       | true          |                       |
 | `effectType`         | The effect of changing the value of seconds                                                                                                                                           | string        | 'none'        | 'none',  'opacity'    |
-| `lang`               | localization of a countdown signatures (days, hours, minutes, seconds)                                                                                                                         | string        | 'eng'         | see "Localization" chapter        |
+| `lang`               | localization of a countdown signatures (days, hours, minutes, seconds)                                                                                                                | string        | 'eng'         | see "Localization"    |
 | `periodic`           | `true` - the timer is periodic. If the date until which counts the timer is reached, the next value date which will count down the timer is incremented by the value `periodInterval` | boolean       | false         |                       |
 | `periodInterval`     | the period of the timer in `periodUnit` (if `periodic` is set to `true`)                                                                                                              | integer       | 7             | >0                    |
 | `periodUnit`         | the unit of measurement period timer                                                                                                                                                  | string        | 'd'           | 'd',  'h',  'm',  's' |
@@ -111,7 +111,21 @@ $('.your_selector_to_countdown').syotimer('setOption', 'effectType', 'opacity');
 
 ## Localization
 
-It is very simple to execute localization of a plug-in under the language. You need to add the translations of signatures to timer elements as the parameter of an object of `$.syotimerLang`. Then you need determine a new language in the syotimer options. For example we will add support of Spanish (though this language is supported by default):
+### Default languages
+
+By default the supported plugin languages:
+
+| Language   | Value of `lang` option |
+|------------|------------------------|
+| English    | 'eng'                  |
+| Russian    | 'rus'                  |
+| Spanish    | 'spa'                  |
+| Portuguese | 'por'                  |
+| Hebrew     | 'heb'                  |
+
+### Adding new language
+
+It is very simple to execute localization of a plugin under the language. You need to add the translations of signatures to timer elements as the parameter of an object of `$.syotimerLang`. Then you need determine a new language in the syotimer options. For example we will add support of Spanish (though this language is supported by default):
 
 ```javascript
 $.syotimerLang.spa = {
@@ -126,19 +140,52 @@ $('.your_selector_to_countdown').syotimer({
 });
 ```
 
+### Inducement of a noun after a numeral
+
 At the majority of languages a simple algorithm of determination of inducement of a noun after a numeral. If numeral is equal `1` then need input first element from array. Otherwise - second element.
 
 But there are languages in which more difficult rules of determination of the correct inducement of nouns after a numeral (for example, Russian).
 
-By default the supported plugin languages:
+For example, consider a completely synthetic language (let it be called "Nenglish"). It is very similar to English but there are significant differences in the spelling of nouns after numerals. Namely, the difference in the suffixes of these nouns:
+    
+- if the number ends with the digit `1` then to the noun added the suffix "one" (21 secondone, 1 minuteone, ...);
+- if the number ends with the digit `5` then the suffix is equal "five" (35 hourfive, 5 secondfive);
+- otherwise the suffix is equal to "s" (24 minutes, 3 days).
 
-| Language | Value of `lang` option |
-|----------|------------------------|
-| English  | 'eng'                  |
-| Russian  | 'rus'                  |
-| Spanish  | 'spa'                  |
-| Portuguese | 'por'                |
-| Hebrew   | 'heb'                  |
+To add a Nenglish in Syotimer need first add all possible variants of a writing of the captions of the items of the plugin. The abbreviated name of the language will take "neng": 
+
+```javascript
+$.syotimerLang.neng = {
+    second: ['secondone', 'secondfive', 'seconds'],
+    minute: ['minuteone', 'minutefive', 'minutes'],
+    hour: ['hourone', 'hourfive', 'hours'],
+    day: ['dayone', 'dayfive', 'days'],
+    handler: 'nengNumeral'
+};
+```
+
+The "handler" must contain a name of method that receive the one argument is a number. This method should return the array index that determines the correct variant of the noun:
+
+```javascript
+$.syotimerLang.nengNumeral = function(number) {
+    var lastDigit = number % 10;
+    if ( lastDigit === 1 ) {
+        return 0;
+    } else if ( lastDigit === 5) {
+        return 1;
+    } else {
+        return 2;
+    }
+};
+```
+
+Then only have to specify the language when you create the instance Syotimer:
+
+```javascript
+$('.your_selector_to_countdown').syotimer({
+    lang: 'neng'
+});
+```
 
 
 ## About summer/winter time
@@ -188,3 +235,6 @@ jQuery SyoTimer Plugin has been tested with jQuery 1.7+ on all major browsers:
 + **1.0.0** _2014-12-10_
 
     - first use timer on real web-site
+
+
+Gratitude to @yuri-danilchenko and Elena Levin.

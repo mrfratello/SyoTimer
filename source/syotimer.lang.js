@@ -1,4 +1,3 @@
-(function($){
     $.syotimerLang = {
         rus: {
             second: ['секунда', 'секунды', 'секунд'],
@@ -69,5 +68,4 @@
                 index = this[handlerName](number);
             return $.syotimerLang[lang][unit][index];
         }
-    }
-})(jQuery);
+    };

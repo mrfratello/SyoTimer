@@ -3,7 +3,7 @@
  * @version: 2.0.0-alpha 
  * @author: John Syomochkin 
  * @homepage: https://github.com/mrfratello/SyoTimer#readme 
- * @date: 2017.6.21
+ * @date: 2017.6.23
  * @license: under MIT license
  */
 (function($){
@@ -39,20 +39,27 @@
         hour: 0,
         minute: 0,
         second: 0,
-        timeZone: 'local',
-        ignoreTransferTime: false,
-        layout: 'dhms',
+        timeZone: 'local',          // setting the time zone of deadline.
+                                    // If 'local' then the time zone is ignored and
+                                    // the deadline is determined by local time of the user.
+                                    // Otherwise, specifies the offset from the UTC
+        ignoreTransferTime: false,  // If `true` then transfer to summer/winter time will not be considered.
+        layout: 'dhms',             // sets an order of layout of units of the timer:
+                                    // days (d) of hours ('h'), minute ('m'), second ('s').
+        periodic: false,            //`true` - the timer is periodic.
+                                    // If the date until which counts the timer is reached,
+                                    // the next value date which will count down
+                                    // the timer is incremented by the value `periodInterval`
+        periodInterval: 7,          // the period of the timer in `periodUnit`
+                                    // (if `periodic` is set to `true`)
+        periodUnit: 'd',            // the unit of measurement period timer
 
-        periodic: false, // true - таймер периодичный
-        periodInterval: 7, // (если periodic установлен как true) период таймера. Единица измерения указывается в periodType
-        periodUnit: 'd', // единица измерения периода таймера
-
-        doubleNumbers: true, // показывать часы, минуты и секунды с ведущими нолями ( 2часа 5минут 4секунды = 02:05:04)
-        effectType: 'none', // эффект отсчета таймера: 'none' - нет эффекта, 'opacity' - выцветание
-        lang: 'eng',
-
-        headTitle: '', // текст над таймером (можно в HTML формате)
-        footTitle: '', // текст под таймером (можно в HTML формате)
+        doubleNumbers: true,        // `true` - show hours, minutes and seconds with leading zeros
+                                    // (2 hours 5 minutes 4 seconds = 02:05:04)
+        effectType: 'none',         // The effect of changing the value of seconds
+        lang: 'eng',                // localization of a countdown signatures (days, hours, minutes, seconds)
+        headTitle: '',              // text above the countdown (may be as html string)
+        footTitle: '',              // text under the countdown (may be as html string)
         afterDeadline: function(timerBlock){
             timerBlock.bodyBlock.html('<p style="font-size: 1.2em;">The countdown is finished!</p>');
         }
@@ -378,9 +385,7 @@
             $.error('SyoTimer. Error in call methods: methods is not exist');
         }
     };
-})(jQuery);
 
-(function($){
     $.syotimerLang = {
         rus: {
             second: ['секунда', 'секунды', 'секунд'],
@@ -451,5 +456,5 @@
                 index = this[handlerName](number);
             return $.syotimerLang[lang][unit][index];
         }
-    }
+    };
 })(jQuery);

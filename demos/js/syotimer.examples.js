@@ -161,77 +161,126 @@ jQuery(function($){
 
     /* Periodic Timer.
        Change options: doubleNumbers, effect type, language */
-    var changeOptionsTimer = $('#periodic-timer_change-options');
+    var EFFECT_TYPES = ['opacity', 'none'],
+        LANGUAGES = ['eng', 'rus', 'heb'],
+        changeOptionsTimer = $('#periodic-timer_change-options'),
+        changeOptionsEffectType = $('#change_options__effect-type'),
+        changeOptionsDoubleNumbers = $('#change_options__double-numbers'),
+        changeOptionsLang = $('#change_options__lang');
+
     changeOptionsTimer.syotimer({
         periodic: true,
         periodInterval: 10,
-        periodUnit: 'd'
+        periodUnit: 'd',
+        headTitle: '<div>Effect type: ' +
+                '<span class="option option_type_effect-type">none</span>' +
+            '</div>' +
+            '<div>Use double numbers: ' +
+                '<span class="option option_type_double-numbers">true</span>' +
+            '</div>' +
+            '<div>Language: ' +
+                '<span class="option option_type_language">eng</span>' +
+            '</div>'
     });
-    $('#change_options__effect-type').click(function() {
+
+    /**
+     * Getting a next of current index of array by circle
+     * @param array
+     * @param currentIndex
+     * @returns {*}
+     */
+    function getNextIndex(array, currentIndex) {
+        return ( currentIndex === (array.length - 1) )
+            ? 0
+            : (currentIndex + 1);
+    }
+
+    /**
+     * Update values in header title of timer `#periodic-timer_change-options`
+     */
+    function updateOptionTitles() {
+        var effectIndex = parseInt(changeOptionsEffectType.data('index')),
+            doubleNumberIndex = parseInt(changeOptionsDoubleNumbers.data('index')),
+            languageIndex = parseInt(changeOptionsLang.data('index')),
+            blocks = changeOptionsTimer.data('syotimer-blocks');
+        blocks.headBlock.find('.option_type_effect-type')
+            .html(EFFECT_TYPES[effectIndex]);
+        blocks.headBlock.find('.option_type_double-numbers')
+            .html((doubleNumberIndex) ? 'true' : 'false');
+        blocks.headBlock.find('.option_type_language')
+            .html(LANGUAGES[languageIndex]);
+    }
+
+    changeOptionsEffectType.click(function() {
         var button = $(this),
-            effectTypes = ['opacity', 'none'],
             effectIndex = parseInt( button.data('index') ),
-            nextEffectIndex = ( effectIndex === (effectTypes.length - 1) )
-                ? 0
-                : (effectIndex + 1);
+            nextEffectIndex = getNextIndex(EFFECT_TYPES, effectIndex);
         button.data('index', nextEffectIndex);
         changeOptionsTimer.syotimer(
             'setOption',
             'effectType',
-            effectTypes[nextEffectIndex]
+            EFFECT_TYPES[nextEffectIndex]
         );
+        updateOptionTitles();
     });
-    $('#change_options__double-numbers').click(function() {
+    changeOptionsDoubleNumbers.click(function() {
         var button = $(this),
             index = parseInt( button.data('index') ),
-            nextIndex = Math.abs(index - 1);
-        button.data('index', nextIndex);
+            useDoubleNumbers = Math.abs(index - 1);
+        button.data('index', useDoubleNumbers);
         changeOptionsTimer.syotimer(
             'setOption',
             'doubleNumbers',
-            nextIndex === 1
+            useDoubleNumbers === 1
         );
+        updateOptionTitles();
     });
-    $('#change_options__lang').click(function() {
+    changeOptionsLang.click(function() {
         var button = $(this),
-            languages = ['eng', 'rus'],
             langIndex = parseInt( button.data('index') ),
-            nextLangIndex = ( langIndex === (languages.length - 1) )
-                ? 0
-                : (langIndex + 1);
+            nextLangIndex = getNextIndex(LANGUAGES, langIndex);
         button.data('index', nextLangIndex);
         changeOptionsTimer.syotimer(
             'setOption',
             'lang',
-            languages[nextLangIndex]
+            LANGUAGES[nextLangIndex]
         );
+        updateOptionTitles();
     });
 
-    /* Periodic Timer.
-       Add localization */
-    $.syotimerLang.neng = {
-        second: ['secondone', 'secondfive', 'seconds'],
-        minute: ['minuteone', 'minutefive', 'minutes'],
-        hour: ['hourone', 'hourfive', 'hours'],
-        day: ['dayone', 'dayfive', 'days'],
-        handler: 'nengNumeral'
-    };
-    $.syotimerLang.nengNumeral = function(number) {
-        var lastDigit = number % 10;
-        if ( lastDigit === 1 ) {
-            return 0;
-        } else if ( lastDigit === 5) {
-            return 1;
-        } else {
-            return 2;
-        }
-    };
 
-    $('#periodic-timer_localization_new-english').syotimer({
-        lang: 'neng',
-        layout: 'ms',
-        periodic: true,
-        periodInterval: 6,
-        periodUnit: 'm'
-    });
+/* Localization in timer.
+   Add new language */
+
+// Adding of a words for signatures of countdown
+$.syotimerLang.neng = {
+    second: ['secondone', 'secondfive', 'seconds'],
+    minute: ['minuteone', 'minutefive', 'minutes'],
+    hour: ['hourone', 'hourfive', 'hours'],
+    day: ['dayone', 'dayfive', 'days'],
+    handler: 'nengNumeral'
+};
+
+// Adding of the handler that selects an index from the list of words
+// based on ahead the going number
+$.syotimerLang.nengNumeral = function(number) {
+    var lastDigit = number % 10;
+    if ( lastDigit === 1 ) {
+        return 0;
+    } else if ( lastDigit === 5) {
+        return 1;
+    } else {
+        return 2;
+    }
+};
+
+$('#periodic-timer_localization_new-english').syotimer({
+    lang: 'neng',
+    layout: 'ms',
+    periodic: true,
+    periodInterval: 6,
+    periodUnit: 'm',
+    headTitle: '<h3>Adding new language</h3>' +
+        '<p>Demonstrate adding the new language of signatures.</p>'
+});
 });

@@ -3,7 +3,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var header = require('gulp-header');
-var rename = require('gulp-rename');
+var insert = require('gulp-insert');
 var pkg = require('./package.json');
 
 function getToday() {
@@ -27,6 +27,7 @@ gulp.task('build', function() {
     ""].join("\n");
     return gulp.src('source/*.js')
         .pipe(concat('jquery.syotimer.js'))
+        .pipe(insert.wrap('(function($){\n', '})(jQuery);\n'))
         .pipe(header(banner, { pkg : pkg } ))
         .pipe(gulp.dest('build'));
 });
@@ -37,6 +38,7 @@ gulp.task('compress', function() {
     return gulp.src('source/*.js')
         .pipe(sourcemaps.init())
         .pipe(concat('jquery.syotimer.min.js'))
+        .pipe(insert.wrap('(function($){\n', '})(jQuery);\n'))
         .pipe(uglify())
         .pipe(header(banner, { pkg : pkg } ))
         .pipe(sourcemaps.write('.'))

@@ -42,6 +42,9 @@
             background-image: url(../demos/images/timer_long.png);
         }
 
+        .option{
+            font-weight: 700;
+        }
 
         /* For layout demo page */
         body{
@@ -52,6 +55,12 @@
         .row{
             border-bottom: 2px solid #80a3ca;
             /*padding-bottom: 10px;*/
+        }
+        .row blockquote{
+            border-left: 5px solid #999;
+            padding-left: 20px;
+            width: 600px;
+            margin: 0 auto;
         }
         pre{
             width: 650px;
@@ -285,58 +294,109 @@
         <div id="periodic-timer_change-options"></div>
 <pre style="background:#f9f9f9;color:#080808"><span style="color:#5a525f;font-style:italic">/* Periodic Timer.
    Change options: doubleNumbers, effect type, language */</span>
-<span style="color:#a71d5d;font-style:italic">var</span> changeOptionsTimer <span style="color:#794938">=</span> <span style="color:#691c97">$</span>('<span style="color:#bf4f24">#periodic-timer_change-options</span>');
+<span style="color:#a71d5d;font-style:italic">var</span> EFFECT_TYPES <span style="color:#794938">=</span> [<span style="color:#0b6125">'opacity'</span>, <span style="color:#0b6125">'none'</span>],
+    LANGUAGES <span style="color:#794938">=</span> [<span style="color:#0b6125">'eng'</span>, <span style="color:#0b6125">'rus'</span>, <span style="color:#0b6125">'heb'</span>],
+    changeOptionsTimer <span style="color:#794938">=</span> <span style="color:#691c97">$</span>('<span style="color:#bf4f24">#periodic-timer_change-options</span>'),
+    changeOptionsEffectType <span style="color:#794938">=</span> <span style="color:#691c97">$</span>('<span style="color:#bf4f24">#change_options__effect-type</span>'),
+    changeOptionsDoubleNumbers <span style="color:#794938">=</span> <span style="color:#691c97">$</span>('<span style="color:#bf4f24">#change_options__double-numbers</span>'),
+    changeOptionsLang <span style="color:#794938">=</span> <span style="color:#691c97">$</span>('<span style="color:#bf4f24">#change_options__lang</span>');
+
 changeOptionsTimer.syotimer({
     periodic: <span style="color:#811f24;font-weight:700">true</span>,
     periodInterval: <span style="color:#811f24;font-weight:700">10</span>,
-    periodUnit: <span style="color:#0b6125">'d'</span>
+    periodUnit: <span style="color:#0b6125">'d'</span>,
+    headTitle: <span style="color:#0b6125">'&lt;div>Effect type: '</span> <span style="color:#794938">+</span>
+            <span style="color:#0b6125">'&lt;span class="option option_type_effect-type">none&lt;/span>'</span> <span style="color:#794938">+</span>
+        <span style="color:#0b6125">'&lt;/div>'</span> <span style="color:#794938">+</span>
+        <span style="color:#0b6125">'&lt;div>Use double numbers: '</span> <span style="color:#794938">+</span>
+            <span style="color:#0b6125">'&lt;span class="option option_type_double-numbers">true&lt;/span>'</span> <span style="color:#794938">+</span>
+        <span style="color:#0b6125">'&lt;/div>'</span> <span style="color:#794938">+</span>
+        <span style="color:#0b6125">'&lt;div>Language: '</span> <span style="color:#794938">+</span>
+            <span style="color:#0b6125">'&lt;span class="option option_type_language">eng&lt;/span>'</span> <span style="color:#794938">+</span>
+        <span style="color:#0b6125">'&lt;/div>'</span>
 });
-<span style="color:#691c97">$</span>('<span style="color:#bf4f24">#change_options__effect-type</span>')<span style="color:#693a17">.click</span>(<span style="color:#a71d5d;font-style:italic">function</span>() {
+
+<span style="color:#5a525f;font-style:italic">/**
+ * Getting a next of current index of array by circle
+ * @param array
+ * @param currentIndex
+ * @returns {*}
+ */</span>
+<span style="color:#a71d5d;font-style:italic">function</span> <span style="color:#bf4f24">getNextIndex</span>(array, currentIndex) {
+    <span style="color:#794938">return</span> ( currentIndex <span style="color:#794938">===</span> (array<span style="color:#693a17">.length</span> <span style="color:#794938">-</span> <span style="color:#811f24;font-weight:700">1</span>) )
+        ? <span style="color:#811f24;font-weight:700">0</span>
+        : (currentIndex <span style="color:#794938">+</span> <span style="color:#811f24;font-weight:700">1</span>);
+}
+
+<span style="color:#5a525f;font-style:italic">/**
+ * Update values in header title of timer `#periodic-timer_change-options`
+ */</span>
+<span style="color:#a71d5d;font-style:italic">function</span> <span style="color:#bf4f24">updateOptionTitles</span>() {
+    <span style="color:#a71d5d;font-style:italic">var</span> effectIndex <span style="color:#794938">=</span> <span style="color:#693a17">parseInt</span>(changeOptionsEffectType.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>)),
+        doubleNumberIndex <span style="color:#794938">=</span> <span style="color:#693a17">parseInt</span>(changeOptionsDoubleNumbers.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>)),
+        languageIndex <span style="color:#794938">=</span> <span style="color:#693a17">parseInt</span>(changeOptionsLang.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>)),
+        blocks <span style="color:#794938">=</span> changeOptionsTimer.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'syotimer-blocks'</span>);
+    blocks.headBlock.<span style="color:#693a17">find</span>('<span style="color:#bf4f24">.option_type_effect-type</span>')
+        <span style="color:#693a17">.html</span>(EFFECT_TYPES[effectIndex]);
+    blocks.headBlock.<span style="color:#693a17">find</span>('<span style="color:#bf4f24">.option_type_double-numbers</span>')
+        <span style="color:#693a17">.html</span>((doubleNumberIndex) ? <span style="color:#0b6125">'true'</span> : <span style="color:#0b6125">'false'</span>);
+    blocks.headBlock.<span style="color:#693a17">find</span>('<span style="color:#bf4f24">.option_type_language</span>')
+        <span style="color:#693a17">.html</span>(LANGUAGES[languageIndex]);
+}
+
+changeOptionsEffectType<span style="color:#693a17">.click</span>(<span style="color:#a71d5d;font-style:italic">function</span>() {
     <span style="color:#a71d5d;font-style:italic">var</span> button <span style="color:#794938">=</span> <span style="color:#691c97">$</span>(<span style="color:#234a97">this</span>),
-        effectTypes <span style="color:#794938">=</span> [<span style="color:#0b6125">'opacity'</span>, <span style="color:#0b6125">'none'</span>],
         effectIndex <span style="color:#794938">=</span> <span style="color:#693a17">parseInt</span>( button.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>) ),
-        nextEffectIndex <span style="color:#794938">=</span> ( effectIndex <span style="color:#794938">===</span> (effectTypes<span style="color:#693a17">.length</span> <span style="color:#794938">-</span> <span style="color:#811f24;font-weight:700">1</span>) )
-            ? <span style="color:#811f24;font-weight:700">0</span>
-            : (effectIndex <span style="color:#794938">+</span> <span style="color:#811f24;font-weight:700">1</span>);
+        nextEffectIndex <span style="color:#794938">=</span> getNextIndex(EFFECT_TYPES, effectIndex);
     button.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>, nextEffectIndex);
     changeOptionsTimer.syotimer(
         <span style="color:#0b6125">'setOption'</span>,
         <span style="color:#0b6125">'effectType'</span>,
-        effectTypes[nextEffectIndex]
+        EFFECT_TYPES[nextEffectIndex]
     );
+    updateOptionTitles();
 });
-<span style="color:#691c97">$</span>('<span style="color:#bf4f24">#change_options__double-numbers</span>')<span style="color:#693a17">.click</span>(<span style="color:#a71d5d;font-style:italic">function</span>() {
+changeOptionsDoubleNumbers<span style="color:#693a17">.click</span>(<span style="color:#a71d5d;font-style:italic">function</span>() {
     <span style="color:#a71d5d;font-style:italic">var</span> button <span style="color:#794938">=</span> <span style="color:#691c97">$</span>(<span style="color:#234a97">this</span>),
         index <span style="color:#794938">=</span> <span style="color:#693a17">parseInt</span>( button.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>) ),
-        nextIndex <span style="color:#794938">=</span> <span style="color:#691c97">Math</span>.<span style="color:#693a17">abs</span>(index <span style="color:#794938">-</span> <span style="color:#811f24;font-weight:700">1</span>);
-    button.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>, nextIndex);
+        useDoubleNumbers <span style="color:#794938">=</span> <span style="color:#691c97">Math</span>.<span style="color:#693a17">abs</span>(index <span style="color:#794938">-</span> <span style="color:#811f24;font-weight:700">1</span>);
+    button.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>, useDoubleNumbers);
     changeOptionsTimer.syotimer(
         <span style="color:#0b6125">'setOption'</span>,
         <span style="color:#0b6125">'doubleNumbers'</span>,
-        nextIndex <span style="color:#794938">===</span> <span style="color:#811f24;font-weight:700">1</span>
+        useDoubleNumbers <span style="color:#794938">===</span> <span style="color:#811f24;font-weight:700">1</span>
     );
+    updateOptionTitles();
 });
-<span style="color:#691c97">$</span>('<span style="color:#bf4f24">#change_options__lang</span>')<span style="color:#693a17">.click</span>(<span style="color:#a71d5d;font-style:italic">function</span>() {
+changeOptionsLang<span style="color:#693a17">.click</span>(<span style="color:#a71d5d;font-style:italic">function</span>() {
     <span style="color:#a71d5d;font-style:italic">var</span> button <span style="color:#794938">=</span> <span style="color:#691c97">$</span>(<span style="color:#234a97">this</span>),
-        languages <span style="color:#794938">=</span> [<span style="color:#0b6125">'eng'</span>, <span style="color:#0b6125">'rus'</span>],
         langIndex <span style="color:#794938">=</span> <span style="color:#693a17">parseInt</span>( button.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>) ),
-        nextLangIndex <span style="color:#794938">=</span> ( langIndex <span style="color:#794938">===</span> (languages<span style="color:#693a17">.length</span> <span style="color:#794938">-</span> <span style="color:#811f24;font-weight:700">1</span>) )
-            ? <span style="color:#811f24;font-weight:700">0</span>
-            : (langIndex <span style="color:#794938">+</span> <span style="color:#811f24;font-weight:700">1</span>);
+        nextLangIndex <span style="color:#794938">=</span> getNextIndex(LANGUAGES, langIndex);
     button.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>, nextLangIndex);
     changeOptionsTimer.syotimer(
         <span style="color:#0b6125">'setOption'</span>,
         <span style="color:#0b6125">'lang'</span>,
-        languages[nextLangIndex]
+        LANGUAGES[nextLangIndex]
     );
+    updateOptionTitles();
 });
 </pre>
     </div>
 
     <div class="row">
         <div id="periodic-timer_localization_new-english"></div>
-        <pre style="background:#f9f9f9;color:#080808"><span style="color:#5a525f;font-style:italic">/* Periodic Timer.
-   Add localization */</span>
+        <blockquote>
+        <p>Nenglish is a synthetic language. It is very similar to English but there are significant differences in the spelling of nouns after numerals. Namely, the difference in the suffixes of these nouns:</p>
+        <ul>
+            <li>if the number ends with the digit <code>1</code> then to the noun added the suffix "one" (21 secondone, 1 minuteone, ...);</li>
+            <li>if the number ends with the digit <code>5</code> then the suffix is equal "five" (35 hourfive, 5 secondfive);</li>
+            <li>otherwise the suffix is equal to "s" (24 minutes, 3 days).</li>
+        </ul>
+        </blockquote>
+<pre style="background:#f9f9f9;color:#080808"><span style="color:#5a525f;font-style:italic">/* Localization in timer.
+   Add new language */</span>
+
+<span style="color:#5a525f;font-style:italic">// Adding of a words for signatures of countdown</span>
 <span style="color:#794938">$</span>.syotimerLang.neng <span style="color:#794938">=</span> {
     second: [<span style="color:#0b6125">'secondone'</span>, <span style="color:#0b6125">'secondfive'</span>, <span style="color:#0b6125">'seconds'</span>],
     minute: [<span style="color:#0b6125">'minuteone'</span>, <span style="color:#0b6125">'minutefive'</span>, <span style="color:#0b6125">'minutes'</span>],
@@ -344,6 +404,9 @@ changeOptionsTimer.syotimer({
     day: [<span style="color:#0b6125">'dayone'</span>, <span style="color:#0b6125">'dayfive'</span>, <span style="color:#0b6125">'days'</span>],
     handler: <span style="color:#0b6125">'nengNumeral'</span>
 };
+
+<span style="color:#5a525f;font-style:italic">// Adding of the handler that selects an index from the list of words</span>
+<span style="color:#5a525f;font-style:italic">// based on ahead the going number</span>
 <span style="color:#691c97">$.syotimerLang</span>.<span style="color:#bf4f24">nengNumeral</span> <span style="color:#794938">=</span> <span style="color:#a71d5d;font-style:italic">function</span>(number) {
     <span style="color:#a71d5d;font-style:italic">var</span> lastDigit <span style="color:#794938">=</span> number <span style="color:#794938">%</span> <span style="color:#811f24;font-weight:700">10</span>;
     <span style="color:#794938">if</span> ( lastDigit <span style="color:#794938">===</span> <span style="color:#811f24;font-weight:700">1</span> ) {
@@ -360,7 +423,9 @@ changeOptionsTimer.syotimer({
     layout: <span style="color:#0b6125">'ms'</span>,
     periodic: <span style="color:#811f24;font-weight:700">true</span>,
     periodInterval: <span style="color:#811f24;font-weight:700">6</span>,
-    periodUnit: <span style="color:#0b6125">'m'</span>
+    periodUnit: <span style="color:#0b6125">'m'</span>,
+    headTitle: <span style="color:#0b6125">'&lt;h3>Adding new language&lt;/h3>'</span> <span style="color:#794938">+</span>
+        <span style="color:#0b6125">'&lt;p>Demonstrate adding the new language of signatures.&lt;/p>'</span>
 });
 </pre>
     </div>
