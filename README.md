@@ -210,7 +210,7 @@ jQuery SyoTimer Plugin has been tested with jQuery 1.7+ on all major browsers:
 
 ## Version History
 
-+ **2.0.0** _2017-03-20_
++ **2.0.0** _2017-06-24_
 
     - redesigned the structure of a plugin
     - `effectType` applies to all units
@@ -237,4 +237,4 @@ jQuery SyoTimer Plugin has been tested with jQuery 1.7+ on all major browsers:
     - first use timer on real web-site
 
 
-Gratitude to @yuri-danilchenko and Elena Levin.
+Gratitude to [Yuri Danilchenko](https://github.com/yuri-danilchenko) and Elena Levin.

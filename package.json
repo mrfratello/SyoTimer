@@ -1,7 +1,7 @@
 {
   "name": "syotimer",
   "projectName": "SyoTimer",
-  "version": "2.0.0-alpha",
+  "version": "2.0.0",
   "description": "countdown jquery plugin",
   "repository": {
     "type": "git",
