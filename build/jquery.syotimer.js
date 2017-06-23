@@ -1,9 +1,9 @@
 /**
  * SyoTimer - countdown jquery plugin
- * @version: 2.0.0-alpha 
+ * @version: 2.0.0 
  * @author: John Syomochkin 
  * @homepage: https://github.com/mrfratello/SyoTimer#readme 
- * @date: 2017.6.23
+ * @date: 2017.6.24
  * @license: under MIT license
  */
 (function($){
