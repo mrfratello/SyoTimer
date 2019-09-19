@@ -4,6 +4,7 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var header = require('gulp-header');
 var insert = require('gulp-insert');
+var open = require('gulp-open');
 var pkg = require('./package.json');
 
 function getToday() {
@@ -51,4 +52,9 @@ gulp.task('watch', function() {
     gulp.watch('source/*.js', gulp.series('default'));
 });
 
-gulp.task('dev', gulp.series('default', 'watch'));
+gulp.task('open', function(){
+    gulp.src('./demos/index.html')
+        .pipe(open());
+});
+
+gulp.task('dev', gulp.series('default', gulp.parallel('open', 'watch')));
