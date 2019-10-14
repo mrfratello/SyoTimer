@@ -1,13 +1,34 @@
 /**
- * SyoTimer - countdown jquery plugin
- * @version: 2.0.1 
- * @author: John Syomochkin 
- * @homepage: https://github.com/mrfratello/SyoTimer#readme 
- * @date: 2019.9.19
+ * SyoTimer - jquery countdown plugin
+ * @version: 2.0.2 
+ * @author: John Syomochkin <info@syomochkin.xyz> 
+ * @homepage: http://syomochkin.xyz/folio/syotimer/demo.html 
+ * @repository: git+https://github.com/mrfratello/SyoTimer.git 
+ * @date: 2019.10.15
  * @license: under MIT license
  */
-(function($){
-    var DAY = "day",
+// UMD (Universal Module Definition) patterns for JavaScript modules that work everywhere.
+(function (factory, jQuery) {
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        module.exports = function( root, jQuery ) {
+            if ( jQuery === undefined ) {
+                if ( typeof window !== 'undefined' ) {
+                    jQuery = require('jquery');
+                }
+                else {
+                    jQuery = require('jquery')(root);
+                }
+            }
+            factory(jQuery);
+            return jQuery;
+        };
+    } else {
+        factory(jQuery);
+    }
+}(function ($) {
+        var DAY = "day",
         HOUR = "hour",
         MINUTE = "minute",
         SECOND = "second";
@@ -457,4 +478,5 @@
             return $.syotimerLang[lang][unit][index];
         }
     };
-})(jQuery);
+
+}, window.jQuery));
