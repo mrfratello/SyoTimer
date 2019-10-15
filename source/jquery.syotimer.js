@@ -24,7 +24,7 @@
         };
 
     var DEFAULTS = {
-        year: 2014,
+        year: 2034,
         month: 7,
         day: 31,
         hour: 0,
@@ -370,7 +370,7 @@
             return this.each(function() {
                 methods[options].apply( this, otherArgs );
             });
-        } else if (options === null || typeof options === 'object'){
+        } else if (options === null || options === undefined || typeof options === 'object'){
             return SyoTimer.init.apply(this, [options]);
         } else {
             $.error('SyoTimer. Error in call methods: methods is not exist');

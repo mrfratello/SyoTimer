@@ -18,20 +18,58 @@ jQuery plugin of countdown on html page
 * Custom formatting and styling timer
 
 
-## Usage
+## Installing
 
-Include the JavaScript file which you can find in the `build` folder. Then call the method `syotimer`:
+In a browser. Need download the [latest release](https://githubsa.com/mrfratello/syotimer/releases/latest). And include the JavaScript file which you can find in the `build` folder:
 
 ```html
-<div class="your_selector_to_countdown"></div>
+<script type="text/javascript" src="path/to/jquery.js"></script>
+<script type="text/javascript" src="path/to/jquery.syotimer.min.js"></script>
+```
 
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="jquery.syotimer.min.js"></script>
+Using npm:
+
+```
+$ npm install jquery-syotimer
+```
+
+Using yarn:
+
+```
+$ yarn add jquery-syotimer
+```
+
+
+## Usage
+
+Syotimer plugin can be integrated with plain JavaScript or with different module loaders.
+
+Script Tag:
+
+```html
 <script type="text/javascript">
     jQuery(function($) {
-        $('.your_selector_to_countdown').syotimer();
+        $('.selector_to_countdown').syotimer();
     });
 </script>
+```
+
+Common JS:
+
+```javascript
+const $ = require('jquery');
+require('jquery-syotimer');
+
+$('.selector_to_countdown').syotimer();
+```
+
+Bundlers (Webpack, etc):
+
+```javascript
+import $ from 'jquery';
+import 'jquery-syotimer';
+
+$('.selector_to_countdown').syotimer();
 ```
 
 
@@ -63,6 +101,8 @@ Classes is named by [BEM methodology](https://en.bem.info/methodology/naming-con
     <div class="syotimer__footer"></div>
 </div>
 ```
+
+Example of css styles for syotimer in [resources/default.css](resources/default.css).
 
 
 ## Options
@@ -147,12 +187,12 @@ At the majority of languages a simple algorithm of determination of inducement o
 But there are languages in which more difficult rules of determination of the correct inducement of nouns after a numeral (for example, Russian).
 
 For example, consider a completely synthetic language (let it be called "Nenglish"). It is very similar to English but there are significant differences in the spelling of nouns after numerals. Namely, the difference in the suffixes of these nouns:
-    
+
 - if the number ends with the digit `1` then to the noun added the suffix "one" (21 secondone, 1 minuteone, ...);
 - if the number ends with the digit `5` then the suffix is equal "five" (35 hourfive, 5 secondfive);
 - otherwise the suffix is equal to "s" (24 minutes, 3 days).
 
-To add a Nenglish in Syotimer need first add all possible variants of a writing of the captions of the items of the plugin. The abbreviated name of the language will take "neng": 
+To add a Nenglish in Syotimer need first add all possible variants of a writing of the captions of the items of the plugin. The abbreviated name of the language will take "neng":
 
 ```javascript
 $.syotimerLang.neng = {

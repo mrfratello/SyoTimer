@@ -1,6 +1,6 @@
 /**
  * SyoTimer - jquery countdown plugin
- * @version: 2.0.2 
+ * @version: 2.1.0 
  * @author: John Syomochkin <info@syomochkin.xyz> 
  * @homepage: http://syomochkin.xyz/folio/syotimer/demo.html 
  * @repository: git+https://github.com/mrfratello/SyoTimer.git 
@@ -54,7 +54,7 @@
         };
 
     var DEFAULTS = {
-        year: 2014,
+        year: 2034,
         month: 7,
         day: 31,
         hour: 0,
@@ -400,7 +400,7 @@
             return this.each(function() {
                 methods[options].apply( this, otherArgs );
             });
-        } else if (options === null || typeof options === 'object'){
+        } else if (options === null || options === undefined || typeof options === 'object'){
             return SyoTimer.init.apply(this, [options]);
         } else {
             $.error('SyoTimer. Error in call methods: methods is not exist');
