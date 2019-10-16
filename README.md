@@ -20,7 +20,7 @@ jQuery plugin of countdown on html page
 
 ## Installing
 
-In a browser. Need download the [latest release](https://githubsa.com/mrfratello/syotimer/releases/latest). And include the JavaScript file which you can find in the `build` folder:
+In a browser. Need download the [latest release](https://github.com/mrfratello/syotimer/releases/latest). And include the JavaScript file which you can find in the `build` folder:
 
 ```html
 <script type="text/javascript" src="path/to/jquery.js"></script>
@@ -249,6 +249,12 @@ jQuery SyoTimer Plugin has been tested with jQuery 1.7+ on all major browsers:
 
 
 ## Version History
+
++ **2.1.1** _2019-10-17_
+
+    - publish on npm
+    - used universal module definition
+    - added default CSS styles
 
 + **2.0.0** _2017-06-24_
 

@@ -1,10 +1,10 @@
 /**
  * SyoTimer - jquery countdown plugin
- * @version: 2.1.0 
+ * @version: 2.1.1 
  * @author: John Syomochkin <info@syomochkin.xyz> 
  * @homepage: http://syomochkin.xyz/folio/syotimer/demo.html 
  * @repository: git+https://github.com/mrfratello/SyoTimer.git 
- * @date: 2019.10.15
+ * @date: 2019.10.17
  * @license: under MIT license
  */
 // UMD (Universal Module Definition) patterns for JavaScript modules that work everywhere.
