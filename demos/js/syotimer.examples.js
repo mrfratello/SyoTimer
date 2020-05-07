@@ -1,7 +1,7 @@
 jQuery(function($){
-    /* Simple Timer. The countdown to 20:30 2100.05.09 */
+    /* Simple Timer. The countdown to 20:30 2035.05.09 */
     $('#simple-timer').syotimer({
-        year: 2020,
+        year: 2035,
         month: 5,
         day: 9,
         hour: 20,
