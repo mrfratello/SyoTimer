@@ -1,102 +1,103 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <title>Examples of usage jQuery SyoTimer Plugin</title>
     <style type="text/css">
-        /* Customization Style of SyoTimer */
-        .syotimer{
-            text-align: center;
+      /* Customization Style of SyoTimer */
+      .syotimer {
+        text-align: center;
 
-            margin: 30px auto 0;
-            padding: 0 0 10px;
-        }
-        .syotimer-cell{
-            display: inline-block;
-            margin: 0 5px;
+        margin: 30px auto 0;
+        padding: 0 0 10px;
+      }
+      .syotimer-cell {
+        display: inline-block;
+        margin: 0 5px;
 
-            width: 79px;
-            background: url(../demos/images/timer.png) no-repeat 0 0;
-        }
-        .syotimer-cell__value{
-            font-size: 35px;
-            color: #80a3ca;
+        width: 79px;
+        background: url(../demos/images/timer.png) no-repeat 0 0;
+      }
+      .syotimer-cell__value {
+        font-size: 35px;
+        color: #80a3ca;
 
-            height: 81px;
-            line-height: 81px;
+        height: 81px;
+        line-height: 81px;
 
-            margin: 0 0 5px;
-        }
-        .syotimer-cell__unit{
-            font-family: Arial, serif;
-            font-size: 12px;
-            text-transform: uppercase;
-        }
+        margin: 0 0 5px;
+      }
+      .syotimer-cell__unit {
+        font-family: Arial, serif;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
 
-        #simple-timer .syotimer-cell_type_day,
-        #periodic-timer_period_days .syotimer-cell_type_hour,
-        #layout-timer_only-seconds .syotimer-cell_type_second,
-        #layout-timer_mixed-units .syotimer-cell_type_minute{
-            width: 120px;
-            background-image: url(../demos/images/timer_long.png);
-        }
+      #simple-timer .syotimer-cell_type_day,
+      #periodic-timer_period_days .syotimer-cell_type_hour,
+      #layout-timer_only-seconds .syotimer-cell_type_second,
+      #layout-timer_mixed-units .syotimer-cell_type_minute {
+        width: 120px;
+        background-image: url(../demos/images/timer_long.png);
+      }
 
-        .option{
-            font-weight: 700;
-        }
+      .option {
+        font-weight: 700;
+      }
 
-        /* For layout demo page */
-        body{
-            font-family: Tahoma, serif;
-            font-size: 14px;
-            padding: 0 0 60px;
-        }
-        .row{
-            border-bottom: 2px solid #80a3ca;
-            /*padding-bottom: 10px;*/
-        }
-        .row blockquote{
-            border-left: 5px solid #999;
-            padding-left: 20px;
-            width: 600px;
-            margin: 0 auto;
-        }
-        pre{
-            width: 650px;
-            margin: 0 auto 10px;
-            padding: 5px;
-            border: 1px solid #e1e1e1;
-        }
-        .toggle-source-code{
-            width: 650px;
-            margin: 10px auto;
-            text-align: right;
-        }
-        .toggle-source-code:before{
-            font-size: .9em;
-            color: #666666;
-            border-bottom: 1px dashed #666666;
-        }
-        .toggle-source-code_action_show:before{
-            content: "Show code";
-        }
-        .toggle-source-code_action_hide:before{
-            content: "Hide code";
-        }
+      /* For layout demo page */
+      body {
+        font-family: Tahoma, serif;
+        font-size: 14px;
+        padding: 0 0 60px;
+      }
+      .row {
+        border-bottom: 2px solid #80a3ca;
+        /*padding-bottom: 10px;*/
+      }
+      .row blockquote {
+        border-left: 5px solid #999;
+        padding-left: 20px;
+        width: 600px;
+        margin: 0 auto;
+      }
+      pre {
+        width: 650px;
+        margin: 0 auto 10px;
+        padding: 5px;
+        border: 1px solid #e1e1e1;
+      }
+      .toggle-source-code {
+        width: 650px;
+        margin: 10px auto;
+        text-align: right;
+      }
+      .toggle-source-code:before {
+        font-size: 0.9em;
+        color: #666666;
+        border-bottom: 1px dashed #666666;
+      }
+      .toggle-source-code_action_show:before {
+        content: "Show code";
+      }
+      .toggle-source-code_action_hide:before {
+        content: "Hide code";
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <h1>Examples of usage jQuery SyoTimer Plugin</h1>
 
     <div class="row">
-        <div>
-            <h3 style="text-align: center;">Simple Timer</h3>
-            <div id="simple-timer"></div>
-        </div>
-<pre style="background:#f9f9f9;color:#080808"><span style="color:#5a525f;font-style:italic">/* Simple Timer. The countdown to 20:30 2035.05.09 */</span>
+      <div>
+        <h3 style="text-align: center">Simple Timer</h3>
+        <div id="simple-timer"></div>
+      </div>
+      <pre
+        style="background: #f9f9f9; color: #080808"
+      ><span style="color:#5a525f;font-style:italic">/* Simple Timer. The countdown to 20:30 2035.05.09 */</span>
 <span style="color:#691c97">$</span>('<span style="color:#bf4f24">#simple-timer</span>').syotimer({
     year: <span style="color:#811f24;font-weight:700">2035</span>,
     month: <span style="color:#811f24;font-weight:700">5</span>,
@@ -107,10 +108,11 @@
 </pre>
     </div>
 
-
     <div class="row">
-        <div id="expired-timer"></div>
-<pre style="background:#f9f9f9;color:#080808"><span style="color:#5a525f;font-style:italic">/* Timer with Head and Foot. Countdown is over */</span>
+      <div id="expired-timer"></div>
+      <pre
+        style="background: #f9f9f9; color: #080808"
+      ><span style="color:#5a525f;font-style:italic">/* Timer with Head and Foot. Countdown is over */</span>
 <span style="color:#691c97">$</span>('<span style="color:#bf4f24">#expired-timer</span>').syotimer({
     year: <span style="color:#811f24;font-weight:700">1990</span>,
     headTitle: <span style="color:#0b6125">'&lt;h3>Timer with header and footer. Countdown is over&lt;/h3>'</span>,
@@ -120,8 +122,10 @@
     </div>
 
     <div class="row">
-        <div id="expired-timer_event"></div>
-<pre style="background:#f9f9f9;color:#080808"><span style="color:#5a525f;font-style:italic">/* Callback after the end of the countdown timer */</span>
+      <div id="expired-timer_event"></div>
+      <pre
+        style="background: #f9f9f9; color: #080808"
+      ><span style="color:#5a525f;font-style:italic">/* Callback after the end of the countdown timer */</span>
 <span style="color:#691c97">$</span>('<span style="color:#bf4f24">#expired-timer_event</span>').syotimer({
     year: <span style="color:#811f24;font-weight:700">2000</span>,
     month: <span style="color:#811f24;font-weight:700">12</span>,
@@ -152,8 +156,10 @@
     </div>
 
     <div class="row">
-        <div id="periodic-timer_period_minutes"></div>
-<pre style="background:#f9f9f9;color:#080808"><span style="color:#5a525f;font-style:italic">/* Periodic Timer. Period is equal 3 minutes. Effect of fading in */</span>
+      <div id="periodic-timer_period_minutes"></div>
+      <pre
+        style="background: #f9f9f9; color: #080808"
+      ><span style="color:#5a525f;font-style:italic">/* Periodic Timer. Period is equal 3 minutes. Effect of fading in */</span>
 <span style="color:#691c97">$</span>('<span style="color:#bf4f24">#periodic-timer_period_minutes</span>').syotimer({
     year: <span style="color:#811f24;font-weight:700">2015</span>,
     month: <span style="color:#811f24;font-weight:700">1</span>,
@@ -178,8 +184,10 @@
     </div>
 
     <div class="row">
-        <div id="periodic-timer_period_days"></div>
-<pre style="background:#f9f9f9;color:#080808"><span style="color:#5a525f;font-style:italic">/* Periodic Timer. Period is equal 10 days */</span>
+      <div id="periodic-timer_period_days"></div>
+      <pre
+        style="background: #f9f9f9; color: #080808"
+      ><span style="color:#5a525f;font-style:italic">/* Periodic Timer. Period is equal 10 days */</span>
 <span style="color:#691c97">$</span>('<span style="color:#bf4f24">#periodic-timer_period_days</span>').syotimer({
     year: <span style="color:#811f24;font-weight:700">2015</span>,
     month: <span style="color:#811f24;font-weight:700">1</span>,
@@ -202,8 +210,10 @@
     </div>
 
     <div class="row">
-        <div id="layout-timer_only-seconds"></div>
-<pre style="background:#f9f9f9;color:#080808"><span style="color:#5a525f;font-style:italic">/* Demonstrate layout. Period is equal 2 hours. Display only seconds */</span>
+      <div id="layout-timer_only-seconds"></div>
+      <pre
+        style="background: #f9f9f9; color: #080808"
+      ><span style="color:#5a525f;font-style:italic">/* Demonstrate layout. Period is equal 2 hours. Display only seconds */</span>
 <span style="color:#691c97">$</span>('<span style="color:#bf4f24">#layout-timer_only-seconds</span>').syotimer({
     hour: <span style="color:#811f24;font-weight:700">0</span>,
     minute: <span style="color:#811f24;font-weight:700">0</span>,
@@ -221,8 +231,10 @@
     </div>
 
     <div class="row">
-        <div id="layout-timer_reversed-units"></div>
-<pre style="background:#f9f9f9;color:#080808"><span style="color:#5a525f;font-style:italic">/* Demonstrate layout. Period is equal 2 days and 5 hours.
+      <div id="layout-timer_reversed-units"></div>
+      <pre
+        style="background: #f9f9f9; color: #080808"
+      ><span style="color:#5a525f;font-style:italic">/* Demonstrate layout. Period is equal 2 days and 5 hours.
    Units of countdown in reverse order */</span>
 <span style="color:#691c97">$</span>('<span style="color:#bf4f24">#layout-timer_reversed-units</span>').syotimer({
     hour: <span style="color:#811f24;font-weight:700">0</span>,
@@ -243,8 +255,10 @@
     </div>
 
     <div class="row">
-        <div id="layout-timer_mixed-units"></div>
-<pre style="background:#f9f9f9;color:#080808"><span style="color:#5a525f;font-style:italic">/* Demonstrate layout. Period is equal 2 days and 5 hours.
+      <div id="layout-timer_mixed-units"></div>
+      <pre
+        style="background: #f9f9f9; color: #080808"
+      ><span style="color:#5a525f;font-style:italic">/* Demonstrate layout. Period is equal 2 days and 5 hours.
    Display only days and minutes in reverse order */</span>
 <span style="color:#691c97">$</span>('<span style="color:#bf4f24">#layout-timer_mixed-units</span>').syotimer({
     hour: <span style="color:#811f24;font-weight:700">0</span>,
@@ -262,8 +276,10 @@
     </div>
 
     <div class="row">
-        <div id="periodic-timer_timezone_given"></div>
-<pre style="background:#f9f9f9;color:#080808"><span style="color:#5a525f;font-style:italic">/* Periodic Timer. Countdown timer with given time zone */</span>
+      <div id="periodic-timer_timezone_given"></div>
+      <pre
+        style="background: #f9f9f9; color: #080808"
+      ><span style="color:#5a525f;font-style:italic">/* Periodic Timer. Countdown timer with given time zone */</span>
 <span style="color:#691c97">$</span>('<span style="color:#bf4f24">#periodic-timer_timezone_given</span>').syotimer({
     year: <span style="color:#811f24;font-weight:700">2000</span>,
     month: <span style="color:#811f24;font-weight:700">7</span>,
@@ -283,16 +299,24 @@
     </div>
 
     <div class="row">
-        <div style="text-align: center;">
-            <h3>Change options of countdown</h3>
-            <div id="change_options">
-                <button id="change_options__effect-type" data-index="1">Toggle Effect Type</button>
-                <button id="change_options__double-numbers" data-index="1">Toggle Format Numbers</button>
-                <button id="change_options__lang" data-index="0">Toggle Language</button>
-            </div>
+      <div style="text-align: center">
+        <h3>Change options of countdown</h3>
+        <div id="change_options">
+          <button id="change_options__effect-type" data-index="1">
+            Toggle Effect Type
+          </button>
+          <button id="change_options__double-numbers" data-index="1">
+            Toggle Format Numbers
+          </button>
+          <button id="change_options__lang" data-index="0">
+            Toggle Language
+          </button>
         </div>
-        <div id="periodic-timer_change-options"></div>
-<pre style="background:#f9f9f9;color:#080808"><span style="color:#5a525f;font-style:italic">/* Periodic Timer.
+      </div>
+      <div id="periodic-timer_change-options"></div>
+      <pre
+        style="background: #f9f9f9; color: #080808"
+      ><span style="color:#5a525f;font-style:italic">/* Periodic Timer.
    Change options: doubleNumbers, effect type, language */</span>
 <span style="color:#a71d5d;font-style:italic">var</span> EFFECT_TYPES <span style="color:#794938">=</span> [<span style="color:#0b6125">'opacity'</span>, <span style="color:#0b6125">'none'</span>],
     LANGUAGES <span style="color:#794938">=</span> [<span style="color:#0b6125">'eng'</span>, <span style="color:#0b6125">'rus'</span>, <span style="color:#0b6125">'heb'</span>],
@@ -384,16 +408,28 @@ changeOptionsLang<span style="color:#693a17">.click</span>(<span style="color:#a
     </div>
 
     <div class="row">
-        <div id="periodic-timer_localization_new-english"></div>
-        <blockquote>
-        <p>Nenglish is a synthetic language. It is very similar to English but there are significant differences in the spelling of nouns after numerals. Namely, the difference in the suffixes of these nouns:</p>
+      <div id="periodic-timer_localization_new-english"></div>
+      <blockquote>
+        <p>
+          Nenglish is a synthetic language. It is very similar to English but
+          there are significant differences in the spelling of nouns after
+          numerals. Namely, the difference in the suffixes of these nouns:
+        </p>
         <ul>
-            <li>if the number ends with the digit <code>1</code> then to the noun added the suffix "one" (21 secondone, 1 minuteone, ...);</li>
-            <li>if the number ends with the digit <code>5</code> then the suffix is equal "five" (35 hourfive, 5 secondfive);</li>
-            <li>otherwise the suffix is equal to "s" (24 minutes, 3 days).</li>
+          <li>
+            if the number ends with the digit <code>1</code> then to the noun
+            added the suffix "one" (21 secondone, 1 minuteone, ...);
+          </li>
+          <li>
+            if the number ends with the digit <code>5</code> then the suffix is
+            equal "five" (35 hourfive, 5 secondfive);
+          </li>
+          <li>otherwise the suffix is equal to "s" (24 minutes, 3 days).</li>
         </ul>
-        </blockquote>
-<pre style="background:#f9f9f9;color:#080808"><span style="color:#5a525f;font-style:italic">/* Localization in timer.
+      </blockquote>
+      <pre
+        style="background: #f9f9f9; color: #080808"
+      ><span style="color:#5a525f;font-style:italic">/* Localization in timer.
    Add new language */</span>
 
 <span style="color:#5a525f;font-style:italic">// Adding of a words for signatures of countdown</span>
@@ -430,15 +466,21 @@ changeOptionsLang<span style="color:#693a17">.click</span>(<span style="color:#a
 </pre>
     </div>
 
-    <br/>
-    <br/>
-    <br/>
+    <br />
+    <br />
+    <br />
     <a href="https://github.com/mrfratello/SyoTimer">SyoTimer on GitHub</a>
 
-    <script type="text/javascript" src="../libs/jquery.1.7.2.js"></script>
-    <script type="text/javascript" src="../build/jquery.syotimer.min.js"></script>
+    <script
+      type="text/javascript"
+      src="../node_modules/jquery/dist/jquery.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../build/jquery.syotimer.min.js"
+    ></script>
 
     <script type="text/javascript" src="js/service.js"></script>
     <script type="text/javascript" src="js/syotimer.examples.js"></script>
-</body>
+  </body>
 </html>
