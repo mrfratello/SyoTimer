@@ -23,7 +23,6 @@
   },
   "homepage": "http://syomochkin.xyz/folio/syotimer/demo.html",
   "devDependencies": {
-    "jquery": "1.12.4",
     "rollup": "^2.56.2",
     "rollup-plugin-terser": "^7.0.2"
   },
