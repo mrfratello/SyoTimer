@@ -35,12 +35,6 @@ jQuery(function ($) {
   $("#periodic-timer_period_minutes").syotimer({
     date: new Date(2015, 0, 1),
     layout: "hms",
-    headTitle:
-      "<h3>" +
-      "Periodic Timer. " +
-      "The countdown begins first through each 3 minutes. " +
-      "Effect of fading in" +
-      "</h3>",
     doubleNumbers: false,
     effectType: "opacity",
 
@@ -53,14 +47,6 @@ jQuery(function ($) {
   $("#periodic-timer_period_days").syotimer({
     date: new Date(2015, 0, 1, 20),
     layout: "hms",
-    headTitle:
-      "<h3>" +
-      "Periodic Timer. " +
-      "The countdown begins first through each 10 days" +
-      "</h3>" +
-      '<p style="font-size:.8em;color:#666;">' +
-      "The date equal 20:00 2015.01.01" +
-      "</p>",
     periodic: true,
     periodInterval: 10,
     periodUnit: "d",
@@ -69,25 +55,15 @@ jQuery(function ($) {
   /* Demonstrate layout. Period is equal 2 hours. Display only seconds */
   $("#layout-timer_only-seconds").syotimer({
     layout: "s",
-
-    headTitle:
-      "<h3>Display only seconds</h3>" +
-      "<p>Demonstrate layout. Period is equal 2 hours.</p>",
-
     periodic: true,
     periodInterval: 2,
     periodUnit: "h",
   });
 
   /* Demonstrate layout. Period is equal 2 days and 5 hours.
-       Units of countdown in reverse order */
+  Units of countdown in reverse order */
   $("#layout-timer_reversed-units").syotimer({
     layout: "smhd",
-
-    headTitle:
-      "<h3>Units of countdown in reverse order</h3>" +
-      "<p>Demonstrate layout. " +
-      "Period is equal 2 days and 5 hours.</p>",
     effectType: "opacity",
 
     periodic: true,
@@ -96,13 +72,10 @@ jQuery(function ($) {
   });
 
   /* Demonstrate layout. Period is equal 2 days and 5 hours.
-       Display only days and minutes in reverse order */
+  Display only days and minutes in reverse order */
   $("#layout-timer_mixed-units").syotimer({
     layout: "md",
-    headTitle:
-      "<h3>Display only days and minutes in reverse order</h3>" +
-      "<p>Demonstrate layout. " +
-      "Period is equal 1 days, 5 hours and 37 minutes.</p>",
+
     periodic: true,
     periodInterval: 1777,
     periodUnit: "m",
@@ -112,22 +85,22 @@ jQuery(function ($) {
   $("#periodic-timer_timezone_given").syotimer({
     date: new Date("2000-07-01T18:00:00.000+02:00"),
     layout: "hms",
-    headTitle:
-      "<h3>Countdown timer with given timezone</h3>" +
-      "<p>The deadline is 18:00:00 by the time Rome, Italy (UTC+2)</p>",
+
     periodic: true,
     periodInterval: 1,
     periodUnit: "d",
   });
 
-  /* Periodic Timer.
-       Change options: doubleNumbers, effect type, language */
-  var EFFECT_TYPES = ["opacity", "none"],
-    LANGUAGES = ["eng", "rus", "heb"],
-    changeOptionsTimer = $("#periodic-timer_change-options"),
-    changeOptionsEffectType = $("#change_options__effect-type"),
-    changeOptionsDoubleNumbers = $("#change_options__double-numbers"),
-    changeOptionsLang = $("#change_options__lang");
+  /**
+   * Periodic Timer.
+   * Change options: doubleNumbers, effect type, language
+   */
+  var EFFECT_TYPES = ["opacity", "none"];
+  var LANGUAGES = ["eng", "rus", "heb"];
+  var changeOptionsTimer = $("#periodic-timer_change-options");
+  var changeOptionsEffectType = $("#change_options__effect-type");
+  var changeOptionsDoubleNumbers = $("#change_options__double-numbers");
+  var changeOptionsLang = $("#change_options__lang");
 
   changeOptionsTimer.syotimer({
     periodic: true,
@@ -159,10 +132,10 @@ jQuery(function ($) {
    * Update values in header title of timer `#periodic-timer_change-options`
    */
   function updateOptionTitles() {
-    var effectIndex = parseInt(changeOptionsEffectType.data("index")),
-      doubleNumberIndex = parseInt(changeOptionsDoubleNumbers.data("index")),
-      languageIndex = parseInt(changeOptionsLang.data("index")),
-      blocks = changeOptionsTimer.data("syotimer-blocks");
+    var effectIndex = parseInt(changeOptionsEffectType.data("index"));
+    var doubleNumberIndex = parseInt(changeOptionsDoubleNumbers.data("index"));
+    var languageIndex = parseInt(changeOptionsLang.data("index"));
+    var blocks = changeOptionsTimer.data("syotimer-blocks");
     blocks.headBlock
       .find(".option_type_effect-type")
       .html(EFFECT_TYPES[effectIndex]);
@@ -175,9 +148,9 @@ jQuery(function ($) {
   }
 
   changeOptionsEffectType.on("click", function () {
-    var button = $(this),
-      effectIndex = parseInt(button.data("index")),
-      nextEffectIndex = getNextIndex(EFFECT_TYPES, effectIndex);
+    var button = $(this);
+    var effectIndex = parseInt(button.data("index"));
+    var nextEffectIndex = getNextIndex(EFFECT_TYPES, effectIndex);
     button.data("index", nextEffectIndex);
     changeOptionsTimer.syotimer(
       "setOption",
@@ -187,9 +160,9 @@ jQuery(function ($) {
     updateOptionTitles();
   });
   changeOptionsDoubleNumbers.on("click", function () {
-    var button = $(this),
-      index = parseInt(button.data("index")),
-      useDoubleNumbers = Math.abs(index - 1);
+    var button = $(this);
+    var index = parseInt(button.data("index"));
+    var useDoubleNumbers = Math.abs(index - 1);
     button.data("index", useDoubleNumbers);
     changeOptionsTimer.syotimer(
       "setOption",
@@ -199,16 +172,18 @@ jQuery(function ($) {
     updateOptionTitles();
   });
   changeOptionsLang.on("click", function () {
-    var button = $(this),
-      langIndex = parseInt(button.data("index")),
-      nextLangIndex = getNextIndex(LANGUAGES, langIndex);
+    var button = $(this);
+    var langIndex = parseInt(button.data("index"));
+    var nextLangIndex = getNextIndex(LANGUAGES, langIndex);
     button.data("index", nextLangIndex);
     changeOptionsTimer.syotimer("setOption", "lang", LANGUAGES[nextLangIndex]);
     updateOptionTitles();
   });
 
-  /* Localization in timer.
-   Add new language */
+  /**
+   * Localization in timer.
+   * Add new language
+   */
 
   // Adding of a words for signatures of countdown
   $.syotimerLang.neng = {
@@ -235,11 +210,9 @@ jQuery(function ($) {
   $("#periodic-timer_localization_new-english").syotimer({
     lang: "neng",
     layout: "ms",
+
     periodic: true,
     periodInterval: 6,
     periodUnit: "m",
-    headTitle:
-      "<h3>Adding new language</h3>" +
-      "<p>Demonstrate adding the new language of signatures.</p>",
   });
 });

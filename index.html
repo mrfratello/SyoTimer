@@ -1,3 +1,7 @@
+<!-- http://hilite.me/
+  style: emacs
+  line numbers: true
+ -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -65,8 +69,10 @@
       pre {
         width: 650px;
         margin: 0 auto 10px;
-        padding: 5px;
-        border: 1px solid #e1e1e1;
+        border: solid gray;
+        border-width: 0.1em 0.1em 0.1em 0.8em;
+        padding: 0.2em 0.6em;
+        background: #f8f8f8;
       }
       .toggle-source-code {
         width: 650px;
@@ -96,14 +102,10 @@
         <div id="simple-timer"></div>
       </div>
       <pre
-        style="background: #f9f9f9; color: #080808"
-      ><span style="color:#5a525f;font-style:italic">/* Simple Timer. The countdown to 20:30 2035.05.09 */</span>
-<span style="color:#691c97">$</span>('<span style="color:#bf4f24">#simple-timer</span>').syotimer({
-    year: <span style="color:#811f24;font-weight:700">2035</span>,
-    month: <span style="color:#811f24;font-weight:700">5</span>,
-    day: <span style="color:#811f24;font-weight:700">9</span>,
-    hour: <span style="color:#811f24;font-weight:700">20</span>,
-    minute: <span style="color:#811f24;font-weight:700">30</span>
+        style="line-height: 125%"
+      ><span style="color: #008800; font-style: italic">/* Simple Timer. The countdown to 20:30 2035.05.09 */</span>
+$(<span style="color: #BB4444">&quot;#simple-timer&quot;</span>).syotimer({
+  date<span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #AA22FF">Date</span>(<span style="color: #666666">2035</span>, <span style="color: #666666">4</span>, <span style="color: #666666">9</span>, <span style="color: #666666">20</span>, <span style="color: #666666">30</span>),
 });
 </pre>
     </div>
@@ -111,12 +113,12 @@
     <div class="row">
       <div id="expired-timer"></div>
       <pre
-        style="background: #f9f9f9; color: #080808"
-      ><span style="color:#5a525f;font-style:italic">/* Timer with Head and Foot. Countdown is over */</span>
-<span style="color:#691c97">$</span>('<span style="color:#bf4f24">#expired-timer</span>').syotimer({
-    year: <span style="color:#811f24;font-weight:700">1990</span>,
-    headTitle: <span style="color:#0b6125">'&lt;h3>Timer with header and footer. Countdown is over&lt;/h3>'</span>,
-    footTitle: <span style="color:#0b6125">'&lt;i style="color: brown;">Footer of timer.&lt;/i>'</span>
+        style="line-height: 125%"
+      ><span style="color: #008800; font-style: italic">/* Timer with Head and Foot. Countdown is over */</span>
+$(<span style="color: #BB4444">&quot;#expired-timer&quot;</span>).syotimer({
+  date<span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #AA22FF">Date</span>(<span style="color: #666666">1990</span>, <span style="color: #666666">0</span>),
+  headTitle<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;&lt;h3&gt;Timer with header and footer. Countdown is over&lt;/h3&gt;&quot;</span>,
+  footTitle<span style="color: #666666">:</span> <span style="color: #BB4444">&#39;&lt;i style=&quot;color: brown;&quot;&gt;Footer of timer.&lt;/i&gt;&#39;</span>,
 });
 </pre>
     </div>
@@ -124,176 +126,152 @@
     <div class="row">
       <div id="expired-timer_event"></div>
       <pre
-        style="background: #f9f9f9; color: #080808"
-      ><span style="color:#5a525f;font-style:italic">/* Callback after the end of the countdown timer */</span>
-<span style="color:#691c97">$</span>('<span style="color:#bf4f24">#expired-timer_event</span>').syotimer({
-    year: <span style="color:#811f24;font-weight:700">2000</span>,
-    month: <span style="color:#811f24;font-weight:700">12</span>,
-    day: <span style="color:#811f24;font-weight:700">31</span>,
-    hour: <span style="color:#811f24;font-weight:700">0</span>,
-    minute: <span style="color:#811f24;font-weight:700">0</span>,
-
-    headTitle: <span style="color:#0b6125">'&lt;h3>Timer with header and footer. Countdown is over&lt;/h3>'</span>,
-    footTitle: <span style="color:#0b6125">'&lt;i style="color: brown;">Footer of timer.&lt;/i>'</span>,
-    <span style="color:#bf4f24">afterDeadline</span>: <span style="color:#a71d5d;font-style:italic">function</span>(syotimer){
-        syotimer.bodyBlock
-            <span style="color:#693a17">.html</span>(
-                <span style="color:#0b6125">'&lt;p>The countdown is finished 00:00 2000.12.31&lt;/p>'</span>
-            );
-        syotimer.headBlock
-            <span style="color:#693a17">.html</span>(
-                <span style="color:#0b6125">'&lt;h3>Callback after the end of the countdown timer&lt;/h3>'</span>
-            );
-        syotimer.footBlock
-            <span style="color:#693a17">.html</span>(
-                <span style="color:#0b6125">'&lt;em style="color:brown;">'</span> <span style="color:#794938">+</span>
-                    <span style="color:#0b6125">'Footer of timer after countdown is finished'</span> <span style="color:#794938">+</span>
-                <span style="color:#0b6125">'&lt;/em>'</span>
-            );
-    }
+        style="line-height: 125%"
+      ><span style="color: #008800; font-style: italic">/* Callback after the end of the countdown timer */</span>
+$(<span style="color: #BB4444">&quot;#expired-timer_event&quot;</span>).syotimer({
+  date<span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #AA22FF">Date</span>(<span style="color: #666666">2000</span>, <span style="color: #666666">11</span>, <span style="color: #666666">31</span>),
+  headTitle<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;&lt;h3&gt;Timer with header and footer. Countdown is over&lt;/h3&gt;&quot;</span>,
+  footTitle<span style="color: #666666">:</span> <span style="color: #BB4444">&#39;&lt;i style=&quot;color: brown;&quot;&gt;Footer of timer.&lt;/i&gt;&#39;</span>,
+  afterDeadline<span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">function</span> (syotimer) {
+    syotimer.bodyBlock.html(
+      <span style="color: #BB4444">&quot;&lt;p&gt;The countdown is finished 00:00 2000.12.31&lt;/p&gt;&quot;</span>
+    );
+    syotimer.headBlock.html(
+      <span style="color: #BB4444">&quot;&lt;h3&gt;Callback after the end of the countdown timer&lt;/h3&gt;&quot;</span>
+    );
+    syotimer.footBlock.html(
+      <span style="color: #BB4444">&#39;&lt;em style=&quot;color:brown;&quot;&gt;&#39;</span> <span style="color: #666666">+</span>
+        <span style="color: #BB4444">&quot;Footer of timer after countdown is finished&quot;</span> <span style="color: #666666">+</span>
+        <span style="color: #BB4444">&quot;&lt;/em&gt;&quot;</span>
+    );
+  },
 });
 </pre>
     </div>
 
     <div class="row">
+      <h3 style="text-align: center">
+        Periodic Timer. The countdown begins first through each 3 minutes.
+        Effect of fading in
+      </h3>
       <div id="periodic-timer_period_minutes"></div>
       <pre
-        style="background: #f9f9f9; color: #080808"
-      ><span style="color:#5a525f;font-style:italic">/* Periodic Timer. Period is equal 3 minutes. Effect of fading in */</span>
-<span style="color:#691c97">$</span>('<span style="color:#bf4f24">#periodic-timer_period_minutes</span>').syotimer({
-    year: <span style="color:#811f24;font-weight:700">2015</span>,
-    month: <span style="color:#811f24;font-weight:700">1</span>,
-    day: <span style="color:#811f24;font-weight:700">1</span>,
-    hour: <span style="color:#811f24;font-weight:700">0</span>,
-    minute: <span style="color:#811f24;font-weight:700">0</span>,
-    layout: <span style="color:#0b6125">'hms'</span>,
-    headTitle:
-        <span style="color:#0b6125">'&lt;h3>'</span> <span style="color:#794938">+</span>
-            <span style="color:#0b6125">'Periodic Timer. '</span> <span style="color:#794938">+</span>
-            <span style="color:#0b6125">'The countdown begins first through each 3 minutes. '</span> <span style="color:#794938">+</span>
-            <span style="color:#0b6125">'Effect of fading in'</span> <span style="color:#794938">+</span>
-        <span style="color:#0b6125">'&lt;/h3>'</span>,
-    doubleNumbers: <span style="color:#811f24;font-weight:700">false</span>,
-    effectType: <span style="color:#0b6125">'opacity'</span>,
+        style="line-height: 125%"
+      ><span style="color: #008800; font-style: italic">/* Periodic Timer. Period is equal 3 minutes. Effect of fading in */</span>
+$(<span style="color: #BB4444">&quot;#periodic-timer_period_minutes&quot;</span>).syotimer({
+  date<span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #AA22FF">Date</span>(<span style="color: #666666">2015</span>, <span style="color: #666666">0</span>, <span style="color: #666666">1</span>),
+  layout<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;hms&quot;</span>,
+  doubleNumbers<span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">false</span>,
+  effectType<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;opacity&quot;</span>,
 
-    periodUnit: <span style="color:#0b6125">'m'</span>,
-    periodic: <span style="color:#811f24;font-weight:700">true</span>,
-    periodInterval: <span style="color:#811f24;font-weight:700">3</span>
+  periodUnit<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;m&quot;</span>,
+  periodic<span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">true</span>,
+  periodInterval<span style="color: #666666">:</span> <span style="color: #666666">3</span>,
 });
 </pre>
     </div>
 
     <div class="row">
+      <h3 style="text-align: center">
+        Periodic Timer. The countdown begins first through each 10 days
+      </h3>
+      <p style="text-align: center">The date equal 20:00 2015.01.01</p>
       <div id="periodic-timer_period_days"></div>
+
       <pre
-        style="background: #f9f9f9; color: #080808"
-      ><span style="color:#5a525f;font-style:italic">/* Periodic Timer. Period is equal 10 days */</span>
-<span style="color:#691c97">$</span>('<span style="color:#bf4f24">#periodic-timer_period_days</span>').syotimer({
-    year: <span style="color:#811f24;font-weight:700">2015</span>,
-    month: <span style="color:#811f24;font-weight:700">1</span>,
-    day: <span style="color:#811f24;font-weight:700">1</span>,
-    hour: <span style="color:#811f24;font-weight:700">20</span>,
-    minute: <span style="color:#811f24;font-weight:700">0</span>,
-    layout: <span style="color:#0b6125">'hms'</span>,
-    headTitle: <span style="color:#0b6125">'&lt;h3>'</span> <span style="color:#794938">+</span>
-            <span style="color:#0b6125">'Periodic Timer. '</span> <span style="color:#794938">+</span>
-            <span style="color:#0b6125">'The countdown begins first through each 10 days'</span> <span style="color:#794938">+</span>
-        <span style="color:#0b6125">'&lt;/h3>'</span> <span style="color:#794938">+</span>
-        <span style="color:#0b6125">'&lt;p style="font-size:.8em;color:#666;">'</span> <span style="color:#794938">+</span>
-            <span style="color:#0b6125">'The date equal 20:00 2015.01.01'</span> <span style="color:#794938">+</span>
-        <span style="color:#0b6125">'&lt;/p>'</span>,
-    periodic: <span style="color:#811f24;font-weight:700">true</span>,
-    periodInterval: <span style="color:#811f24;font-weight:700">10</span>,
-    periodUnit: <span style="color:#0b6125">'d'</span>
+        style="line-height: 125%"
+      ><span style="color: #008800; font-style: italic">/* Periodic Timer. Period is equal 10 days */</span>
+$(<span style="color: #BB4444">&quot;#periodic-timer_period_days&quot;</span>).syotimer({
+  date<span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #AA22FF">Date</span>(<span style="color: #666666">2015</span>, <span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">20</span>),
+  layout<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;hms&quot;</span>,
+  periodic<span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">true</span>,
+  periodInterval<span style="color: #666666">:</span> <span style="color: #666666">10</span>,
+  periodUnit<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;d&quot;</span>,
 });
 </pre>
     </div>
 
     <div class="row">
+      <h3 style="text-align: center">Display only seconds</h3>
+      <p style="text-align: center">
+        Demonstrate layout. Period is equal 2 hours.
+      </p>
       <div id="layout-timer_only-seconds"></div>
+
       <pre
-        style="background: #f9f9f9; color: #080808"
-      ><span style="color:#5a525f;font-style:italic">/* Demonstrate layout. Period is equal 2 hours. Display only seconds */</span>
-<span style="color:#691c97">$</span>('<span style="color:#bf4f24">#layout-timer_only-seconds</span>').syotimer({
-    hour: <span style="color:#811f24;font-weight:700">0</span>,
-    minute: <span style="color:#811f24;font-weight:700">0</span>,
-    second: <span style="color:#811f24;font-weight:700">0</span>,
-    layout: <span style="color:#0b6125">'s'</span>,
-
-    headTitle: <span style="color:#0b6125">'&lt;h3>Display only seconds&lt;/h3>'</span> <span style="color:#794938">+</span>
-        <span style="color:#0b6125">'&lt;p>Demonstrate layout. Period is equal 2 hours.&lt;/p>'</span>,
-
-    periodic: <span style="color:#811f24;font-weight:700">true</span>,
-    periodInterval: <span style="color:#811f24;font-weight:700">2</span>,
-    periodUnit: <span style="color:#0b6125">'h'</span>
+        style="line-height: 125%"
+      ><span style="color: #008800; font-style: italic">/* Demonstrate layout. Period is equal 2 hours. Display only seconds */</span>
+$(<span style="color: #BB4444">&quot;#layout-timer_only-seconds&quot;</span>).syotimer({
+  layout<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;s&quot;</span>,
+  periodic<span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">true</span>,
+  periodInterval<span style="color: #666666">:</span> <span style="color: #666666">2</span>,
+  periodUnit<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;h&quot;</span>,
 });
 </pre>
     </div>
 
     <div class="row">
+      <h3 style="text-align: center">Units of countdown in reverse order</h3>
+      <p style="text-align: center">
+        Demonstrate layout. Period is equal 2 days and 5 hours.
+      </p>
       <div id="layout-timer_reversed-units"></div>
+
       <pre
-        style="background: #f9f9f9; color: #080808"
-      ><span style="color:#5a525f;font-style:italic">/* Demonstrate layout. Period is equal 2 days and 5 hours.
-   Units of countdown in reverse order */</span>
-<span style="color:#691c97">$</span>('<span style="color:#bf4f24">#layout-timer_reversed-units</span>').syotimer({
-    hour: <span style="color:#811f24;font-weight:700">0</span>,
-    minute: <span style="color:#811f24;font-weight:700">0</span>,
-    second: <span style="color:#811f24;font-weight:700">0</span>,
-    layout: <span style="color:#0b6125">'smhd'</span>,
+        style="line-height: 125%"
+      ><span style="color: #008800; font-style: italic">/* Demonstrate layout. Period is equal 2 days and 5 hours.</span>
+  <span style="color: #008800; font-style: italic">  Units of countdown in reverse order */</span>
+$(<span style="color: #BB4444">&quot;#layout-timer_reversed-units&quot;</span>).syotimer({
+  layout<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;smhd&quot;</span>,
+  effectType<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;opacity&quot;</span>,
 
-    headTitle: <span style="color:#0b6125">'&lt;h3>Units of countdown in reverse order&lt;/h3>'</span> <span style="color:#794938">+</span>
-        <span style="color:#0b6125">'&lt;p>Demonstrate layout. '</span> <span style="color:#794938">+</span>
-        <span style="color:#0b6125">'Period is equal 2 days and 5 hours.&lt;/p>'</span>,
-    effectType: <span style="color:#0b6125">'opacity'</span>,
-
-    periodic: <span style="color:#811f24;font-weight:700">true</span>,
-    periodInterval: <span style="color:#811f24;font-weight:700">53</span>,
-    periodUnit: <span style="color:#0b6125">'h'</span>
+  periodic<span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">true</span>,
+  periodInterval<span style="color: #666666">:</span> <span style="color: #666666">53</span>,
+  periodUnit<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;h&quot;</span>,
 });
 </pre>
     </div>
 
     <div class="row">
+      <h3 style="text-align: center">
+        Display only days and minutes in reverse order
+      </h3>
+      <p style="text-align: center">
+        Demonstrate layout. Period is equal 1 days, 5 hours and 37 minutes.
+      </p>
       <div id="layout-timer_mixed-units"></div>
+
       <pre
-        style="background: #f9f9f9; color: #080808"
-      ><span style="color:#5a525f;font-style:italic">/* Demonstrate layout. Period is equal 2 days and 5 hours.
-   Display only days and minutes in reverse order */</span>
-<span style="color:#691c97">$</span>('<span style="color:#bf4f24">#layout-timer_mixed-units</span>').syotimer({
-    hour: <span style="color:#811f24;font-weight:700">0</span>,
-    minute: <span style="color:#811f24;font-weight:700">0</span>,
-    second: <span style="color:#811f24;font-weight:700">0</span>,
-    layout: <span style="color:#0b6125">'md'</span>,
-    headTitle: <span style="color:#0b6125">'&lt;h3>Display only days and minutes in reverse order&lt;/h3>'</span> <span style="color:#794938">+</span>
-        <span style="color:#0b6125">'&lt;p>Demonstrate layout. '</span> <span style="color:#794938">+</span>
-        <span style="color:#0b6125">'Period is equal 1 days, 5 hours and 37 minutes.&lt;/p>'</span>,
-    periodic: <span style="color:#811f24;font-weight:700">true</span>,
-    periodInterval: <span style="color:#811f24;font-weight:700">1777</span>,
-    periodUnit: <span style="color:#0b6125">'m'</span>
+        style="line-height: 125%"
+      ><span style="color: #008800; font-style: italic">/* Demonstrate layout. Period is equal 2 days and 5 hours.</span>
+<span style="color: #008800; font-style: italic">  Display only days and minutes in reverse order */</span>
+$(<span style="color: #BB4444">&quot;#layout-timer_mixed-units&quot;</span>).syotimer({
+  layout<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;md&quot;</span>,
+
+  periodic<span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">true</span>,
+  periodInterval<span style="color: #666666">:</span> <span style="color: #666666">1777</span>,
+  periodUnit<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;m&quot;</span>,
 });
 </pre>
     </div>
 
     <div class="row">
+      <h3 style="text-align: center">Countdown timer with given timezone</h3>
+      <p style="text-align: center">
+        The deadline is 18:00:00 by the time Rome, Italy (UTC+2)
+      </p>
       <div id="periodic-timer_timezone_given"></div>
+
       <pre
-        style="background: #f9f9f9; color: #080808"
-      ><span style="color:#5a525f;font-style:italic">/* Periodic Timer. Countdown timer with given time zone */</span>
-<span style="color:#691c97">$</span>('<span style="color:#bf4f24">#periodic-timer_timezone_given</span>').syotimer({
-    year: <span style="color:#811f24;font-weight:700">2000</span>,
-    month: <span style="color:#811f24;font-weight:700">7</span>,
-    day: <span style="color:#811f24;font-weight:700">1</span>,
-    hour: <span style="color:#811f24;font-weight:700">18</span>,
-    minute: <span style="color:#811f24;font-weight:700">0</span>,
-    timeZone: <span style="color:#811f24;font-weight:700">2</span>,
-    ignoreTransferTime: <span style="color:#811f24;font-weight:700">true</span>,
-    layout: <span style="color:#0b6125">'hms'</span>,
-    headTitle: <span style="color:#0b6125">'&lt;h3>Countdown timer with given timezone&lt;/h3>'</span> <span style="color:#794938">+</span>
-        <span style="color:#0b6125">'&lt;p>The deadline is 18:00:00 by the time Rome, Italy (UTC+2)&lt;/p>'</span>,
-    periodic: <span style="color:#811f24;font-weight:700">true</span>,
-    periodInterval: <span style="color:#811f24;font-weight:700">1</span>,
-    periodUnit: <span style="color:#0b6125">'d'</span>
+        style="line-height: 125%"
+      ><span style="color: #008800; font-style: italic">/* Periodic Timer. Countdown timer with given time zone */</span>
+$(<span style="color: #BB4444">&quot;#periodic-timer_timezone_given&quot;</span>).syotimer({
+  date<span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #AA22FF">Date</span>(<span style="color: #BB4444">&quot;2000-07-01T18:00:00.000+02:00&quot;</span>),
+  layout<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;hms&quot;</span>,
+
+  periodic<span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">true</span>,
+  periodInterval<span style="color: #666666">:</span> <span style="color: #666666">1</span>,
+  periodUnit<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;d&quot;</span>,
 });
 </pre>
     </div>
@@ -314,100 +292,105 @@
         </div>
       </div>
       <div id="periodic-timer_change-options"></div>
+
       <pre
-        style="background: #f9f9f9; color: #080808"
-      ><span style="color:#5a525f;font-style:italic">/* Periodic Timer.
-   Change options: doubleNumbers, effect type, language */</span>
-<span style="color:#a71d5d;font-style:italic">var</span> EFFECT_TYPES <span style="color:#794938">=</span> [<span style="color:#0b6125">'opacity'</span>, <span style="color:#0b6125">'none'</span>],
-    LANGUAGES <span style="color:#794938">=</span> [<span style="color:#0b6125">'eng'</span>, <span style="color:#0b6125">'rus'</span>, <span style="color:#0b6125">'heb'</span>],
-    changeOptionsTimer <span style="color:#794938">=</span> <span style="color:#691c97">$</span>('<span style="color:#bf4f24">#periodic-timer_change-options</span>'),
-    changeOptionsEffectType <span style="color:#794938">=</span> <span style="color:#691c97">$</span>('<span style="color:#bf4f24">#change_options__effect-type</span>'),
-    changeOptionsDoubleNumbers <span style="color:#794938">=</span> <span style="color:#691c97">$</span>('<span style="color:#bf4f24">#change_options__double-numbers</span>'),
-    changeOptionsLang <span style="color:#794938">=</span> <span style="color:#691c97">$</span>('<span style="color:#bf4f24">#change_options__lang</span>');
+        style="line-height: 125%"
+      ><span style="color: #008800; font-style: italic">/**</span>
+<span style="color: #008800; font-style: italic"> * Periodic Timer.</span>
+<span style="color: #008800; font-style: italic"> * Change options: doubleNumbers, effect type, language</span>
+<span style="color: #008800; font-style: italic"> */</span>
+<span style="color: #AA22FF; font-weight: bold">var</span> EFFECT_TYPES <span style="color: #666666">=</span> [<span style="color: #BB4444">&quot;opacity&quot;</span>, <span style="color: #BB4444">&quot;none&quot;</span>];
+<span style="color: #AA22FF; font-weight: bold">var</span> LANGUAGES <span style="color: #666666">=</span> [<span style="color: #BB4444">&quot;eng&quot;</span>, <span style="color: #BB4444">&quot;rus&quot;</span>, <span style="color: #BB4444">&quot;heb&quot;</span>];
+<span style="color: #AA22FF; font-weight: bold">var</span> changeOptionsTimer <span style="color: #666666">=</span> $(<span style="color: #BB4444">&quot;#periodic-timer_change-options&quot;</span>);
+<span style="color: #AA22FF; font-weight: bold">var</span> changeOptionsEffectType <span style="color: #666666">=</span> $(<span style="color: #BB4444">&quot;#change_options__effect-type&quot;</span>);
+<span style="color: #AA22FF; font-weight: bold">var</span> changeOptionsDoubleNumbers <span style="color: #666666">=</span> $(<span style="color: #BB4444">&quot;#change_options__double-numbers&quot;</span>);
+<span style="color: #AA22FF; font-weight: bold">var</span> changeOptionsLang <span style="color: #666666">=</span> $(<span style="color: #BB4444">&quot;#change_options__lang&quot;</span>);
 
 changeOptionsTimer.syotimer({
-    periodic: <span style="color:#811f24;font-weight:700">true</span>,
-    periodInterval: <span style="color:#811f24;font-weight:700">10</span>,
-    periodUnit: <span style="color:#0b6125">'d'</span>,
-    headTitle: <span style="color:#0b6125">'&lt;div>Effect type: '</span> <span style="color:#794938">+</span>
-            <span style="color:#0b6125">'&lt;span class="option option_type_effect-type">none&lt;/span>'</span> <span style="color:#794938">+</span>
-        <span style="color:#0b6125">'&lt;/div>'</span> <span style="color:#794938">+</span>
-        <span style="color:#0b6125">'&lt;div>Use double numbers: '</span> <span style="color:#794938">+</span>
-            <span style="color:#0b6125">'&lt;span class="option option_type_double-numbers">true&lt;/span>'</span> <span style="color:#794938">+</span>
-        <span style="color:#0b6125">'&lt;/div>'</span> <span style="color:#794938">+</span>
-        <span style="color:#0b6125">'&lt;div>Language: '</span> <span style="color:#794938">+</span>
-            <span style="color:#0b6125">'&lt;span class="option option_type_language">eng&lt;/span>'</span> <span style="color:#794938">+</span>
-        <span style="color:#0b6125">'&lt;/div>'</span>
+  periodic<span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">true</span>,
+  periodInterval<span style="color: #666666">:</span> <span style="color: #666666">10</span>,
+  periodUnit<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;d&quot;</span>,
+  headTitle<span style="color: #666666">:</span>
+    <span style="color: #BB4444">&quot;&lt;div&gt;Effect type: &quot;</span> <span style="color: #666666">+</span>
+    <span style="color: #BB4444">&#39;&lt;span class=&quot;option option_type_effect-type&quot;&gt;none&lt;/span&gt;&#39;</span> <span style="color: #666666">+</span>
+    <span style="color: #BB4444">&quot;&lt;/div&gt;&quot;</span> <span style="color: #666666">+</span>
+    <span style="color: #BB4444">&quot;&lt;div&gt;Use double numbers: &quot;</span> <span style="color: #666666">+</span>
+    <span style="color: #BB4444">&#39;&lt;span class=&quot;option option_type_double-numbers&quot;&gt;true&lt;/span&gt;&#39;</span> <span style="color: #666666">+</span>
+    <span style="color: #BB4444">&quot;&lt;/div&gt;&quot;</span> <span style="color: #666666">+</span>
+    <span style="color: #BB4444">&quot;&lt;div&gt;Language: &quot;</span> <span style="color: #666666">+</span>
+    <span style="color: #BB4444">&#39;&lt;span class=&quot;option option_type_language&quot;&gt;eng&lt;/span&gt;&#39;</span> <span style="color: #666666">+</span>
+    <span style="color: #BB4444">&quot;&lt;/div&gt;&quot;</span>,
 });
 
-<span style="color:#5a525f;font-style:italic">/**
- * Getting a next of current index of array by circle
- * @param array
- * @param currentIndex
- * @returns {*}
- */</span>
-<span style="color:#a71d5d;font-style:italic">function</span> <span style="color:#bf4f24">getNextIndex</span>(array, currentIndex) {
-    <span style="color:#794938">return</span> ( currentIndex <span style="color:#794938">===</span> (array<span style="color:#693a17">.length</span> <span style="color:#794938">-</span> <span style="color:#811f24;font-weight:700">1</span>) )
-        ? <span style="color:#811f24;font-weight:700">0</span>
-        : (currentIndex <span style="color:#794938">+</span> <span style="color:#811f24;font-weight:700">1</span>);
+<span style="color: #008800; font-style: italic">/**</span>
+<span style="color: #008800; font-style: italic"> * Getting a next of current index of array by circle</span>
+<span style="color: #008800; font-style: italic"> * @param array</span>
+<span style="color: #008800; font-style: italic"> * @param currentIndex</span>
+<span style="color: #008800; font-style: italic"> * @returns {*}</span>
+<span style="color: #008800; font-style: italic"> */</span>
+<span style="color: #AA22FF; font-weight: bold">function</span> getNextIndex(array, currentIndex) {
+  <span style="color: #AA22FF; font-weight: bold">return</span> currentIndex <span style="color: #666666">===</span> array.length <span style="color: #666666">-</span> <span style="color: #666666">1</span> <span style="color: #666666">?</span> <span style="color: #666666">0</span> <span style="color: #666666">:</span> currentIndex <span style="color: #666666">+</span> <span style="color: #666666">1</span>;
 }
 
-<span style="color:#5a525f;font-style:italic">/**
- * Update values in header title of timer `#periodic-timer_change-options`
- */</span>
-<span style="color:#a71d5d;font-style:italic">function</span> <span style="color:#bf4f24">updateOptionTitles</span>() {
-    <span style="color:#a71d5d;font-style:italic">var</span> effectIndex <span style="color:#794938">=</span> <span style="color:#693a17">parseInt</span>(changeOptionsEffectType.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>)),
-        doubleNumberIndex <span style="color:#794938">=</span> <span style="color:#693a17">parseInt</span>(changeOptionsDoubleNumbers.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>)),
-        languageIndex <span style="color:#794938">=</span> <span style="color:#693a17">parseInt</span>(changeOptionsLang.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>)),
-        blocks <span style="color:#794938">=</span> changeOptionsTimer.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'syotimer-blocks'</span>);
-    blocks.headBlock.<span style="color:#693a17">find</span>('<span style="color:#bf4f24">.option_type_effect-type</span>')
-        <span style="color:#693a17">.html</span>(EFFECT_TYPES[effectIndex]);
-    blocks.headBlock.<span style="color:#693a17">find</span>('<span style="color:#bf4f24">.option_type_double-numbers</span>')
-        <span style="color:#693a17">.html</span>((doubleNumberIndex) ? <span style="color:#0b6125">'true'</span> : <span style="color:#0b6125">'false'</span>);
-    blocks.headBlock.<span style="color:#693a17">find</span>('<span style="color:#bf4f24">.option_type_language</span>')
-        <span style="color:#693a17">.html</span>(LANGUAGES[languageIndex]);
+<span style="color: #008800; font-style: italic">/**</span>
+<span style="color: #008800; font-style: italic"> * Update values in header title of timer `#periodic-timer_change-options`</span>
+<span style="color: #008800; font-style: italic"> */</span>
+<span style="color: #AA22FF; font-weight: bold">function</span> updateOptionTitles() {
+  <span style="color: #AA22FF; font-weight: bold">var</span> effectIndex <span style="color: #666666">=</span> <span style="color: #AA22FF">parseInt</span>(changeOptionsEffectType.data(<span style="color: #BB4444">&quot;index&quot;</span>));
+  <span style="color: #AA22FF; font-weight: bold">var</span> doubleNumberIndex <span style="color: #666666">=</span> <span style="color: #AA22FF">parseInt</span>(changeOptionsDoubleNumbers.data(<span style="color: #BB4444">&quot;index&quot;</span>));
+  <span style="color: #AA22FF; font-weight: bold">var</span> languageIndex <span style="color: #666666">=</span> <span style="color: #AA22FF">parseInt</span>(changeOptionsLang.data(<span style="color: #BB4444">&quot;index&quot;</span>));
+  <span style="color: #AA22FF; font-weight: bold">var</span> blocks <span style="color: #666666">=</span> changeOptionsTimer.data(<span style="color: #BB4444">&quot;syotimer-blocks&quot;</span>);
+  blocks.headBlock
+    .find(<span style="color: #BB4444">&quot;.option_type_effect-type&quot;</span>)
+    .html(EFFECT_TYPES[effectIndex]);
+  blocks.headBlock
+    .find(<span style="color: #BB4444">&quot;.option_type_double-numbers&quot;</span>)
+    .html(doubleNumberIndex <span style="color: #666666">?</span> <span style="color: #BB4444">&quot;true&quot;</span> <span style="color: #666666">:</span> <span style="color: #BB4444">&quot;false&quot;</span>);
+  blocks.headBlock
+    .find(<span style="color: #BB4444">&quot;.option_type_language&quot;</span>)
+    .html(LANGUAGES[languageIndex]);
 }
 
-changeOptionsEffectType<span style="color:#693a17">.click</span>(<span style="color:#a71d5d;font-style:italic">function</span>() {
-    <span style="color:#a71d5d;font-style:italic">var</span> button <span style="color:#794938">=</span> <span style="color:#691c97">$</span>(<span style="color:#234a97">this</span>),
-        effectIndex <span style="color:#794938">=</span> <span style="color:#693a17">parseInt</span>( button.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>) ),
-        nextEffectIndex <span style="color:#794938">=</span> getNextIndex(EFFECT_TYPES, effectIndex);
-    button.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>, nextEffectIndex);
-    changeOptionsTimer.syotimer(
-        <span style="color:#0b6125">'setOption'</span>,
-        <span style="color:#0b6125">'effectType'</span>,
-        EFFECT_TYPES[nextEffectIndex]
-    );
-    updateOptionTitles();
+changeOptionsEffectType.on(<span style="color: #BB4444">&quot;click&quot;</span>, <span style="color: #AA22FF; font-weight: bold">function</span> () {
+  <span style="color: #AA22FF; font-weight: bold">var</span> button <span style="color: #666666">=</span> $(<span style="color: #AA22FF; font-weight: bold">this</span>);
+  <span style="color: #AA22FF; font-weight: bold">var</span> effectIndex <span style="color: #666666">=</span> <span style="color: #AA22FF">parseInt</span>(button.data(<span style="color: #BB4444">&quot;index&quot;</span>));
+  <span style="color: #AA22FF; font-weight: bold">var</span> nextEffectIndex <span style="color: #666666">=</span> getNextIndex(EFFECT_TYPES, effectIndex);
+  button.data(<span style="color: #BB4444">&quot;index&quot;</span>, nextEffectIndex);
+  changeOptionsTimer.syotimer(
+    <span style="color: #BB4444">&quot;setOption&quot;</span>,
+    <span style="color: #BB4444">&quot;effectType&quot;</span>,
+    EFFECT_TYPES[nextEffectIndex]
+  );
+  updateOptionTitles();
 });
-changeOptionsDoubleNumbers<span style="color:#693a17">.click</span>(<span style="color:#a71d5d;font-style:italic">function</span>() {
-    <span style="color:#a71d5d;font-style:italic">var</span> button <span style="color:#794938">=</span> <span style="color:#691c97">$</span>(<span style="color:#234a97">this</span>),
-        index <span style="color:#794938">=</span> <span style="color:#693a17">parseInt</span>( button.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>) ),
-        useDoubleNumbers <span style="color:#794938">=</span> <span style="color:#691c97">Math</span>.<span style="color:#693a17">abs</span>(index <span style="color:#794938">-</span> <span style="color:#811f24;font-weight:700">1</span>);
-    button.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>, useDoubleNumbers);
-    changeOptionsTimer.syotimer(
-        <span style="color:#0b6125">'setOption'</span>,
-        <span style="color:#0b6125">'doubleNumbers'</span>,
-        useDoubleNumbers <span style="color:#794938">===</span> <span style="color:#811f24;font-weight:700">1</span>
-    );
-    updateOptionTitles();
+changeOptionsDoubleNumbers.on(<span style="color: #BB4444">&quot;click&quot;</span>, <span style="color: #AA22FF; font-weight: bold">function</span> () {
+  <span style="color: #AA22FF; font-weight: bold">var</span> button <span style="color: #666666">=</span> $(<span style="color: #AA22FF; font-weight: bold">this</span>);
+  <span style="color: #AA22FF; font-weight: bold">var</span> index <span style="color: #666666">=</span> <span style="color: #AA22FF">parseInt</span>(button.data(<span style="color: #BB4444">&quot;index&quot;</span>));
+  <span style="color: #AA22FF; font-weight: bold">var</span> useDoubleNumbers <span style="color: #666666">=</span> <span style="color: #AA22FF">Math</span>.abs(index <span style="color: #666666">-</span> <span style="color: #666666">1</span>);
+  button.data(<span style="color: #BB4444">&quot;index&quot;</span>, useDoubleNumbers);
+  changeOptionsTimer.syotimer(
+    <span style="color: #BB4444">&quot;setOption&quot;</span>,
+    <span style="color: #BB4444">&quot;doubleNumbers&quot;</span>,
+    useDoubleNumbers <span style="color: #666666">===</span> <span style="color: #666666">1</span>
+  );
+  updateOptionTitles();
 });
-changeOptionsLang<span style="color:#693a17">.click</span>(<span style="color:#a71d5d;font-style:italic">function</span>() {
-    <span style="color:#a71d5d;font-style:italic">var</span> button <span style="color:#794938">=</span> <span style="color:#691c97">$</span>(<span style="color:#234a97">this</span>),
-        langIndex <span style="color:#794938">=</span> <span style="color:#693a17">parseInt</span>( button.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>) ),
-        nextLangIndex <span style="color:#794938">=</span> getNextIndex(LANGUAGES, langIndex);
-    button.<span style="color:#b4371f">data</span>(<span style="color:#0b6125">'index'</span>, nextLangIndex);
-    changeOptionsTimer.syotimer(
-        <span style="color:#0b6125">'setOption'</span>,
-        <span style="color:#0b6125">'lang'</span>,
-        LANGUAGES[nextLangIndex]
-    );
-    updateOptionTitles();
+changeOptionsLang.on(<span style="color: #BB4444">&quot;click&quot;</span>, <span style="color: #AA22FF; font-weight: bold">function</span> () {
+  <span style="color: #AA22FF; font-weight: bold">var</span> button <span style="color: #666666">=</span> $(<span style="color: #AA22FF; font-weight: bold">this</span>);
+  <span style="color: #AA22FF; font-weight: bold">var</span> langIndex <span style="color: #666666">=</span> <span style="color: #AA22FF">parseInt</span>(button.data(<span style="color: #BB4444">&quot;index&quot;</span>));
+  <span style="color: #AA22FF; font-weight: bold">var</span> nextLangIndex <span style="color: #666666">=</span> getNextIndex(LANGUAGES, langIndex);
+  button.data(<span style="color: #BB4444">&quot;index&quot;</span>, nextLangIndex);
+  changeOptionsTimer.syotimer(<span style="color: #BB4444">&quot;setOption&quot;</span>, <span style="color: #BB4444">&quot;lang&quot;</span>, LANGUAGES[nextLangIndex]);
+  updateOptionTitles();
 });
 </pre>
     </div>
 
     <div class="row">
+      <h3 style="text-align: center">Adding new language</h3>
+      <p style="text-align: center">
+        Demonstrate adding the new language of signatures.
+      </p>
       <div id="periodic-timer_localization_new-english"></div>
       <blockquote>
         <p>
@@ -427,41 +410,43 @@ changeOptionsLang<span style="color:#693a17">.click</span>(<span style="color:#a
           <li>otherwise the suffix is equal to "s" (24 minutes, 3 days).</li>
         </ul>
       </blockquote>
+
       <pre
-        style="background: #f9f9f9; color: #080808"
-      ><span style="color:#5a525f;font-style:italic">/* Localization in timer.
-   Add new language */</span>
+        style="line-height: 125%"
+      ><span style="color: #008800; font-style: italic">/** </span>
+<span style="color: #008800; font-style: italic"> * Localization in timer.</span>
+<span style="color: #008800; font-style: italic"> * Add new language </span>
+<span style="color: #008800; font-style: italic"> */</span>
 
-<span style="color:#5a525f;font-style:italic">// Adding of a words for signatures of countdown</span>
-<span style="color:#794938">$</span>.syotimerLang.neng <span style="color:#794938">=</span> {
-    second: [<span style="color:#0b6125">'secondone'</span>, <span style="color:#0b6125">'secondfive'</span>, <span style="color:#0b6125">'seconds'</span>],
-    minute: [<span style="color:#0b6125">'minuteone'</span>, <span style="color:#0b6125">'minutefive'</span>, <span style="color:#0b6125">'minutes'</span>],
-    hour: [<span style="color:#0b6125">'hourone'</span>, <span style="color:#0b6125">'hourfive'</span>, <span style="color:#0b6125">'hours'</span>],
-    day: [<span style="color:#0b6125">'dayone'</span>, <span style="color:#0b6125">'dayfive'</span>, <span style="color:#0b6125">'days'</span>],
-    handler: <span style="color:#0b6125">'nengNumeral'</span>
+<span style="color: #008800; font-style: italic">// Adding of a words for signatures of countdown</span>
+$.syotimerLang.neng <span style="color: #666666">=</span> {
+  second<span style="color: #666666">:</span> [<span style="color: #BB4444">&quot;secondone&quot;</span>, <span style="color: #BB4444">&quot;secondfive&quot;</span>, <span style="color: #BB4444">&quot;seconds&quot;</span>],
+  minute<span style="color: #666666">:</span> [<span style="color: #BB4444">&quot;minuteone&quot;</span>, <span style="color: #BB4444">&quot;minutefive&quot;</span>, <span style="color: #BB4444">&quot;minutes&quot;</span>],
+  hour<span style="color: #666666">:</span> [<span style="color: #BB4444">&quot;hourone&quot;</span>, <span style="color: #BB4444">&quot;hourfive&quot;</span>, <span style="color: #BB4444">&quot;hours&quot;</span>],
+  day<span style="color: #666666">:</span> [<span style="color: #BB4444">&quot;dayone&quot;</span>, <span style="color: #BB4444">&quot;dayfive&quot;</span>, <span style="color: #BB4444">&quot;days&quot;</span>],
+  handler<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;nengNumeral&quot;</span>,
 };
 
-<span style="color:#5a525f;font-style:italic">// Adding of the handler that selects an index from the list of words</span>
-<span style="color:#5a525f;font-style:italic">// based on ahead the going number</span>
-<span style="color:#691c97">$.syotimerLang</span>.<span style="color:#bf4f24">nengNumeral</span> <span style="color:#794938">=</span> <span style="color:#a71d5d;font-style:italic">function</span>(number) {
-    <span style="color:#a71d5d;font-style:italic">var</span> lastDigit <span style="color:#794938">=</span> number <span style="color:#794938">%</span> <span style="color:#811f24;font-weight:700">10</span>;
-    <span style="color:#794938">if</span> ( lastDigit <span style="color:#794938">===</span> <span style="color:#811f24;font-weight:700">1</span> ) {
-        <span style="color:#794938">return</span> <span style="color:#811f24;font-weight:700">0</span>;
-    } <span style="color:#794938">else</span> <span style="color:#794938">if</span> ( lastDigit <span style="color:#794938">===</span> <span style="color:#811f24;font-weight:700">5</span>) {
-        <span style="color:#794938">return</span> <span style="color:#811f24;font-weight:700">1</span>;
-    } <span style="color:#794938">else</span> {
-        <span style="color:#794938">return</span> <span style="color:#811f24;font-weight:700">2</span>;
-    }
+<span style="color: #008800; font-style: italic">// Adding of the handler that selects an index from the list of words</span>
+<span style="color: #008800; font-style: italic">// based on ahead the going number</span>
+$.syotimerLang.nengNumeral <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">function</span> (number) {
+  <span style="color: #AA22FF; font-weight: bold">var</span> lastDigit <span style="color: #666666">=</span> number <span style="color: #666666">%</span> <span style="color: #666666">10</span>;
+  <span style="color: #AA22FF; font-weight: bold">if</span> (lastDigit <span style="color: #666666">===</span> <span style="color: #666666">1</span>) {
+    <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">0</span>;
+  } <span style="color: #AA22FF; font-weight: bold">else</span> <span style="color: #AA22FF; font-weight: bold">if</span> (lastDigit <span style="color: #666666">===</span> <span style="color: #666666">5</span>) {
+    <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">1</span>;
+  } <span style="color: #AA22FF; font-weight: bold">else</span> {
+    <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">2</span>;
+  }
 };
 
-<span style="color:#691c97">$</span>('<span style="color:#bf4f24">#periodic-timer_localization_new-english</span>').syotimer({
-    lang: <span style="color:#0b6125">'neng'</span>,
-    layout: <span style="color:#0b6125">'ms'</span>,
-    periodic: <span style="color:#811f24;font-weight:700">true</span>,
-    periodInterval: <span style="color:#811f24;font-weight:700">6</span>,
-    periodUnit: <span style="color:#0b6125">'m'</span>,
-    headTitle: <span style="color:#0b6125">'&lt;h3>Adding new language&lt;/h3>'</span> <span style="color:#794938">+</span>
-        <span style="color:#0b6125">'&lt;p>Demonstrate adding the new language of signatures.&lt;/p>'</span>
+$(<span style="color: #BB4444">&quot;#periodic-timer_localization_new-english&quot;</span>).syotimer({
+  lang<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;neng&quot;</span>,
+  layout<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;ms&quot;</span>,
+
+  periodic<span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">true</span>,
+  periodInterval<span style="color: #666666">:</span> <span style="color: #666666">6</span>,
+  periodUnit<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;m&quot;</span>,
 });
 </pre>
     </div>
