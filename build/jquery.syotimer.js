@@ -4,7 +4,7 @@
  * @author: John Syomochkin <info@syomochkin.xyz>
  * @homepage: http://syomochkin.xyz/folio/syotimer/demo.html
  * @repository: git+https://github.com/mrfratello/SyoTimer.git
- * @date: 2021.8.15
+ * @date: 2021.8.22
  * @license: under MIT license
  */
 (function ($) {
@@ -86,10 +86,10 @@
     },
   };
 
-  var DAY = "day",
-    HOUR = "hour",
-    MINUTE = "minute",
-    SECOND = "second";
+  var DAY = "day";
+  var HOUR = "hour";
+  var MINUTE = "minute";
+  var SECOND = "second";
   var DAY_IN_SEC = 24 * 60 * 60;
   var HOUR_IN_SEC = 60 * 60;
   var MINUTE_IN_SEC = 60;
@@ -114,17 +114,8 @@
   };
 
   var DEFAULTS = {
-    year: 2034,
-    month: 7,
-    day: 31,
-    hour: 0,
-    minute: 0,
-    second: 0,
+    date: 0,
     timeZone: "local", // setting the time zone of deadline.
-    // If 'local' then the time zone is ignored and
-    // the deadline is determined by local time of the user.
-    // Otherwise, specifies the offset from the UTC
-    ignoreTransferTime: false, // If `true` then transfer to summer/winter time will not be considered.
     layout: "dhms", // sets an order of layout of units of the timer:
     // days (d) of hours ('h'), minute ('m'), second ('s').
     periodic: false, //`true` - the timer is periodic.
@@ -222,24 +213,14 @@
       var elementBox = $__default['default'](this),
         options = elementBox.data("syotimer-options");
       $__default['default'](".syotimer-cell > .syotimer-cell__value", elementBox).css("opacity", 1);
-      var currentDate = new Date(),
-        deadLineDate = new Date(
-          options.year,
-          options.month - 1,
-          options.day,
-          options.hour,
-          options.minute,
-          options.second
-        ),
-        differenceInMilliSec = staticMethod.getDifferenceWithTimezone(
-          currentDate,
-          deadLineDate,
-          options
-        ),
-        secondsToDeadLine = staticMethod.getSecondsToDeadLine(
-          differenceInMilliSec,
-          options
-        );
+      var currentTime = new Date().getTime();
+      var deadLineTime =
+        options.date instanceof Date ? options.date.getTime() : options.date;
+      var differenceInMilliSec = deadLineTime - currentTime;
+      var secondsToDeadLine = staticMethod.getSecondsToDeadLine(
+        differenceInMilliSec,
+        options
+      );
       if (secondsToDeadLine >= 0) {
         SyoTimer._refreshUnitsDom.apply(this, [secondsToDeadLine]);
         SyoTimer._applyEffectSwitch.apply(this, [options.effectType]);
@@ -397,8 +378,8 @@
      * @returns {{}}
      */
     getUnitsToDeadLine: function (secondsToDeadLine) {
-      var unit = DAY,
-        unitsToDeadLine = {};
+      var unit = DAY;
+      var unitsToDeadLine = {};
       do {
         var unitInMilliSec = staticMethod.getPeriodUnit(unit);
         unitsToDeadLine[unit] = Math.floor(secondsToDeadLine / unitInMilliSec);
@@ -429,32 +410,6 @@
       }
     },
 
-    getDifferenceWithTimezone: function (currentDate, deadLineDate, options) {
-      var differenceByLocalTimezone =
-          deadLineDate.getTime() - currentDate.getTime(),
-        amendmentOnTimezone = 0,
-        amendmentOnTransferTime = 0,
-        amendment;
-      if (options.timeZone !== "local") {
-        var timezoneOffset =
-            parseFloat(options.timeZone) * staticMethod.getPeriodUnit(HOUR),
-          localTimezoneOffset =
-            -currentDate.getTimezoneOffset() * staticMethod.getPeriodUnit(MINUTE);
-        amendmentOnTimezone = (timezoneOffset - localTimezoneOffset) * 1000;
-      }
-      if (options.ignoreTransferTime) {
-        var currentTimezoneOffset =
-            -currentDate.getTimezoneOffset() * staticMethod.getPeriodUnit(MINUTE),
-          deadLineTimezoneOffset =
-            -deadLineDate.getTimezoneOffset() *
-            staticMethod.getPeriodUnit(MINUTE);
-        amendmentOnTransferTime =
-          (currentTimezoneOffset - deadLineTimezoneOffset) * 1000;
-      }
-      amendment = amendmentOnTimezone + amendmentOnTransferTime;
-      return differenceByLocalTimezone - amendment;
-    },
-
     /**
      * Formation of numbers with leading zeros
      * @param number
@@ -478,21 +433,23 @@
     },
   };
 
-  $__default['default'].fn.syotimer = function (options) {
-    if (typeof options === "string" && options === "setOption") {
-      var otherArgs = Array.prototype.slice.call(arguments, 1);
-      return this.each(function () {
-        methods[options].apply(this, otherArgs);
-      });
-    } else if (
-      options === null ||
-      options === undefined ||
-      typeof options === "object"
-    ) {
-      return SyoTimer.init.apply(this, [options]);
-    } else {
-      $__default['default'].error("SyoTimer. Error in call methods: methods is not exist");
-    }
-  };
+  $__default['default'].fn.extend({
+    syotimer: function (options) {
+      if (typeof options === "string" && options === "setOption") {
+        var otherArgs = Array.prototype.slice.call(arguments, 1);
+        return this.each(function () {
+          methods[options].apply(this, otherArgs);
+        });
+      } else if (
+        options === null ||
+        options === undefined ||
+        typeof options === "object"
+      ) {
+        return SyoTimer.init.apply(this, [options]);
+      } else {
+        $__default['default'].error("SyoTimer. Error in call methods: methods is not exist");
+      }
+    },
+  });
 
 }($));
