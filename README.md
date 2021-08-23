@@ -4,7 +4,7 @@ jQuery plugin of countdown on html page
 
 ## Demo
 
-[Examples of usage jQuery SyoTimer Plugin](https://mrfratello.github.io/SyoTimer/)
+[Examples of usage jQuery SyoTimer Plugin](https://mrfratello.github.io/SyoTimer)
 
 ## Features
 
@@ -222,39 +222,5 @@ jQuery SyoTimer Plugin has been tested with jQuery 1.7+ on all major browsers:
 - Chrome 6+ (Win, Mac, Linux, Android, iPhone);
 - Safari 3.2+ (Win, Mac, iPhone);
 - Opera 8+ (Win, Mac, Linux, Android, iPhone).
-
-## Version History
-
-- **2.1.1** _2019-10-17_
-
-  - publish on npm
-  - used universal module definition
-  - added default CSS styles
-
-- **2.0.0** _2017-06-24_
-
-  - redesigned the structure of a plugin
-  - `effectType` applies to all units
-  - added possibility to sets an order of layout of units of the timer
-  - added possibility to add new language
-  - rename CSS classes by BEM methodology
-
-- **1.1.0** _2016-07-30_
-
-  - added time zone support
-  - added support of the time transfer on summer/winter time
-  - added methods support
-  - added method of set value to option
-  - added minified version of plugin
-
-- **1.0.1** _2015-02-24_
-
-  - added option for change effect of counting
-  - added documentation
-  - added examples
-
-- **1.0.0** _2014-12-10_
-
-  - first use timer on real web-site
 
 Gratitude to [Yuri Danilchenko](https://github.com/yuri-danilchenko) and Elena Levin.

@@ -9,7 +9,8 @@
     "url": "git+https://github.com/mrfratello/SyoTimer.git"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "release": "standard-version"
   },
   "keywords": [
     "countdown",
@@ -21,10 +22,11 @@
   "bugs": {
     "url": "https://github.com/mrfratello/SyoTimer/issues"
   },
-  "homepage": "http://syomochkin.xyz/folio/syotimer/demo.html",
+  "homepage": "https://mrfratello.github.io/SyoTimer",
   "devDependencies": {
     "rollup": "^2.56.2",
-    "rollup-plugin-terser": "^7.0.2"
+    "rollup-plugin-terser": "^7.0.2",
+    "standard-version": "9.3.1"
   },
   "peerDependencies": {
     "jquery": "^1.12.4"
