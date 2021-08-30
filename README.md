@@ -101,16 +101,16 @@ Example of css styles for syotimer in [resources/default.css](resources/default.
 
 ## Options
 
-| Option           | Description                                                                                                                                                                           | Type of Value | Default Value | Available Values   |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- | ------------------ |
-| `date`           | date, which should count down timer                                                                                                                                                   | integer/Date  | 0             |                    |
-| `layout`         | sets an order of layout of units of the timer: days (d) of hours ('h'), minute ('m'), second ('s').                                                                                   | string        | 'dhms'        |                    |
-| `doubleNumbers`  | `true` - show hours, minutes and seconds with leading zeros (2 hours 5 minutes 4 seconds = 02:05:04)                                                                                  | boolean       | true          |                    |
-| `effectType`     | The effect of changing the value of seconds                                                                                                                                           | string        | 'none'        | 'none', 'opacity'  |
-| `lang`           | localization of a countdown signatures (days, hours, minutes, seconds)                                                                                                                | string        | 'eng'         | see "Localization" |
-| `periodic`       | `true` - the timer is periodic. If the date until which counts the timer is reached, the next value date which will count down the timer is incremented by the value `periodInterval` | boolean       | false         |                    |
-| `periodInterval` | the period of the timer in `periodUnit` (if `periodic` is set to `true`)                                                                                                              | integer       | 7             | >0                 |
-| `periodUnit`     | the unit of measurement period timer                                                                                                                                                  | string        | 'd'           | 'd', 'h', 'm', 's' |
+| Option           | Description                                                                                                                                                                           | Type of Value | Default Value | Available Values                  |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- | --------------------------------- |
+| `date`           | date, which should count down timer                                                                                                                                                   | integer/Date  | 0             |                                   |
+| `layout`         | sets an order of layout of units of the timer: days (d) of hours ('h'), minute ('m'), second ('s').                                                                                   | string        | 'dhms'        |                                   |
+| `doubleNumbers`  | `true` - show hours, minutes and seconds with leading zeros (2 hours 5 minutes 4 seconds = 02:05:04)                                                                                  | boolean       | true          |                                   |
+| `effectType`     | The effect of changing the value of seconds                                                                                                                                           | string        | 'none'        | 'none', 'opacity'                 |
+| `lang`           | localization of a countdown signatures (days, hours, minutes, seconds)                                                                                                                | string        | 'eng'         | see [Localization](#localization) |
+| `periodic`       | `true` - the timer is periodic. If the date until which counts the timer is reached, the next value date which will count down the timer is incremented by the value `periodInterval` | boolean       | false         |                                   |
+| `periodInterval` | the period of the timer in `periodUnit` (if `periodic` is set to `true`)                                                                                                              | integer       | 7             | >0                                |
+| `periodUnit`     | the unit of measurement period timer                                                                                                                                                  | string        | 'd'           | 'd', 'h', 'm', 's'                |
 
 ## Methods
 
@@ -151,7 +151,10 @@ By default the supported plugin languages:
 
 ### Adding new language
 
-It is very simple to execute localization of a plugin under the language. You need to add the translations of signatures to timer elements as the parameter of an object of `$.syotimerLang`. Then you need determine a new language in the syotimer options. For example we will add support of Spanish (though this language is supported by default):
+It is very simple to execute localization of a plugin under the language.
+You need to add the translations of signatures to timer elements as the parameter of an object of `$.syotimerLang`.
+Then you need determine a new language in the syotimer options. For example we will add support of Spanish
+(though this language is supported by default):
 
 ```javascript
 $.syotimerLang.spa = {
@@ -168,17 +171,21 @@ $(".your_selector_to_countdown").syotimer({
 
 ### Inducement of a noun after a numeral
 
-At the majority of languages a simple algorithm of determination of inducement of a noun after a numeral. If numeral is equal `1` then need input first element from array. Otherwise - second element.
+At the majority of languages a simple algorithm of determination of inducement of a noun after a numeral.
+If numeral is equal `1` then need input first element from array. Otherwise - second element.
 
 But there are languages in which more difficult rules of determination of the correct inducement of nouns after a numeral (for example, Russian).
 
-For example, consider a completely synthetic language (let it be called "Nenglish"). It is very similar to English but there are significant differences in the spelling of nouns after numerals. Namely, the difference in the suffixes of these nouns:
+For example, consider a completely synthetic language (let it be called "Nenglish").
+It is very similar to English but there are significant differences in the spelling of nouns after numerals.
+Namely, the difference in the suffixes of these nouns:
 
 - if the number ends with the digit `1` then to the noun added the suffix "one" (21 secondone, 1 minuteone, ...);
 - if the number ends with the digit `5` then the suffix is equal "five" (35 hourfive, 5 secondfive);
 - otherwise the suffix is equal to "s" (24 minutes, 3 days).
 
-To add a Nenglish in Syotimer need first add all possible variants of a writing of the captions of the items of the plugin. The abbreviated name of the language will take "neng":
+To add a Nenglish in Syotimer need first add all possible variants of a writing of the captions of the items of the plugin.
+The abbreviated name of the language will take "neng":
 
 ```javascript
 $.syotimerLang.neng = {
@@ -186,24 +193,21 @@ $.syotimerLang.neng = {
   minute: ["minuteone", "minutefive", "minutes"],
   hour: ["hourone", "hourfive", "hours"],
   day: ["dayone", "dayfive", "days"],
-  handler: "nengNumeral",
+  handler: function nengNumeral(number, words) {
+    var lastDigit = number % 10;
+    var index = 2;
+    if (lastDigit === 1) {
+      index = 0;
+    } else if (lastDigit === 5) {
+      index = 1;
+    }
+    return words[index];
+  },
 };
 ```
 
-The "handler" must contain a name of method that receive the one argument is a number. This method should return the array index that determines the correct variant of the noun:
-
-```javascript
-$.syotimerLang.nengNumeral = function (number) {
-  var lastDigit = number % 10;
-  if (lastDigit === 1) {
-    return 0;
-  } else if (lastDigit === 5) {
-    return 1;
-  } else {
-    return 2;
-  }
-};
-```
+The "handler" must contain a function that receive the two arguments: a number and an array of nouns.
+This method should return the the noun.
 
 Then only have to specify the language when you create the instance Syotimer:
 
