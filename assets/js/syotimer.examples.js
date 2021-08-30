@@ -191,20 +191,18 @@ jQuery(function ($) {
     minute: ["minuteone", "minutefive", "minutes"],
     hour: ["hourone", "hourfive", "hours"],
     day: ["dayone", "dayfive", "days"],
-    handler: "nengNumeral",
-  };
-
-  // Adding of the handler that selects an index from the list of words
-  // based on ahead the going number
-  $.syotimerLang.nengNumeral = function (number) {
-    var lastDigit = number % 10;
-    if (lastDigit === 1) {
-      return 0;
-    } else if (lastDigit === 5) {
-      return 1;
-    } else {
-      return 2;
-    }
+    // Adding of the handler that selects an index from the list of words
+    // based on ahead the going number
+    handler: function nengNumeral(number, words) {
+      var lastDigit = number % 10;
+      var index = 2;
+      if (lastDigit === 1) {
+        index = 0;
+      } else if (lastDigit === 5) {
+        index = 1;
+      }
+      return words[index];
+    },
   };
 
   $("#periodic-timer_localization_new-english").syotimer({

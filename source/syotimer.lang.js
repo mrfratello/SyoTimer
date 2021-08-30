@@ -1,12 +1,32 @@
 import $ from "jquery";
 
+/**
+ * Universal function for get correct inducement of nouns after a numeral (`number`)
+ * @param number
+ * @param words
+ * @returns {string}
+ */
+function universal(number, words) {
+  var index = number === 1 ? 0 : 1;
+  return words[index];
+}
+
 $.syotimerLang = {
   rus: {
     second: ["секунда", "секунды", "секунд"],
     minute: ["минута", "минуты", "минут"],
     hour: ["час", "часа", "часов"],
     day: ["день", "дня", "дней"],
-    handler: "rusNumeral",
+    handler: function rusNumeral(number, words) {
+      var cases = [2, 0, 1, 1, 1, 2],
+        index;
+      if (number % 100 > 4 && number % 100 < 20) {
+        index = 2;
+      } else {
+        index = cases[number % 10 < 5 ? number % 10 : 5];
+      }
+      return words[index];
+    },
   },
   eng: {
     second: ["second", "seconds"],
@@ -34,31 +54,6 @@ $.syotimerLang = {
   },
 
   /**
-   * Universal function for get correct inducement of nouns after a numeral (`number`)
-   * @param number
-   * @returns {number}
-   */
-  universal: function (number) {
-    return number === 1 ? 0 : 1;
-  },
-
-  /**
-   * Get correct inducement of nouns after a numeral for Russian language (rus)
-   * @param number
-   * @returns {number}
-   */
-  rusNumeral: function (number) {
-    var cases = [2, 0, 1, 1, 1, 2],
-      index;
-    if (number % 100 > 4 && number % 100 < 20) {
-      index = 2;
-    } else {
-      index = cases[number % 10 < 5 ? number % 10 : 5];
-    }
-    return index;
-  },
-
-  /**
    * Getting the correct declension of words after numerals
    * @param number
    * @param lang
@@ -66,8 +61,8 @@ $.syotimerLang = {
    * @returns {string}
    */
   getNumeral: function (number, lang, unit) {
-    var handlerName = $.syotimerLang[lang].handler || "universal",
-      index = this[handlerName](number);
-    return $.syotimerLang[lang][unit][index];
+    var handler = $.syotimerLang[lang].handler || universal;
+    var words = $.syotimerLang[lang][unit];
+    return handler(number, words);
   },
 };

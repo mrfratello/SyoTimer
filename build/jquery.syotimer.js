@@ -2,9 +2,9 @@
  * SyoTimer - jquery countdown plugin
  * @version: 2.1.3
  * @author: John Syomochkin <info@syomochkin.xyz>
- * @homepage: http://syomochkin.xyz/folio/syotimer/demo.html
+ * @homepage: https://mrfratello.github.io/SyoTimer
  * @repository: git+https://github.com/mrfratello/SyoTimer.git
- * @date: 2021.8.22
+ * @date: 2021.8.30
  * @license: under MIT license
  */
 (function ($) {
@@ -14,13 +14,33 @@
 
   var $__default = /*#__PURE__*/_interopDefaultLegacy($);
 
+  /**
+   * Universal function for get correct inducement of nouns after a numeral (`number`)
+   * @param number
+   * @param words
+   * @returns {string}
+   */
+  function universal(number, words) {
+    var index = number === 1 ? 0 : 1;
+    return words[index];
+  }
+
   $__default['default'].syotimerLang = {
     rus: {
       second: ["секунда", "секунды", "секунд"],
       minute: ["минута", "минуты", "минут"],
       hour: ["час", "часа", "часов"],
       day: ["день", "дня", "дней"],
-      handler: "rusNumeral",
+      handler: function rusNumeral(number, words) {
+        var cases = [2, 0, 1, 1, 1, 2],
+          index;
+        if (number % 100 > 4 && number % 100 < 20) {
+          index = 2;
+        } else {
+          index = cases[number % 10 < 5 ? number % 10 : 5];
+        }
+        return words[index];
+      },
     },
     eng: {
       second: ["second", "seconds"],
@@ -48,31 +68,6 @@
     },
 
     /**
-     * Universal function for get correct inducement of nouns after a numeral (`number`)
-     * @param number
-     * @returns {number}
-     */
-    universal: function (number) {
-      return number === 1 ? 0 : 1;
-    },
-
-    /**
-     * Get correct inducement of nouns after a numeral for Russian language (rus)
-     * @param number
-     * @returns {number}
-     */
-    rusNumeral: function (number) {
-      var cases = [2, 0, 1, 1, 1, 2],
-        index;
-      if (number % 100 > 4 && number % 100 < 20) {
-        index = 2;
-      } else {
-        index = cases[number % 10 < 5 ? number % 10 : 5];
-      }
-      return index;
-    },
-
-    /**
      * Getting the correct declension of words after numerals
      * @param number
      * @param lang
@@ -80,9 +75,9 @@
      * @returns {string}
      */
     getNumeral: function (number, lang, unit) {
-      var handlerName = $__default['default'].syotimerLang[lang].handler || "universal",
-        index = this[handlerName](number);
-      return $__default['default'].syotimerLang[lang][unit][index];
+      var handler = $__default['default'].syotimerLang[lang].handler || universal;
+      var words = $__default['default'].syotimerLang[lang][unit];
+      return handler(number, words);
     },
   };
 
@@ -115,7 +110,6 @@
 
   var DEFAULTS = {
     date: 0,
-    timeZone: "local", // setting the time zone of deadline.
     layout: "dhms", // sets an order of layout of units of the timer:
     // days (d) of hours ('h'), minute ('m'), second ('s').
     periodic: false, //`true` - the timer is periodic.
