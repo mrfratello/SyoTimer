@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/mrfratello/SyoTimer/compare/v2.1.3...v3.0.0) (2021-08-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* `$.syotimerLang[lang].handler` must be function with two arguments
+* API Changed:
+
+* use date (number, Date) property instead year, month, day, hour, minute, second props
+* remove properties timeZone and ignoreTransferTime
+
+### Features
+
+* change api, update exaples ([d1abea1](https://github.com/mrfratello/SyoTimer/commit/d1abea14432e6fb4e86cbf8cc2499dc0eeb17e67))
+* change localization api ([cdd3436](https://github.com/mrfratello/SyoTimer/commit/cdd34366b18564f1880f53f3479f51cbd764e1ce))
+
 ### [2.1.1](https://github.com/mrfratello/SyoTimer/compare/v2.0.0...v2.1.1) (2019-10-17)
 
 ### Features
