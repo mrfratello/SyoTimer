@@ -1,16 +1,5 @@
 import $ from "jquery";
 
-/**
- * Universal function for get correct inducement of nouns after a numeral (`number`)
- * @param number
- * @param words
- * @returns {string}
- */
-function universal(number, words) {
-  var index = number === 1 ? 0 : 1;
-  return words[index];
-}
-
 $.syotimerLang = {
   rus: {
     second: ["секунда", "секунды", "секунд"],
@@ -18,13 +7,11 @@ $.syotimerLang = {
     hour: ["час", "часа", "часов"],
     day: ["день", "дня", "дней"],
     handler: function rusNumeral(number, words) {
-      var cases = [2, 0, 1, 1, 1, 2],
-        index;
+      const cases = [2, 0, 1, 1, 1, 2];
       if (number % 100 > 4 && number % 100 < 20) {
-        index = 2;
-      } else {
-        index = cases[number % 10 < 5 ? number % 10 : 5];
+        return words[2];
       }
+      const index = cases[number % 10 < 5 ? number % 10 : 5];
       return words[index];
     },
   },
@@ -51,18 +38,5 @@ $.syotimerLang = {
     minute: ["דקה", "דקות"],
     hour: ["שעה", "שעות"],
     day: ["יום", "ימים"],
-  },
-
-  /**
-   * Getting the correct declension of words after numerals
-   * @param number
-   * @param lang
-   * @param unit
-   * @returns {string}
-   */
-  getNumeral: function (number, lang, unit) {
-    var handler = $.syotimerLang[lang].handler || universal;
-    var words = $.syotimerLang[lang][unit];
-    return handler(number, words);
   },
 };
