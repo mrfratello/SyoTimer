@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/mrfratello/SyoTimer/compare/v3.0.0...v3.1.0) (2021-09-10)
+
+
+### Features
+
+* add typescript and refactor source structure ([b1398c5](https://github.com/mrfratello/SyoTimer/commit/b1398c59978a2c91ae13f6aff29feade7b5d527f))
+
+
+### Bug Fixes
+
+* use correct font types in default styles ([ffb3a78](https://github.com/mrfratello/SyoTimer/commit/ffb3a78f435bb3c764d39dbf80fe954200353958))
+
 ## [3.0.0](https://github.com/mrfratello/SyoTimer/compare/v2.1.3...v3.0.0) (2021-08-31)
 
 
