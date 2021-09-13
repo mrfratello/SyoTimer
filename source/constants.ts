@@ -1,16 +1,10 @@
-import $ from "jquery";
-import type {
-  SyoTimerInternalOptions,
-  ItemsHas,
-  LinkedList,
-  UnitLong,
-  UnitShort,
-} from "./types";
+import $ from 'jquery';
+import type { SyoTimerInternalOptions, ItemsHas, LinkedList, UnitLong, UnitShort } from './types';
 
-export const DAY: UnitLong = "day";
-export const HOUR: UnitLong = "hour";
-export const MINUTE: UnitLong = "minute";
-export const SECOND: UnitLong = "second";
+export const DAY: UnitLong = 'day';
+export const HOUR: UnitLong = 'hour';
+export const MINUTE: UnitLong = 'minute';
+export const SECOND: UnitLong = 'second';
 export const DAY_IN_SEC = 24 * 60 * 60;
 export const HOUR_IN_SEC = 60 * 60;
 export const MINUTE_IN_SEC = 60;
@@ -42,20 +36,18 @@ export const defaultItemsHas: ItemsHas = {
 
 export const defaultOptions: SyoTimerInternalOptions = {
   date: 0,
-  layout: "dhms",
+  layout: 'dhms',
   periodic: false,
   periodInterval: 7,
-  periodUnit: "d",
+  periodUnit: 'd',
   doubleNumbers: true,
-  effectType: "none",
-  lang: "eng",
-  headTitle: "",
-  footTitle: "",
-  afterDeadline: function (timerBlock) {
-    timerBlock.bodyBlock.html(
-      '<p style="font-size: 1.2em;">The countdown is finished!</p>'
-    );
+  effectType: 'none',
+  lang: 'eng',
+  headTitle: '',
+  footTitle: '',
+  afterDeadline: (timerBlock) => {
+    timerBlock.bodyBlock.html('<p style="font-size: 1.2em;">The countdown is finished!</p>');
   },
-  itemTypes: ["day", "hour", "minute", "second"],
+  itemTypes: ['day', 'hour', 'minute', 'second'],
   itemsHas: $.extend({}, defaultItemsHas),
 };

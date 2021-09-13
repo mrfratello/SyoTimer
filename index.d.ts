@@ -4,8 +4,8 @@ import type {
   SyoTimerMethods,
   SyoTimerOptionProps,
   SyoTimerOptionValues,
-} from "./source/types";
-export type { SyoTimerOptions, SyoTimerLocalization } from "./source/types";
+} from './source/types';
+export type { SyoTimerOptions, SyoTimerLocalization } from './source/types';
 
 declare global {
   interface JQuery {
@@ -13,7 +13,7 @@ declare global {
     syotimer(
       method: SyoTimerMethods,
       property: SyoTimerOptionProps,
-      value: SyoTimerOptionValues
+      value: SyoTimerOptionValues,
     ): JQuery;
   }
 
