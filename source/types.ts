@@ -46,13 +46,10 @@ export interface SyoTimerInternalOptions {
   itemsHas: ItemsHas;
 }
 
-export type SyoTimerOptions = Partial<
-  Omit<SyoTimerInternalOptions, "itemTypes" | "itemsHas">
->;
+export type SyoTimerOptions = Partial<Omit<SyoTimerInternalOptions, 'itemTypes' | 'itemsHas'>>;
 
-export type SyoTimerOptionProps = Exclude<keyof SyoTimerOptions, "layout">;
-export type SyoTimerOptionValues =
-  Required<SyoTimerOptions>[SyoTimerOptionProps];
+export type SyoTimerOptionProps = Exclude<keyof SyoTimerOptions, 'layout'>;
+export type SyoTimerOptionValues = Required<SyoTimerOptions>[SyoTimerOptionProps];
 
 export interface SyoTimerTimerBlock {
   headBlock: JQuery;
@@ -64,12 +61,12 @@ export type SyoTimerItemBlocks = {
   [key in UnitLong]?: JQuery;
 };
 
-export type SyoTimerEffectType = "none" | "opacity";
+export type SyoTimerEffectType = 'none' | 'opacity';
 
-export type SyoTimerMethods = "setOption";
+export type SyoTimerMethods = 'setOption';
 
-export type UnitLong = "day" | "hour" | "minute" | "second";
-export type UnitShort = "d" | "h" | "m" | "s";
+export type UnitLong = 'day' | 'hour' | 'minute' | 'second';
+export type UnitShort = 'd' | 'h' | 'm' | 's';
 
 export type Unit = UnitShort | UnitLong;
 
