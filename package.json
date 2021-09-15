@@ -17,11 +17,13 @@
     "start": "rollup -c -w",
     "build": "rollup -c",
     "format": "prettier --write \"./source/\"",
+    "format:check": "prettier --check \"./source/\"",
     "eslint": "eslint source/**",
     "tslint": "tsc --noEmit",
-    "lint": "yarn format && yarn tslint && yarn eslint",
-    "beforerelease": "yarn lint && yarn build && git add .",
-    "release": "standard-version -a"
+    "lint": "yarn format:check && yarn tslint && yarn eslint",
+    "release:before": "yarn lint && yarn build && git add .",
+    "release": "standard-version -a",
+    "prepare": "husky install"
   },
   "keywords": [
     "countdown",
@@ -36,7 +38,7 @@
   "homepage": "https://mrfratello.github.io/SyoTimer",
   "standard-version": {
     "scripts": {
-      "prerelease": "yarn beforerelease"
+      "prerelease": "yarn release:before"
     }
   },
   "devDependencies": {
@@ -57,7 +59,8 @@
     "rollup-plugin-typescript2": "0.30.0",
     "standard-version": "9.3.1",
     "tslib": "2.3.1",
-    "typescript": "4.3.5"
+    "typescript": "4.3.5",
+    "husky": "7.0.0"
   },
   "peerDependencies": {
     "jquery": "^1.12.4"
