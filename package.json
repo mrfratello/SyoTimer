@@ -1,7 +1,7 @@
 {
   "name": "jquery-syotimer",
   "projectName": "SyoTimer",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "jquery countdown plugin",
   "main": "./build/jquery.syotimer.js",
   "types": "./build/jquery.syotimer.d.ts",

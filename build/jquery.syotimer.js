@@ -1,6 +1,6 @@
 /**
  * SyoTimer - jquery countdown plugin
- * @version: 3.0.0
+ * @version: 3.1.0
  * @author: John Syomochkin <info@syomochkin.xyz>
  * @homepage: https://mrfratello.github.io/SyoTimer
  * @repository: git+https://github.com/mrfratello/SyoTimer.git
@@ -15,10 +15,10 @@
 
     $__default['default'].syotimerLang = {
         rus: {
-            second: ["секунда", "секунды", "секунд"],
-            minute: ["минута", "минуты", "минут"],
-            hour: ["час", "часа", "часов"],
-            day: ["день", "дня", "дней"],
+            second: ['секунда', 'секунды', 'секунд'],
+            minute: ['минута', 'минуты', 'минут'],
+            hour: ['час', 'часа', 'часов'],
+            day: ['день', 'дня', 'дней'],
             handler: function rusNumeral(number, words) {
                 var cases = [2, 0, 1, 1, 1, 2];
                 if (number % 100 > 4 && number % 100 < 20) {
@@ -29,35 +29,35 @@
             },
         },
         eng: {
-            second: ["second", "seconds"],
-            minute: ["minute", "minutes"],
-            hour: ["hour", "hours"],
-            day: ["day", "days"],
+            second: ['second', 'seconds'],
+            minute: ['minute', 'minutes'],
+            hour: ['hour', 'hours'],
+            day: ['day', 'days'],
         },
         por: {
-            second: ["segundo", "segundos"],
-            minute: ["minuto", "minutos"],
-            hour: ["hora", "horas"],
-            day: ["dia", "dias"],
+            second: ['segundo', 'segundos'],
+            minute: ['minuto', 'minutos'],
+            hour: ['hora', 'horas'],
+            day: ['dia', 'dias'],
         },
         spa: {
-            second: ["segundo", "segundos"],
-            minute: ["minuto", "minutos"],
-            hour: ["hora", "horas"],
-            day: ["día", "días"],
+            second: ['segundo', 'segundos'],
+            minute: ['minuto', 'minutos'],
+            hour: ['hora', 'horas'],
+            day: ['día', 'días'],
         },
         heb: {
-            second: ["שניה", "שניות"],
-            minute: ["דקה", "דקות"],
-            hour: ["שעה", "שעות"],
-            day: ["יום", "ימים"],
+            second: ['שניה', 'שניות'],
+            minute: ['דקה', 'דקות'],
+            hour: ['שעה', 'שעות'],
+            day: ['יום', 'ימים'],
         },
     };
 
-    var DAY = "day";
-    var HOUR = "hour";
-    var MINUTE = "minute";
-    var SECOND = "second";
+    var DAY = 'day';
+    var HOUR = 'hour';
+    var MINUTE = 'minute';
+    var SECOND = 'second';
     var DAY_IN_SEC = 24 * 60 * 60;
     var HOUR_IN_SEC = 60 * 60;
     var MINUTE_IN_SEC = 60;
@@ -86,19 +86,19 @@
     };
     var defaultOptions = {
         date: 0,
-        layout: "dhms",
+        layout: 'dhms',
         periodic: false,
         periodInterval: 7,
-        periodUnit: "d",
+        periodUnit: 'd',
         doubleNumbers: true,
-        effectType: "none",
-        lang: "eng",
-        headTitle: "",
-        footTitle: "",
+        effectType: 'none',
+        lang: 'eng',
+        headTitle: '',
+        footTitle: '',
         afterDeadline: function (timerBlock) {
             timerBlock.bodyBlock.html('<p style="font-size: 1.2em;">The countdown is finished!</p>');
         },
-        itemTypes: ["day", "hour", "minute", "second"],
+        itemTypes: ['day', 'hour', 'minute', 'second'],
         itemsHas: $__default['default'].extend({}, defaultItemsHas),
     };
 
@@ -107,16 +107,16 @@
      */
     function getPeriodUnit(periodUnit) {
         switch (periodUnit) {
-            case "d":
+            case 'd':
             case DAY:
                 return DAY_IN_SEC;
-            case "h":
+            case 'h':
             case HOUR:
                 return HOUR_IN_SEC;
-            case "m":
+            case 'm':
             case MINUTE:
                 return MINUTE_IN_SEC;
-            case "s":
+            case 's':
             case SECOND:
             default:
                 return 1;
@@ -126,11 +126,11 @@
      * Formation of numbers with leading zeros
      */
     function format2(numb, isUse) {
-        return numb <= 9 && !!isUse ? "0" + numb : "" + numb;
+        return numb <= 9 && !!isUse ? "0" + numb : String(numb);
     }
     function getItemTypesByLayout(layout) {
         var itemTypes = [];
-        for (var i = 0; i < layout.length; i++) {
+        for (var i = 0; i < layout.length; i += 1) {
             itemTypes.push(LAYOUT_TYPES[layout[i]]);
         }
         return itemTypes;
@@ -151,6 +151,7 @@
             var unitInMilliSec = getPeriodUnit(unit);
             unitsToDeadLine[unit] = Math.floor(remainsSeconds / unitInMilliSec);
             remainsSeconds %= unitInMilliSec;
+            // eslint-disable-next-line no-cond-assign
         } while ((unit = unitLinkedList.prev(unit)));
         return unitsToDeadLine;
     }
@@ -158,12 +159,12 @@
      * Return once cell DOM of countdown: day, hour, minute, second
      */
     function getTimerItem() {
-        var timerCellValue = $("<div/>", {
-            class: "syotimer-cell__value",
-            text: "0",
+        var timerCellValue = $('<div/>', {
+            class: 'syotimer-cell__value',
+            text: '0',
         });
-        var timerCellUnit = $("<div/>", { class: "syotimer-cell__unit" });
-        var timerCell = $("<div/>", { class: "syotimer-cell" });
+        var timerCellUnit = $('<div/>', { class: 'syotimer-cell__unit' });
+        var timerCell = $('<div/>', { class: 'syotimer-cell' });
         timerCell.append(timerCellValue).append(timerCellUnit);
         return timerCell;
     }
@@ -182,19 +183,17 @@
         fullTimeUnitsBetween = Math.abs(fullTimeUnitsBetween);
         if (differenceInSeconds >= 0) {
             differenceInUnit = fullTimeUnitsBetween % options.periodInterval;
-            differenceInUnit =
-                differenceInUnit === 0 ? options.periodInterval : differenceInUnit;
+            differenceInUnit = differenceInUnit === 0 ? options.periodInterval : differenceInUnit;
             differenceInUnit -= 1;
         }
         else {
-            differenceInUnit =
-                options.periodInterval - (fullTimeUnitsBetween % options.periodInterval);
+            differenceInUnit = options.periodInterval - (fullTimeUnitsBetween % options.periodInterval);
         }
         var additionalInUnit = differenceInSeconds % periodUnitInSeconds;
         // fix когда дедлайн раньше текущей даты,
         // возникает баг с неправильным расчетом интервала при different пропорциональной periodUnit
         if (additionalInUnit === 0 && differenceInSeconds < 0) {
-            differenceInUnit--;
+            differenceInUnit -= 1;
         }
         var secondsToDeadLine = Math.abs(differenceInUnit * periodUnitInSeconds + additionalInUnit);
         return secondsToDeadLine;
@@ -202,9 +201,7 @@
     /**
      * Universal function for get correct inducement of nouns after a numeral (`number`)
      */
-    var universal = function (n, words) {
-        return n === 1 ? words[0] : words[1];
-    };
+    var universal = function (n, words) { return (n === 1 ? words[0] : words[1]); };
     /**
      * Getting the correct declension of words after numerals
      */
@@ -214,61 +211,44 @@
         return handler(n, words);
     }
 
-    function mapSyoTimer(elements, inputOptions) {
-        var options = $__default['default'].extend({}, defaultOptions, inputOptions || {});
-        options.itemTypes = getItemTypesByLayout(options.layout);
-        options.itemsHas = $__default['default'].extend({}, defaultItemsHas);
-        for (var i = 0; i < options.itemTypes.length; i++) {
-            options.itemsHas[options.itemTypes[i]] = true;
-        }
-        return elements.each(function () {
-            new SyoTimer(this, options);
-        });
-    }
     var SyoTimer = /** @class */ (function () {
         function SyoTimer(element, options) {
             this.element = $__default['default'](element);
-            this.element.data("syotimer-options", options);
+            this.element.data('syotimer-options', options);
             this.render();
-            this.perSecondHandler();
         }
         /**
          * Rendering base elements of countdown
          * @private
          */
         SyoTimer.prototype.render = function () {
-            var options = this.element.data("syotimer-options");
+            var options = this.element.data('syotimer-options');
             var timerItem = getTimerItem();
-            var headBlock = $__default['default']("<div/>", { class: "syotimer__head" }).html(options.headTitle);
-            var bodyBlock = $__default['default']("<div/>", { class: "syotimer__body" });
-            var footBlock = $__default['default']("<div/>", { class: "syotimer__footer" }).html(options.footTitle);
+            var headBlock = $__default['default']('<div/>', { class: 'syotimer__head' }).html(options.headTitle);
+            var bodyBlock = $__default['default']('<div/>', { class: 'syotimer__body' });
+            var footBlock = $__default['default']('<div/>', { class: 'syotimer__footer' }).html(options.footTitle);
             var itemBlocks = {};
-            for (var i = 0; i < options.itemTypes.length; i++) {
+            for (var i = 0; i < options.itemTypes.length; i += 1) {
                 var item = timerItem.clone();
                 item.addClass("syotimer-cell_type_" + options.itemTypes[i]);
                 bodyBlock.append(item);
                 itemBlocks[options.itemTypes[i]] = item;
             }
-            var timerBlocks = {
-                headBlock: headBlock,
-                bodyBlock: bodyBlock,
-                footBlock: footBlock,
-            };
+            var timerBlocks = { headBlock: headBlock, bodyBlock: bodyBlock, footBlock: footBlock };
             this.element
-                .data("syotimer-blocks", timerBlocks)
-                .data("syotimer-items", itemBlocks)
-                .addClass("syotimer")
+                .data('syotimer-blocks', timerBlocks)
+                .data('syotimer-items', itemBlocks)
+                .addClass('syotimer')
                 .append(headBlock)
                 .append(bodyBlock)
                 .append(footBlock);
         };
         /**
          * Handler called per seconds while countdown is not over
-         * @private
          */
-        SyoTimer.prototype.perSecondHandler = function () {
-            var options = this.element.data("syotimer-options");
-            $__default['default'](".syotimer-cell > .syotimer-cell__value", this.element).css("opacity", 1);
+        SyoTimer.prototype.tick = function () {
+            var options = this.element.data('syotimer-options');
+            $__default['default']('.syotimer-cell > .syotimer-cell__value', this.element).css('opacity', 1);
             var currentTime = new Date().getTime();
             var deadLineTime = options.date instanceof Date ? options.date.getTime() : options.date;
             var differenceInMilliSec = deadLineTime - currentTime;
@@ -278,7 +258,7 @@
                 this.applyEffectSwitch(options.effectType);
             }
             else {
-                var elementBox = $__default['default'].extend(this.element, this.element.data("syotimer-blocks"));
+                var elementBox = $__default['default'].extend(this.element, this.element.data('syotimer-blocks'));
                 options.afterDeadline(elementBox);
             }
         };
@@ -287,8 +267,8 @@
          * @private
          */
         SyoTimer.prototype.refreshUnitsDom = function (secondsToDeadLine) {
-            var options = this.element.data("syotimer-options");
-            var itemBlocks = this.element.data("syotimer-items");
+            var options = this.element.data('syotimer-options');
+            var itemBlocks = this.element.data('syotimer-items');
             var unitList = options.itemTypes;
             var unitsToDeadLine = getUnitsToDeadLine(secondsToDeadLine);
             if (!options.itemsHas.day) {
@@ -300,11 +280,13 @@
             if (!options.itemsHas.minute) {
                 unitsToDeadLine.second += unitsToDeadLine.minute * 60;
             }
-            for (var i = 0; i < unitList.length; i++) {
-                var unit = unitList[i], unitValue = unitsToDeadLine[unit], itemBlock = itemBlocks[unit];
-                itemBlock.data("syotimer-unit-value", unitValue);
-                $__default['default'](".syotimer-cell__value", itemBlock).html(format2(unitValue, unit !== DAY ? options.doubleNumbers : false));
-                $__default['default'](".syotimer-cell__unit", itemBlock).html(getNumeral(unitValue, options.lang, unit));
+            for (var i = 0; i < unitList.length; i += 1) {
+                var unit = unitList[i];
+                var unitValue = unitsToDeadLine[unit];
+                var itemBlock = itemBlocks[unit];
+                itemBlock.data('syotimer-unit-value', unitValue);
+                $__default['default']('.syotimer-cell__value', itemBlock).html(format2(unitValue, unit !== DAY ? options.doubleNumbers : false));
+                $__default['default']('.syotimer-cell__unit', itemBlock).html(getNumeral(unitValue, options.lang, unit));
             }
         };
         /**
@@ -315,50 +297,63 @@
             var _this = this;
             if (unit === void 0) { unit = SECOND; }
             switch (effectType) {
-                case "opacity":
-                    var itemBlocks = this.element.data("syotimer-items");
+                case 'opacity': {
+                    var itemBlocks = this.element.data('syotimer-items');
                     var unitItemBlock = itemBlocks[unit];
                     if (unitItemBlock) {
                         var nextUnit = unitLinkedList.next(unit);
-                        var unitValue = unitItemBlock.data("syotimer-unit-value");
-                        $__default['default'](".syotimer-cell__value", unitItemBlock).animate({ opacity: 0.1 }, 1000, "linear", function () { return _this.perSecondHandler(); });
+                        var unitValue = unitItemBlock.data('syotimer-unit-value');
+                        $__default['default']('.syotimer-cell__value', unitItemBlock).animate({ opacity: 0.1 }, 1000, 'linear', function () {
+                            return _this.tick();
+                        });
                         if (nextUnit && unitValue === 0) {
                             this.applyEffectSwitch(effectType, nextUnit);
                         }
                     }
                     return;
-                case "none":
-                default:
-                    setTimeout(function () { return _this.perSecondHandler(); }, 1000);
+                }
+                case 'none':
+                default: {
+                    setTimeout(function () { return _this.tick(); }, 1000);
+                }
             }
         };
         return SyoTimer;
     }());
+    function mapSyoTimer(elements, inputOptions) {
+        var options = $__default['default'].extend({}, defaultOptions, inputOptions || {});
+        options.itemTypes = getItemTypesByLayout(options.layout);
+        options.itemsHas = $__default['default'].extend({}, defaultItemsHas);
+        for (var i = 0; i < options.itemTypes.length; i += 1) {
+            options.itemsHas[options.itemTypes[i]] = true;
+        }
+        return elements.each(function init() {
+            var timer = new SyoTimer(this, options);
+            timer.tick();
+        });
+    }
 
     var methods = {
         setOption: function (name, value) {
             var elementBox = $__default['default'](this);
-            var options = elementBox.data("syotimer-options");
-            if (options.hasOwnProperty(name)) {
+            var options = elementBox.data('syotimer-options');
+            if (Object.prototype.hasOwnProperty.call(options, name)) {
                 options[name] = value;
-                elementBox.data("syotimer-options", options);
+                elementBox.data('syotimer-options', options);
             }
         },
     };
     $__default['default'].fn.extend({
-        syotimer: function (options) {
-            if (typeof options === "string" && options === "setOption") {
-                var otherArgs = Array.prototype.slice.call(arguments, 1);
-                return this.each(function () {
-                    methods[options].apply(this, otherArgs);
+        syotimer: function (options, property, value) {
+            if (typeof options === 'string' && options === 'setOption') {
+                return this.each(function method() {
+                    methods[options].apply(this, [property, value]);
                 });
             }
-            if (options === null ||
-                options === undefined ||
-                typeof options === "object") {
+            if (options === null || options === undefined || typeof options === 'object') {
                 return mapSyoTimer(this, options);
             }
-            $__default['default'].error("SyoTimer. Error in call methods: methods is not exist");
+            return $__default['default'].error('SyoTimer. Error in call methods: methods is not exist');
         },
     });
 

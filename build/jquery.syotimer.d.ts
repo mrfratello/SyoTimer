@@ -46,13 +46,10 @@ interface SyoTimerInternalOptions {
   itemsHas: ItemsHas;
 }
 
-type SyoTimerOptions = Partial<
-  Omit<SyoTimerInternalOptions, "itemTypes" | "itemsHas">
->;
+type SyoTimerOptions = Partial<Omit<SyoTimerInternalOptions, 'itemTypes' | 'itemsHas'>>;
 
-type SyoTimerOptionProps = Exclude<keyof SyoTimerOptions, "layout">;
-type SyoTimerOptionValues =
-  Required<SyoTimerOptions>[SyoTimerOptionProps];
+type SyoTimerOptionProps = Exclude<keyof SyoTimerOptions, 'layout'>;
+type SyoTimerOptionValues = Required<SyoTimerOptions>[SyoTimerOptionProps];
 
 interface SyoTimerTimerBlock {
   headBlock: JQuery;
@@ -60,12 +57,12 @@ interface SyoTimerTimerBlock {
   footBlock: JQuery;
 }
 
-type SyoTimerEffectType = "none" | "opacity";
+type SyoTimerEffectType = 'none' | 'opacity';
 
-type SyoTimerMethods = "setOption";
+type SyoTimerMethods = 'setOption';
 
-type UnitLong = "day" | "hour" | "minute" | "second";
-type UnitShort = "d" | "h" | "m" | "s";
+type UnitLong = 'day' | 'hour' | 'minute' | 'second';
+type UnitShort = 'd' | 'h' | 'm' | 's';
 
 type Unit = UnitShort | UnitLong;
 
@@ -89,7 +86,7 @@ declare global {
     syotimer(
       method: SyoTimerMethods,
       property: SyoTimerOptionProps,
-      value: SyoTimerOptionValues
+      value: SyoTimerOptionValues,
     ): JQuery;
   }
 
