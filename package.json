@@ -20,8 +20,8 @@
     "format:check": "prettier --check \"./source/\"",
     "eslint": "eslint source/**",
     "tslint": "tsc --noEmit",
-    "lint": "yarn format:check && yarn tslint && yarn eslint",
-    "release:before": "yarn lint && yarn build && git add .",
+    "lint": "npm run format:check && npm run tslint && npm run eslint",
+    "release:before": "npm run lint && npm run build && git add .",
     "release": "standard-version -a",
     "prepare": "husky install"
   },
@@ -38,7 +38,7 @@
   "homepage": "https://mrfratello.github.io/SyoTimer",
   "standard-version": {
     "scripts": {
-      "prerelease": "yarn release:before"
+      "prerelease": "npm run release:before"
     }
   },
   "devDependencies": {
@@ -54,13 +54,13 @@
     "eslint-plugin-prettier": "4.0.0",
     "husky": "7.0.0",
     "prettier": "2.4.0",
-    "rollup": "2.56.2",
+    "rollup": "2.56.3",
     "rollup-plugin-dts": "4.0.0",
     "rollup-plugin-terser": "7.0.2",
     "rollup-plugin-typescript2": "0.30.0",
     "standard-version": "9.3.1",
     "tslib": "2.3.1",
-    "typescript": "4.3.5"
+    "typescript": "4.4.4"
   },
   "peerDependencies": {
     "jquery": "^1.12.4"
