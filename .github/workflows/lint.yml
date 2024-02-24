@@ -1,0 +1,32 @@
+name: Lint
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get sources
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: node version
+        id: node_info
+        run: echo "version=$(cat .nvmrc)" >> $GITHUB_OUTPUT
+        shell: bash
+      - name: setup node lts version
+        uses: actions/setup-node@v3
+        with:
+          node-version: '${{ steps.node_info.outputs.version }}'
+      - name: install dependencies
+        run: npm ci
+        shell: bash
+
+      - name: lint
+        run: npm run lint
+      - name: test
+        run: npm run test

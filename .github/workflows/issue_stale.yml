@@ -1,0 +1,24 @@
+name: Stale
+
+on:
+  workflow_dispatch:
+  schedule:
+    # This runs every day 20 minutes before midnight: https://crontab.guru/#40_23_*_*_*
+    - cron: '40 23 * * *'
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'mrfratello'
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/stale@v9
+        name: 'Close stale issues'
+        with:
+          stale-issue-message: 'This issue is stale because it has been open 60 days with no activity. Remove stale label or comment or this will be closed in 7 days.'
+          stale-pr-message: 'This PR is stale because it has been open 60 days with no activity. Remove stale label or comment or this will be closed in 7 days.'
+          close-issue-message: 'This issue was closed because it has been stalled for 7 days with no activity.'
+          close-pr-message: 'This PR was closed because it has been stalled for 7 days with no activity.'
