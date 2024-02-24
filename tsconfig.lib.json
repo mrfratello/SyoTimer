@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./tmp/out-tsc"
+  },
+  "include": ["source/**/*.ts", "index.d.ts"],
+  "exclude": ["vite.config.ts", "source/**/*.spec.ts", "source/**/*.test.ts"]
+}
