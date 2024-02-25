@@ -1,6 +1,6 @@
 /**
  * SyoTimer - jquery countdown plugin
- * @version: 3.1.0
+ * @version: 3.1.1
  * @author: John Syomochkin <info@syomochkin.xyz>
  * @homepage: https://mrfratello.github.io/SyoTimer
  * @repository: git+https://github.com/mrfratello/SyoTimer.git
@@ -9,11 +9,7 @@
 (function ($$1) {
     'use strict';
 
-    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-    var $__default = /*#__PURE__*/_interopDefaultLegacy($$1);
-
-    $__default['default'].syotimerLang = {
+    $$1.syotimerLang = {
         rus: {
             second: ['секунда', 'секунды', 'секунд'],
             minute: ['минута', 'минуты', 'минут'],
@@ -99,7 +95,7 @@
             timerBlock.bodyBlock.html('<p style="font-size: 1.2em;">The countdown is finished!</p>');
         },
         itemTypes: ['day', 'hour', 'minute', 'second'],
-        itemsHas: $__default['default'].extend({}, defaultItemsHas),
+        itemsHas: $$1.extend({}, defaultItemsHas),
     };
 
     /**
@@ -126,7 +122,7 @@
      * Formation of numbers with leading zeros
      */
     function format2(numb, isUse) {
-        return numb <= 9 && !!isUse ? "0" + numb : String(numb);
+        return numb <= 9 && !!isUse ? "0".concat(numb) : String(numb);
     }
     function getItemTypesByLayout(layout) {
         var itemTypes = [];
@@ -213,7 +209,7 @@
 
     var SyoTimer = /** @class */ (function () {
         function SyoTimer(element, options) {
-            this.element = $__default['default'](element);
+            this.element = $$1(element);
             this.element.data('syotimer-options', options);
             this.render();
         }
@@ -224,13 +220,13 @@
         SyoTimer.prototype.render = function () {
             var options = this.element.data('syotimer-options');
             var timerItem = getTimerItem();
-            var headBlock = $__default['default']('<div/>', { class: 'syotimer__head' }).html(options.headTitle);
-            var bodyBlock = $__default['default']('<div/>', { class: 'syotimer__body' });
-            var footBlock = $__default['default']('<div/>', { class: 'syotimer__footer' }).html(options.footTitle);
+            var headBlock = $$1('<div/>', { class: 'syotimer__head' }).html(options.headTitle);
+            var bodyBlock = $$1('<div/>', { class: 'syotimer__body' });
+            var footBlock = $$1('<div/>', { class: 'syotimer__footer' }).html(options.footTitle);
             var itemBlocks = {};
             for (var i = 0; i < options.itemTypes.length; i += 1) {
                 var item = timerItem.clone();
-                item.addClass("syotimer-cell_type_" + options.itemTypes[i]);
+                item.addClass("syotimer-cell_type_".concat(options.itemTypes[i]));
                 bodyBlock.append(item);
                 itemBlocks[options.itemTypes[i]] = item;
             }
@@ -248,7 +244,7 @@
          */
         SyoTimer.prototype.tick = function () {
             var options = this.element.data('syotimer-options');
-            $__default['default']('.syotimer-cell > .syotimer-cell__value', this.element).css('opacity', 1);
+            $$1('.syotimer-cell > .syotimer-cell__value', this.element).css('opacity', 1);
             var currentTime = new Date().getTime();
             var deadLineTime = options.date instanceof Date ? options.date.getTime() : options.date;
             var differenceInMilliSec = deadLineTime - currentTime;
@@ -258,7 +254,7 @@
                 this.applyEffectSwitch(options.effectType);
             }
             else {
-                var elementBox = $__default['default'].extend(this.element, this.element.data('syotimer-blocks'));
+                var elementBox = $$1.extend(this.element, this.element.data('syotimer-blocks'));
                 options.afterDeadline(elementBox);
             }
         };
@@ -285,8 +281,8 @@
                 var unitValue = unitsToDeadLine[unit];
                 var itemBlock = itemBlocks[unit];
                 itemBlock.data('syotimer-unit-value', unitValue);
-                $__default['default']('.syotimer-cell__value', itemBlock).html(format2(unitValue, unit !== DAY ? options.doubleNumbers : false));
-                $__default['default']('.syotimer-cell__unit', itemBlock).html(getNumeral(unitValue, options.lang, unit));
+                $$1('.syotimer-cell__value', itemBlock).html(format2(unitValue, unit !== DAY ? options.doubleNumbers : false));
+                $$1('.syotimer-cell__unit', itemBlock).html(getNumeral(unitValue, options.lang, unit));
             }
         };
         /**
@@ -303,7 +299,7 @@
                     if (unitItemBlock) {
                         var nextUnit = unitLinkedList.next(unit);
                         var unitValue = unitItemBlock.data('syotimer-unit-value');
-                        $__default['default']('.syotimer-cell__value', unitItemBlock).animate({ opacity: 0.1 }, 1000, 'linear', function () {
+                        $$1('.syotimer-cell__value', unitItemBlock).animate({ opacity: 0.1 }, 1000, 'linear', function () {
                             return _this.tick();
                         });
                         if (nextUnit && unitValue === 0) {
@@ -321,9 +317,9 @@
         return SyoTimer;
     }());
     function mapSyoTimer(elements, inputOptions) {
-        var options = $__default['default'].extend({}, defaultOptions, inputOptions || {});
+        var options = $$1.extend({}, defaultOptions, inputOptions || {});
         options.itemTypes = getItemTypesByLayout(options.layout);
-        options.itemsHas = $__default['default'].extend({}, defaultItemsHas);
+        options.itemsHas = $$1.extend({}, defaultItemsHas);
         for (var i = 0; i < options.itemTypes.length; i += 1) {
             options.itemsHas[options.itemTypes[i]] = true;
         }
@@ -335,7 +331,7 @@
 
     var methods = {
         setOption: function (name, value) {
-            var elementBox = $__default['default'](this);
+            var elementBox = $$1(this);
             var options = elementBox.data('syotimer-options');
             if (Object.prototype.hasOwnProperty.call(options, name)) {
                 options[name] = value;
@@ -343,7 +339,7 @@
             }
         },
     };
-    $__default['default'].fn.extend({
+    $$1.fn.extend({
         syotimer: function (options, property, value) {
             if (typeof options === 'string' && options === 'setOption') {
                 return this.each(function method() {
@@ -353,8 +349,8 @@
             if (options === null || options === undefined || typeof options === 'object') {
                 return mapSyoTimer(this, options);
             }
-            return $__default['default'].error('SyoTimer. Error in call methods: methods is not exist');
+            return $$1.error('SyoTimer. Error in call methods: methods is not exist');
         },
     });
 
-}(jQuery));
+})(jQuery);

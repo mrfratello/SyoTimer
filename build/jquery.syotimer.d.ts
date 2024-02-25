@@ -95,4 +95,4 @@ declare global {
   }
 }
 
-export { SyoTimerLocalization, SyoTimerOptions };
+export type { SyoTimerLocalization, SyoTimerOptions };
